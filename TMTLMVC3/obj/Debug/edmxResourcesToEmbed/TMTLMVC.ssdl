@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelUser.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="USER1">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FNAME" Type="varchar" MaxLength="255" />
+    <Property Name="LNAME" Type="varchar" MaxLength="255" />
+    <Property Name="ADDR" Type="varchar" MaxLength="255" />
+    <Property Name="DESIG" Type="varchar" MaxLength="255" />
+    <Property Name="PHNO" Type="varchar" MaxLength="255" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="255" />
+    <Property Name="UID" Type="varchar" MaxLength="255" />
+    <Property Name="PASS" Type="varchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityContainer Name="ModelUserStoreContainer">
+    <EntitySet Name="USER1" EntityType="Self.USER1" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
