@@ -1,4 +1,4 @@
-﻿@Modeltype list(of TMTLMVC3.USER1) 
+﻿@Model  list(of TMTLMVC3.USER1) 
 
 @Code
     Layout = Nothing
