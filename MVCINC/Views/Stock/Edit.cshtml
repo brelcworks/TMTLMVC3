@@ -1,0 +1,189 @@
+﻿@model MVCINC.TABLE1
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-2.2.0.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function () {
+        $("#txtParti").autocomplete({
+           source: '@Url.Action("GetParti")'
+        });
+    });
+        $(function () {
+            $("#txtPtno").autocomplete({
+                source: '@Url.Action("GetPtno")'
+            });
+        });
+    </script>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>TABLE1</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.RID1)
+    
+            <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.RID)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.RID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RID)
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.STOTAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.STOTAL, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PARTI)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PARTI, new { htmlAttributes = new { @class = "form-control", @id = "txtParti", @placeholder = "PART NAME" } })
+                        @Html.ValidationMessageFor(model => model.PARTI, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.TVAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TVAL, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PART_NO)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PART_NO, new { htmlAttributes = new { @class = "form-control", @id = "txtPtno", @placeholder = "PART NO" } })
+                        @Html.ValidationMessageFor(model => model.PART_NO, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.TYPE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TYPE, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.MRP)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.MRP, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.UNIT)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.UNIT, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.TAX)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TAX, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.RACKNO)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.RACKNO, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.SPRICE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.SPRICE, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+
+                    <td>
+                        @Html.LabelFor(model => model.EOR)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.EOR, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PPRICE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PPRICE, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.grop)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.grop, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.QTY)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.QTY, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.DPCODE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.DPCODE, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.TOTAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TOTAL, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.USER1)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.USER1, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+            </table>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+       @Html.ActionLink("Back to List", "List")
+    </div>
+</body>
+</html>

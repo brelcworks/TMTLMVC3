@@ -1,0 +1,310 @@
+﻿@model MVCINC.TABLE1
+
+@{
+    ViewBag.Title = "CREATE ITEM";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.number.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtPtno").autocomplete({
+                source: '@Url.Action("GetPtno")'
+            });
+            $("#txtParti").autocomplete({
+                source: '@Url.Action("GetParti")'
+            });
+
+            $("#txtParti").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("gdata1","Stock")",
+                        data: {aData: $("#txtParti").val()},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            $('#txtPtno').val(val.PART_NO)
+                            $('#txtUNIT').val(val.unit)
+                            $('#txtMRP').val(val.MRP)
+                            $('#txtGROP').val(val.GROP)
+                            $('#txtTYPE').val(val.CATE)
+                            $('#txtTAX').val(val.TRATE)
+                            $('#txtPPRICE').focus()
+                            $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
+                            $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
+                            $("#txtSPRICE").number(true,2);
+                            $('#txtTVAL').number(true, 2);
+                        });
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                    });
+                    e.preventDefault();
+                }
+            });
+
+            $("#txtPtno").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("gdata2","Stock")",
+                        data: { aData: $("#txtPtno").val() },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            $('#txtParti').val(val.PARTI)
+                            $('#txtUNIT').val(val.unit)
+                            $('#txtMRP').val(val.MRP)
+                            $('#txtGROP').val(val.GROP)
+                            $('#txtTYPE').val(val.CATE)
+                            $('#txtTAX').val(val.TRATE)
+                            $('#txtPPRICE').focus()
+                            var tax = parseFloat($('#txtTAX').val()) + 100
+                            var spr = parseFloat($('#txtMRP').val()) / tax * 100
+                            $('#txtSPRICE').val(spr.toFixed(2))
+                            var tval = parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100
+                            $('#txtTVAL').val(tval.toFixed(2))
+                        });
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                });
+                e.preventDefault();
+            }
+            });
+
+            $(document).ready(function () {
+                $('INPUT[type="text"]').focus(function () {
+                    $(this).addClass("focus");
+                });
+
+                $('INPUT[type="text"]').blur(function () {
+                    $(this).removeClass("focus");
+                });
+            });
+
+
+                $('#txtPPRICE').keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        $('#txtQTY').focus()
+                        e.preventDefault();
+                    }
+                });
+
+                $('#txtQTY').keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        var tot = parseFloat($('#txtMRP').val()) * parseFloat($('#txtQTY').val())
+                        var tot1 = parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtQTY').val())
+                        $('#txtTOTAL').val(tot.toFixed(2))
+                        $('#txtSTOT').val(tot1.toFixed(2))
+                        $('#txtRCNO').focus()
+                        e.preventDefault();
+                    }
+                });
+
+                $('#txtRCNO').keypress(function (e) {
+                    if (e.keyCode == 13) {
+                        $('#txtUSER').VAL("A1587")
+                        $('#txtEOR').focus()
+                        e.preventDefault();
+                    }
+                });
+        });
+
+    </script>
+    <style type="text/css">
+        .focus {
+            border: 2px solid red;
+            background-color: #FEFED5;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <hr />
+    <div style="width: 98%; margin-right: 1%; margin-left: 1%; text-align: center" class="table table-responsive">
+    @Scripts.Render("~/bundles/jqueryval")
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.RID)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.RID, new { htmlAttributes = new { @class = "form-control", @id = "txtRID", @placeholder = "RECORD NO" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.STOTAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.STOTAL, new { htmlAttributes = new { @class = "form-control", @id = "txtSTOT", @placeholder = "SELL PRICE TOTAL" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PART_NO)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PART_NO, new { htmlAttributes = new { @class = "form-control", @id = "txtPtno", @placeholder = "PART NO" } })
+                        @Html.ValidationMessageFor(model => model.PART_NO, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.TVAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TVAL, new { htmlAttributes = new { @class = "form-control", @id = "txtTVAL", @placeholder = "TAX VALUE" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PARTI)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PARTI, new { htmlAttributes = new { @class = "form-control", @id = "txtParti", @placeholder = "PART NAME" } })
+                        @Html.ValidationMessageFor(model => model.PARTI, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.TYPE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TYPE, new { htmlAttributes = new { @class = "form-control", @id = "txtTYPE", @placeholder = "ITEM TYPE" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.MRP)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.MRP, new { htmlAttributes = new { @class = "form-control", @id = "txtMRP", @placeholder = "MRP" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.UNIT)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.UNIT, new { htmlAttributes = new { @class = "form-control", @id = "txtUNIT", @placeholder = "UNIT" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.TAX)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TAX, new { htmlAttributes = new { @class = "form-control", @id = "txtTAX", @placeholder = "TAX RATE" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.RACKNO)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.RACKNO, new { htmlAttributes = new { @class = "form-control", @id = "txtRCNO", @placeholder = "RACK NO" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.SPRICE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.SPRICE, new { htmlAttributes = new { @class = "form-control", @id = "txtSPRICE", @placeholder = "SELL PRICE" } })
+                    </td>
+
+                    <td>
+                        @Html.LabelFor(model => model.EOR)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.EOR, new { htmlAttributes = new { @class = "form-control", @id = "txtEOR", @placeholder = "ITEM E.O.R" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PPRICE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PPRICE, new { htmlAttributes = new { @class = "form-control", @id = "txtPPRICE", @placeholder = "PURCHASE PRICE" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.grop)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.grop, new { htmlAttributes = new { @class = "form-control", @id = "txtGROP", @placeholder = "ITEM GROUP" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.QTY)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.QTY, new { htmlAttributes = new { @class = "form-control", @id = "txtQTY", @placeholder = "QUANTITY" } })
+                        @Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.DPCODE)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.DPCODE, new { htmlAttributes = new { @class = "form-control", @id = "txtDPCODE", @placeholder = "DEALER CODE" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.TOTAL)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.TOTAL, new { htmlAttributes = new { @class = "form-control", @id = "txtTOTAL", @placeholder = "ITEM TOTAL" } })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.USER1)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.USER1, new { htmlAttributes = new { @class = "form-control", @id = "txtUSER", @placeholder = "USER NAME" } })
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+
+    }
+        <div>
+            @Html.ActionLink("Back to List", "List")
+        </div>
+</div> 
+</body>
+</html>

@@ -1,0 +1,934 @@
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<!-- EF Runtime content -->
+<edmx:Runtime>
+<!-- SSDL content -->
+<edmx:StorageModels>
+<Schema Namespace="DB1Model.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DB1ModelStoreContainer">
+    <EntitySet Name="BILL" EntityType="DB1Model.Store.BILL" store:Type="Tables" />
+    <EntitySet Name="BILL1" EntityType="DB1Model.Store.BILL1" store:Type="Tables" />
+    <EntitySet Name="CUST" EntityType="DB1Model.Store.CUST" store:Type="Tables" />
+    <EntitySet Name="CUSTOMER" EntityType="DB1Model.Store.CUSTOMER" store:Type="Tables" />
+    <EntitySet Name="MAINPOPU" EntityType="DB1Model.Store.MAINPOPU" store:Type="Tables" />
+    <EntitySet Name="PMR" EntityType="DB1Model.Store.PMR" store:Type="Tables" />
+    <EntitySet Name="PURCHSE" EntityType="DB1Model.Store.PURCHSE" store:Type="Tables" />
+    <EntitySet Name="PURCHSE1" EntityType="DB1Model.Store.PURCHSE1" store:Type="Tables" />
+    <EntitySet Name="SHEET1" EntityType="DB1Model.Store.SHEET1" store:Type="Tables" />
+    <EntitySet Name="TABLE1" EntityType="DB1Model.Store.TABLE1" store:Type="Tables" />
+    <EntitySet Name="user1" EntityType="DB1Model.Store.user1" store:Type="Tables" />
+  </EntityContainer>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="BILLID" />
+    </Key>
+    <Property Name="BILLID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BID" Type="nvarchar" MaxLength="255" />
+    <Property Name="BILL_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="BDATE" Type="datetime" />
+    <Property Name="DNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="PARTI" Type="nvarchar" MaxLength="255" />
+    <Property Name="QTY" Type="nvarchar" MaxLength="255" />
+    <Property Name="MRP" Type="nvarchar" MaxLength="255" />
+    <Property Name="SPRICE" Type="nvarchar" MaxLength="255" />
+    <Property Name="TOTAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="TAX" Type="nvarchar" MaxLength="255" />
+    <Property Name="TVAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="STOT" Type="nvarchar" MaxLength="255" />
+    <Property Name="CMP" Type="nvarchar" MaxLength="255" />
+    <Property Name="UNIT" Type="nvarchar" MaxLength="255" />
+    <Property Name="USER1" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LMODI" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="BAMT" Type="numeric" Scale="2" />
+  </EntityType>
+  <EntityType Name="BILL1">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BDATE" Type="datetime" />
+    <Property Name="BNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="SNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="GTOT" Type="numeric" Scale="2" />
+    <Property Name="TOTAL" Type="numeric" Scale="2" />
+    <Property Name="PAYMENT" Type="numeric" Scale="2" />
+    <Property Name="SECTOR" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="255" />
+    <Property Name="ROUND" Type="numeric" Scale="2" />
+    <Property Name="NTOT" Type="numeric" Scale="2" />
+    <Property Name="TVAL" Type="numeric" Scale="2" />
+    <Property Name="USER1" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="VNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="CBILL" Type="numeric" Scale="2" />
+    <Property Name="BAPAY" Type="numeric" Scale="2" />
+    <Property Name="BST" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LMODI" Type="nvarchar" MaxLength="255" />
+    <Property Name="BID1" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="BAMT" Type="numeric" Scale="2" />
+  </EntityType>
+  <EntityType Name="CUST">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="SECTOR" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="PHNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="SITENAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="255" />
+    <Property Name="SECTOR" Type="nvarchar" MaxLength="255" />
+    <Property Name="DID" Type="nvarchar" MaxLength="255" />
+    <Property Name="VNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LMODI" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="MAINPOPU">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RID1" Type="nvarchar" MaxLength="255" />
+    <Property Name="SID" Type="nvarchar" MaxLength="255" />
+    <Property Name="CNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="SNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="ENS" Type="nvarchar" MaxLength="255" />
+    <Property Name="ALSN" Type="nvarchar" MaxLength="255" />
+    <Property Name="RAT_PH" Type="nvarchar" MaxLength="255" />
+    <Property Name="PHASE" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+    <Property Name="BSN" Type="nvarchar" MaxLength="255" />
+    <Property Name="CPN" Type="nvarchar" MaxLength="255" />
+    <Property Name="PHNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR" Type="nvarchar" MaxLength="255" />
+    <Property Name="DOC" Type="datetime" />
+    <Property Name="SPIN" Type="nvarchar" MaxLength="255" />
+    <Property Name="AMC" Type="nvarchar" MaxLength="255" />
+    <Property Name="CHMR" Type="nvarchar" MaxLength="255" />
+    <Property Name="CHMD" Type="datetime" />
+    <Property Name="lhmr" Type="nvarchar" MaxLength="255" />
+    <Property Name="lsd" Type="datetime" />
+    <Property Name="nsd" Type="datetime" />
+    <Property Name="ahm" Type="nvarchar" MaxLength="255" />
+    <Property Name="DGNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="ACTION" Type="nvarchar" MaxLength="255" />
+    <Property Name="DIST" Type="nvarchar" MaxLength="255" />
+    <Property Name="STATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="AMAKE" Type="nvarchar" MaxLength="255" />
+    <Property Name="WARR" Type="nvarchar" MaxLength="255" />
+    <Property Name="OEA" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="hmage" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="lmodi" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="llop" Type="nvarchar" MaxLength="255" />
+    <Property Name="solenoid" Type="nvarchar" MaxLength="255" />
+    <Property Name="chalt" Type="nvarchar" MaxLength="255" />
+    <Property Name="starter" Type="nvarchar" MaxLength="255" />
+    <Property Name="cntype" Type="nvarchar" MaxLength="255" />
+    <Property Name="cnmake" Type="nvarchar" MaxLength="255" />
+    <Property Name="sauto" Type="nvarchar" MaxLength="255" />
+    <Property Name="FRAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="DSTA" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PMR">
+    <Key>
+      <PropertyRef Name="RECID1" />
+    </Key>
+    <Property Name="RECID1" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SID" Type="nvarchar" MaxLength="255" />
+    <Property Name="SNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="ENGINE_No" Type="nvarchar" MaxLength="255" />
+    <Property Name="DOS" Type="datetime" />
+    <Property Name="STYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="HMR" Type="nvarchar" MaxLength="255" />
+    <Property Name="Report" Type="nvarchar" MaxLength="255" />
+    <Property Name="Technician" Type="nvarchar" MaxLength="255" />
+    <Property Name="METERIAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="recid" Type="nvarchar" MaxLength="255" />
+    <Property Name="CDATI" Type="datetime" />
+    <Property Name="DIST" Type="nvarchar" MaxLength="255" />
+    <Property Name="STATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="CCATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+    <Property Name="DOI" Type="datetime" />
+    <Property Name="DGNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="AMAKE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ALSN" Type="nvarchar" MaxLength="255" />
+    <Property Name="BSN" Type="nvarchar" MaxLength="255" />
+    <Property Name="CNAT" Type="nvarchar" MaxLength="255" />
+    <Property Name="SERV" Type="nvarchar" MaxLength="255" />
+    <Property Name="RFAIL" Type="nvarchar" MaxLength="255" />
+    <Property Name="STA" Type="nvarchar" MaxLength="255" />
+    <Property Name="WARR" Type="nvarchar" MaxLength="255" />
+    <Property Name="ACTION" Type="nvarchar" MaxLength="255" />
+    <Property Name="OEA" Type="nvarchar" MaxLength="255" />
+    <Property Name="AMC" Type="nvarchar" MaxLength="255" />
+    <Property Name="TTR" Type="nvarchar" MaxLength="255" />
+    <Property Name="SLA" Type="nvarchar" MaxLength="255" />
+    <Property Name="TSLOT" Type="nvarchar" MaxLength="255" />
+    <Property Name="RESLA" Type="nvarchar" MaxLength="255" />
+    <Property Name="KVA" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="lmodi" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="PURCHSE">
+    <Key>
+      <PropertyRef Name="BILLID" />
+    </Key>
+    <Property Name="BILLID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BID" Type="nvarchar" MaxLength="255" />
+    <Property Name="BILL_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="BDATE" Type="datetime" />
+    <Property Name="DNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="PARTI" Type="nvarchar" MaxLength="255" />
+    <Property Name="QTY" Type="nvarchar" MaxLength="255" />
+    <Property Name="MRP" Type="nvarchar" MaxLength="255" />
+    <Property Name="SPRICE" Type="nvarchar" MaxLength="255" />
+    <Property Name="TOTAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="TAX" Type="nvarchar" MaxLength="255" />
+    <Property Name="TVAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="STOT" Type="nvarchar" MaxLength="255" />
+    <Property Name="CMP" Type="nvarchar" MaxLength="255" />
+    <Property Name="UNIT" Type="nvarchar" MaxLength="255" />
+    <Property Name="USER1" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LMODI" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="BAMT" Type="numeric" Scale="2" />
+  </EntityType>
+  <EntityType Name="PURCHSE1">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BDATE" Type="datetime" />
+    <Property Name="BNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="CUST" Type="nvarchar" MaxLength="255" />
+    <Property Name="SNAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="GTOT" Type="numeric" Scale="2" />
+    <Property Name="TOTAL" Type="numeric" Scale="2" />
+    <Property Name="PAYMENT" Type="numeric" Scale="2" />
+    <Property Name="SECTOR" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDRESS" Type="nvarchar" MaxLength="255" />
+    <Property Name="ROUND" Type="numeric" Scale="2" />
+    <Property Name="NTOT" Type="numeric" Scale="2" />
+    <Property Name="TVAL" Type="numeric" Scale="2" />
+    <Property Name="USER1" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="VNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="CBILL" Type="numeric" Scale="2" />
+    <Property Name="BAPAY" Type="numeric" Scale="2" />
+    <Property Name="BST" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LMODI" Type="nvarchar" MaxLength="255" />
+    <Property Name="BID1" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="BAMT" Type="numeric" Scale="2" />
+  </EntityType>
+  <EntityType Name="SHEET1">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="PARTI" Type="nvarchar" MaxLength="255" />
+    <Property Name="MRP" Type="nvarchar" MaxLength="255" />
+    <Property Name="GROP" Type="nvarchar" MaxLength="255" />
+    <Property Name="CATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="lmodi" Type="nvarchar" MaxLength="255" />
+    <Property Name="TRATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="rid1" Type="nvarchar" MaxLength="255" />
+    <Property Name="unit" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TABLE1">
+    <Key>
+      <PropertyRef Name="RID1" />
+    </Key>
+    <Property Name="RID1" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RID" Type="nvarchar" MaxLength="255" />
+    <Property Name="TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="PART_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="PARTI" Type="nvarchar" MaxLength="255" />
+    <Property Name="MRP" Type="nvarchar" MaxLength="255" />
+    <Property Name="QTY" Type="nvarchar" MaxLength="255" />
+    <Property Name="TOTAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="RACKNO" Type="nvarchar" MaxLength="255" />
+    <Property Name="TAX" Type="nvarchar" MaxLength="255" />
+    <Property Name="TVAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="STOTAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="PPRICE" Type="nvarchar" MaxLength="255" />
+    <Property Name="UNIT" Type="nvarchar" MaxLength="255" />
+    <Property Name="SPRICE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSTA" Type="nvarchar" MaxLength="255" />
+    <Property Name="EOR" Type="nvarchar" MaxLength="255" />
+    <Property Name="DPCODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="lmodi" Type="nvarchar" MaxLength="255" />
+    <Property Name="grop" Type="nvarchar" MaxLength="255" />
+    <Property Name="AEDT" Type="nvarchar" MaxLength="255" />
+    <Property Name="USER1" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="user1">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="nvarchar" MaxLength="255" />
+    <Property Name="pass" Type="nvarchar" MaxLength="255" />
+    <Property Name="fname" Type="nvarchar" MaxLength="255" />
+    <Property Name="lname" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+</Schema>
+</edmx:StorageModels>
+<!-- CSDL content -->
+<edmx:ConceptualModels>
+<Schema Namespace="DB1Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DB1Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="BILL" EntityType="DB1Model.BILL" />
+    <EntitySet Name="BILL1" EntityType="DB1Model.BILL1" />
+    <EntitySet Name="CUST" EntityType="DB1Model.CUST" />
+    <EntitySet Name="CUSTOMER" EntityType="DB1Model.CUSTOMER" />
+    <EntitySet Name="MAINPOPU" EntityType="DB1Model.MAINPOPU" />
+    <EntitySet Name="PMR" EntityType="DB1Model.PMR" />
+    <EntitySet Name="PURCHSE" EntityType="DB1Model.PURCHSE" />
+    <EntitySet Name="PURCHSE1" EntityType="DB1Model.PURCHSE1" />
+    <EntitySet Name="SHEET1" EntityType="DB1Model.SHEET1" />
+    <EntitySet Name="TABLE1" EntityType="DB1Model.TABLE1" />
+    <EntitySet Name="user1" EntityType="DB1Model.user1" />
+  </EntityContainer>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="BILLID" />
+    </Key>
+    <Property Name="BILLID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BILL_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BDATE" Type="DateTime" />
+    <Property Name="DNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CUST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PART_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PARTI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="QTY" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MRP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SPRICE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TOTAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TAX" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TVAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CMP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="UNIT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="USER1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="LMODI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BAMT" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="BILL1">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BDATE" Type="DateTime" />
+    <Property Name="BNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CUST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="GTOT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PAYMENT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SECTOR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ROUND" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NTOT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TVAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="USER1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="VNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CBILL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BAPAY" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="LMODI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BID1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BAMT" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="CUST">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CUST1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SECTOR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PHNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SITENAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SECTOR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="VNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="LMODI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="MAINPOPU">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RID1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ENS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ALSN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="RAT_PH" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PHASE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODEL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BSN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CPN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PHNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ADDR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DOC" Type="DateTime" />
+    <Property Name="SPIN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AMC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CHMR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CHMD" Type="DateTime" />
+    <Property Name="lhmr" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lsd" Type="DateTime" />
+    <Property Name="nsd" Type="DateTime" />
+    <Property Name="ahm" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DGNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ACTION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DIST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STATE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AMAKE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="WARR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="OEA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="hmage" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lmodi" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="llop" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="solenoid" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="chalt" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="starter" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="cntype" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="cnmake" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="sauto" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="FRAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="PMR">
+    <Key>
+      <PropertyRef Name="RECID1" />
+    </Key>
+    <Property Name="RECID1" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ENGINE_No" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DOS" Type="DateTime" />
+    <Property Name="STYPE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="HMR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Report" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Technician" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="METERIAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CUST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="recid" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CDATI" Type="DateTime" />
+    <Property Name="DIST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STATE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CCATE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODEL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DOI" Type="DateTime" />
+    <Property Name="DGNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AMAKE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ALSN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BSN" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CNAT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SERV" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="RFAIL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="WARR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ACTION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="OEA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AMC" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TTR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SLA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TSLOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="RESLA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="KVA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lmodi" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="PURCHSE">
+    <Key>
+      <PropertyRef Name="BILLID" />
+    </Key>
+    <Property Name="BILLID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BILL_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BDATE" Type="DateTime" />
+    <Property Name="DNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CUST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PART_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PARTI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="QTY" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MRP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SPRICE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TOTAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TAX" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TVAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STOT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CMP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="UNIT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="USER1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="LMODI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BAMT" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PURCHSE1">
+    <Key>
+      <PropertyRef Name="BID" />
+    </Key>
+    <Property Name="BID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BDATE" Type="DateTime" />
+    <Property Name="BNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CUST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SNAME" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="GTOT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PAYMENT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SECTOR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ROUND" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NTOT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TVAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="USER1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="VNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CBILL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BAPAY" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BST" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="LMODI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BID1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="BAMT" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="SHEET1">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="PART_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PARTI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MRP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="GROP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CATE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lmodi" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TRATE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="rid1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="unit" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TABLE1">
+    <Key>
+      <PropertyRef Name="RID1" />
+    </Key>
+    <Property Name="RID1" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TYPE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PART_NO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PARTI" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MRP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="QTY" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TOTAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="RACKNO" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TAX" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="TVAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="STOTAL" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="PPRICE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="UNIT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SPRICE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SSTA" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="EOR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DPCODE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lmodi" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="grop" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="AEDT" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="USER1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user1">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="uid" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="pass" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="fname" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="lname" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+</Schema>
+</edmx:ConceptualModels>
+<!-- C-S mapping content -->
+<edmx:Mappings>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB1ModelStoreContainer" CdmEntityContainer="DB1Entities">
+    <EntitySetMapping Name="BILL">
+      <EntityTypeMapping TypeName="DB1Model.BILL">
+        <MappingFragment StoreEntitySet="BILL">
+          <ScalarProperty Name="BILLID" ColumnName="BILLID" />
+          <ScalarProperty Name="BID" ColumnName="BID" />
+          <ScalarProperty Name="BILL_NO" ColumnName="BILL_NO" />
+          <ScalarProperty Name="BDATE" ColumnName="BDATE" />
+          <ScalarProperty Name="DNAME" ColumnName="DNAME" />
+          <ScalarProperty Name="CUST" ColumnName="CUST" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="PARTI" ColumnName="PARTI" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="SPRICE" ColumnName="SPRICE" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="TVAL" ColumnName="TVAL" />
+          <ScalarProperty Name="STOT" ColumnName="STOT" />
+          <ScalarProperty Name="CMP" ColumnName="CMP" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="USER1" ColumnName="USER1" />
+          <ScalarProperty Name="MODE" ColumnName="MODE" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="LMODI" ColumnName="LMODI" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="BAMT" ColumnName="BAMT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BILL1">
+      <EntityTypeMapping TypeName="DB1Model.BILL1">
+        <MappingFragment StoreEntitySet="BILL1">
+          <ScalarProperty Name="BID" ColumnName="BID" />
+          <ScalarProperty Name="BDATE" ColumnName="BDATE" />
+          <ScalarProperty Name="BNO" ColumnName="BNO" />
+          <ScalarProperty Name="CUST" ColumnName="CUST" />
+          <ScalarProperty Name="SNAME" ColumnName="SNAME" />
+          <ScalarProperty Name="GTOT" ColumnName="GTOT" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="PAYMENT" ColumnName="PAYMENT" />
+          <ScalarProperty Name="SECTOR" ColumnName="SECTOR" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="ROUND" ColumnName="ROUND" />
+          <ScalarProperty Name="NTOT" ColumnName="NTOT" />
+          <ScalarProperty Name="TVAL" ColumnName="TVAL" />
+          <ScalarProperty Name="USER1" ColumnName="USER1" />
+          <ScalarProperty Name="MODE" ColumnName="MODE" />
+          <ScalarProperty Name="VNO" ColumnName="VNO" />
+          <ScalarProperty Name="CBILL" ColumnName="CBILL" />
+          <ScalarProperty Name="BAPAY" ColumnName="BAPAY" />
+          <ScalarProperty Name="BST" ColumnName="BST" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="LMODI" ColumnName="LMODI" />
+          <ScalarProperty Name="BID1" ColumnName="BID1" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="BAMT" ColumnName="BAMT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUST">
+      <EntityTypeMapping TypeName="DB1Model.CUST">
+        <MappingFragment StoreEntitySet="CUST">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="CUST1" ColumnName="CUST" />
+          <ScalarProperty Name="SECTOR" ColumnName="SECTOR" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMER">
+      <EntityTypeMapping TypeName="DB1Model.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="DNAME" ColumnName="DNAME" />
+          <ScalarProperty Name="PHNO" ColumnName="PHNO" />
+          <ScalarProperty Name="SITENAME" ColumnName="SITENAME" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="SECTOR" ColumnName="SECTOR" />
+          <ScalarProperty Name="DID" ColumnName="DID" />
+          <ScalarProperty Name="VNO" ColumnName="VNO" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="LMODI" ColumnName="LMODI" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAINPOPU">
+      <EntityTypeMapping TypeName="DB1Model.MAINPOPU">
+        <MappingFragment StoreEntitySet="MAINPOPU">
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="RID1" ColumnName="RID1" />
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="CNAME" ColumnName="CNAME" />
+          <ScalarProperty Name="SNAME" ColumnName="SNAME" />
+          <ScalarProperty Name="ENS" ColumnName="ENS" />
+          <ScalarProperty Name="ALSN" ColumnName="ALSN" />
+          <ScalarProperty Name="RAT_PH" ColumnName="RAT_PH" />
+          <ScalarProperty Name="PHASE" ColumnName="PHASE" />
+          <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+          <ScalarProperty Name="BSN" ColumnName="BSN" />
+          <ScalarProperty Name="CPN" ColumnName="CPN" />
+          <ScalarProperty Name="PHNO" ColumnName="PHNO" />
+          <ScalarProperty Name="ADDR" ColumnName="ADDR" />
+          <ScalarProperty Name="DOC" ColumnName="DOC" />
+          <ScalarProperty Name="SPIN" ColumnName="SPIN" />
+          <ScalarProperty Name="AMC" ColumnName="AMC" />
+          <ScalarProperty Name="CHMR" ColumnName="CHMR" />
+          <ScalarProperty Name="CHMD" ColumnName="CHMD" />
+          <ScalarProperty Name="lhmr" ColumnName="lhmr" />
+          <ScalarProperty Name="lsd" ColumnName="lsd" />
+          <ScalarProperty Name="nsd" ColumnName="nsd" />
+          <ScalarProperty Name="ahm" ColumnName="ahm" />
+          <ScalarProperty Name="DGNO" ColumnName="DGNO" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="DIST" ColumnName="DIST" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="AMAKE" ColumnName="AMAKE" />
+          <ScalarProperty Name="WARR" ColumnName="WARR" />
+          <ScalarProperty Name="OEA" ColumnName="OEA" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="hmage" ColumnName="hmage" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="lmodi" ColumnName="lmodi" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="llop" ColumnName="llop" />
+          <ScalarProperty Name="solenoid" ColumnName="solenoid" />
+          <ScalarProperty Name="chalt" ColumnName="chalt" />
+          <ScalarProperty Name="starter" ColumnName="starter" />
+          <ScalarProperty Name="cntype" ColumnName="cntype" />
+          <ScalarProperty Name="cnmake" ColumnName="cnmake" />
+          <ScalarProperty Name="sauto" ColumnName="sauto" />
+          <ScalarProperty Name="FRAME" ColumnName="FRAME" />
+          <ScalarProperty Name="DSTA" ColumnName="DSTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PMR">
+      <EntityTypeMapping TypeName="DB1Model.PMR">
+        <MappingFragment StoreEntitySet="PMR">
+          <ScalarProperty Name="RECID1" ColumnName="RECID1" />
+          <ScalarProperty Name="SID" ColumnName="SID" />
+          <ScalarProperty Name="SNAME" ColumnName="SNAME" />
+          <ScalarProperty Name="ENGINE_No" ColumnName="ENGINE_No" />
+          <ScalarProperty Name="DOS" ColumnName="DOS" />
+          <ScalarProperty Name="STYPE" ColumnName="STYPE" />
+          <ScalarProperty Name="HMR" ColumnName="HMR" />
+          <ScalarProperty Name="Report" ColumnName="Report" />
+          <ScalarProperty Name="Technician" ColumnName="Technician" />
+          <ScalarProperty Name="METERIAL" ColumnName="METERIAL" />
+          <ScalarProperty Name="CUST" ColumnName="CUST" />
+          <ScalarProperty Name="recid" ColumnName="recid" />
+          <ScalarProperty Name="CDATI" ColumnName="CDATI" />
+          <ScalarProperty Name="DIST" ColumnName="DIST" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="CCATE" ColumnName="CCATE" />
+          <ScalarProperty Name="MODEL" ColumnName="MODEL" />
+          <ScalarProperty Name="DOI" ColumnName="DOI" />
+          <ScalarProperty Name="DGNO" ColumnName="DGNO" />
+          <ScalarProperty Name="AMAKE" ColumnName="AMAKE" />
+          <ScalarProperty Name="ALSN" ColumnName="ALSN" />
+          <ScalarProperty Name="BSN" ColumnName="BSN" />
+          <ScalarProperty Name="CNAT" ColumnName="CNAT" />
+          <ScalarProperty Name="SERV" ColumnName="SERV" />
+          <ScalarProperty Name="RFAIL" ColumnName="RFAIL" />
+          <ScalarProperty Name="STA" ColumnName="STA" />
+          <ScalarProperty Name="WARR" ColumnName="WARR" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="OEA" ColumnName="OEA" />
+          <ScalarProperty Name="AMC" ColumnName="AMC" />
+          <ScalarProperty Name="TTR" ColumnName="TTR" />
+          <ScalarProperty Name="SLA" ColumnName="SLA" />
+          <ScalarProperty Name="TSLOT" ColumnName="TSLOT" />
+          <ScalarProperty Name="RESLA" ColumnName="RESLA" />
+          <ScalarProperty Name="KVA" ColumnName="KVA" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="lmodi" ColumnName="lmodi" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PURCHSE">
+      <EntityTypeMapping TypeName="DB1Model.PURCHSE">
+        <MappingFragment StoreEntitySet="PURCHSE">
+          <ScalarProperty Name="BILLID" ColumnName="BILLID" />
+          <ScalarProperty Name="BID" ColumnName="BID" />
+          <ScalarProperty Name="BILL_NO" ColumnName="BILL_NO" />
+          <ScalarProperty Name="BDATE" ColumnName="BDATE" />
+          <ScalarProperty Name="DNAME" ColumnName="DNAME" />
+          <ScalarProperty Name="CUST" ColumnName="CUST" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="PARTI" ColumnName="PARTI" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="SPRICE" ColumnName="SPRICE" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="TVAL" ColumnName="TVAL" />
+          <ScalarProperty Name="STOT" ColumnName="STOT" />
+          <ScalarProperty Name="CMP" ColumnName="CMP" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="USER1" ColumnName="USER1" />
+          <ScalarProperty Name="MODE" ColumnName="MODE" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="LMODI" ColumnName="LMODI" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="BAMT" ColumnName="BAMT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PURCHSE1">
+      <EntityTypeMapping TypeName="DB1Model.PURCHSE1">
+        <MappingFragment StoreEntitySet="PURCHSE1">
+          <ScalarProperty Name="BID" ColumnName="BID" />
+          <ScalarProperty Name="BDATE" ColumnName="BDATE" />
+          <ScalarProperty Name="BNO" ColumnName="BNO" />
+          <ScalarProperty Name="CUST" ColumnName="CUST" />
+          <ScalarProperty Name="SNAME" ColumnName="SNAME" />
+          <ScalarProperty Name="GTOT" ColumnName="GTOT" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="PAYMENT" ColumnName="PAYMENT" />
+          <ScalarProperty Name="SECTOR" ColumnName="SECTOR" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="ROUND" ColumnName="ROUND" />
+          <ScalarProperty Name="NTOT" ColumnName="NTOT" />
+          <ScalarProperty Name="TVAL" ColumnName="TVAL" />
+          <ScalarProperty Name="USER1" ColumnName="USER1" />
+          <ScalarProperty Name="MODE" ColumnName="MODE" />
+          <ScalarProperty Name="VNO" ColumnName="VNO" />
+          <ScalarProperty Name="CBILL" ColumnName="CBILL" />
+          <ScalarProperty Name="BAPAY" ColumnName="BAPAY" />
+          <ScalarProperty Name="BST" ColumnName="BST" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="LMODI" ColumnName="LMODI" />
+          <ScalarProperty Name="BID1" ColumnName="BID1" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="BAMT" ColumnName="BAMT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SHEET1">
+      <EntityTypeMapping TypeName="DB1Model.SHEET1">
+        <MappingFragment StoreEntitySet="SHEET1">
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="PARTI" ColumnName="PARTI" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="GROP" ColumnName="GROP" />
+          <ScalarProperty Name="CATE" ColumnName="CATE" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="lmodi" ColumnName="lmodi" />
+          <ScalarProperty Name="TRATE" ColumnName="TRATE" />
+          <ScalarProperty Name="rid1" ColumnName="rid1" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TABLE1">
+      <EntityTypeMapping TypeName="DB1Model.TABLE1">
+        <MappingFragment StoreEntitySet="TABLE1">
+          <ScalarProperty Name="RID1" ColumnName="RID1" />
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+          <ScalarProperty Name="PARTI" ColumnName="PARTI" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="QTY" ColumnName="QTY" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="RACKNO" ColumnName="RACKNO" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="TVAL" ColumnName="TVAL" />
+          <ScalarProperty Name="STOTAL" ColumnName="STOTAL" />
+          <ScalarProperty Name="PPRICE" ColumnName="PPRICE" />
+          <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+          <ScalarProperty Name="SPRICE" ColumnName="SPRICE" />
+          <ScalarProperty Name="SSTA" ColumnName="SSTA" />
+          <ScalarProperty Name="EOR" ColumnName="EOR" />
+          <ScalarProperty Name="DPCODE" ColumnName="DPCODE" />
+          <ScalarProperty Name="lmodi" ColumnName="lmodi" />
+          <ScalarProperty Name="grop" ColumnName="grop" />
+          <ScalarProperty Name="AEDT" ColumnName="AEDT" />
+          <ScalarProperty Name="USER1" ColumnName="USER1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user1">
+      <EntityTypeMapping TypeName="DB1Model.user1">
+        <MappingFragment StoreEntitySet="user1">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
+</edmx:Mappings>
+</edmx:Runtime>
+<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+<Connection><DesignerInfoPropertySet><DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /></DesignerInfoPropertySet></Connection>
+<edmx:Options><DesignerInfoPropertySet><DesignerProperty Name="ValidateOnBuild" Value="True" /><DesignerProperty Name="EnablePluralization" Value="False" /><DesignerProperty Name="IncludeForeignKeysInModel" Value="True" /><DesignerProperty Name="UseLegacyProvider" Value="False" /><DesignerProperty Name="CodeGenerationStrategy" Value="None" /></DesignerInfoPropertySet></edmx:Options>
+<edmx:Diagrams />
+</edmx:Designer></edmx:Edmx>

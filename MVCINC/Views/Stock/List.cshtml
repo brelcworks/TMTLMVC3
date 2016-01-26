@@ -1,0 +1,156 @@
+﻿@model IEnumerable<MVCINC.TABLE1>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+    <tr>
+                                @*<th>
+            @Html.DisplayNameFor(model => model.RID)
+        </th>
+                 <th>
+                @Html.DisplayNameFor(model => model.TAX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TVAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STOTAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PPRICE)
+            </th>
+                     <th>
+            @Html.DisplayNameFor(model => model.SPRICE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SSTA)
+        </th>
+                             <th>
+            @Html.DisplayNameFor(model => model.DPCODE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lmodi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AEDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER1)
+        </th>
+                                *@
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.TYPE)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.PART_NO)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.PARTI)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.MRP)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.QTY)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.TOTAL)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.RACKNO)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.UNIT)
+        </th>
+        <th nowrap bgcolor="#00ffe1">
+            @Html.DisplayNameFor(model => model.EOR)
+        </th>
+        <th nowrap bgcolor="#00ffe1">ITEM OPERATION</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+                                @*<td>
+            @Html.DisplayFor(modelItem => item.RID)
+        </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.TAX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TVAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STOTAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PPRICE)
+            </td>
+                    <td>
+            @Html.DisplayFor(modelItem => item.SPRICE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SSTA)
+        </td>
+                            <td>
+            @Html.DisplayFor(modelItem => item.DPCODE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lmodi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.grop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AEDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER1)
+        </td>
+                                *@
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.TYPE)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.PART_NO)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.PARTI)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.MRP)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.QTY)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.TOTAL)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.RACKNO)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.UNIT)
+        </td>
+        <td nowrap>
+            @Html.DisplayFor(modelItem => item.EOR)
+        </td>
+        <td nowrap>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RID1 }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RID1 }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RID1 })
+        </td>
+    </tr>
+}
+
+</table>
