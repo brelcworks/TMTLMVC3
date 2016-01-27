@@ -26,29 +26,33 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Stock", "List", "Stock")</li>
+                    <li>@Html.ActionLink("Population", "List", "Pop")</li>
                 </ul>
+                
+                    <div class="navbar-form navbar-right">
+                        <ul class="nav navbar-nav">
+                            @{
+                                if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
+                                    {
+                                        <li><a href="javascript:document.getElementById('LogoutForm').submit()">Sign-Out</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a>@Html.ActionLink("Signin", "login", "MyAccount")</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
             </div>
         </div>
     </div>
     <div class="container body-content">
         <br />
         <br />
-        <ul class="btn pull-right">
-            @{
-                if (Request.IsAuthenticated)
-                {
-                    using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
-                    {
-                        <li><a href="javascript:document.getElementById('LogoutForm').submit()">Sign-Out</a></li>
-                    }
-                }
-                else
-                {
-                    <li><a>@Html.ActionLink("Signin", "login", "MyAccount")</a></li>
-                }
-            }
-        </ul>
-
+        
         @RenderBody()
         <hr />
         <footer>

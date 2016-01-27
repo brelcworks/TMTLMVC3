@@ -1,0 +1,293 @@
+﻿@model IEnumerable<MVCINCV4._1.MAINPOPU>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ENS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ALSN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAT_PH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHASE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MODEL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BSN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADDR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SPIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AMC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CHMR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CHMD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lhmr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lsd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nsd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ahm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DGNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIST)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AMAKE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WARR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OEA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SSTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hmage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DPCODE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lmodi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AEDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.llop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.solenoid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.chalt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.starter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cntype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cnmake)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sauto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FRAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DSTA)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RID1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ENS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ALSN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAT_PH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHASE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODEL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BSN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADDR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SPIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AMC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHMR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHMD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lhmr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lsd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nsd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ahm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DGNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ACTION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AMAKE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WARR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OEA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hmage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DPCODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lmodi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AEDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.llop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.solenoid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.chalt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.starter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cntype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cnmake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sauto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FRAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DSTA)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B & R ELECTRICAL WORKS</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
@@ -25,10 +25,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+
+                    <div class="navbar-form navbar-right">
+                        
+                    </div>
             </div>
         </div>
     </div>

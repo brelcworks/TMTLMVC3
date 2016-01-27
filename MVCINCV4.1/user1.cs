@@ -22,7 +22,7 @@ namespace MVCINCV4._1
         public string uid { get; set; }
         [Required(ErrorMessage = "Please Provide Password", AllowEmptyStrings = false)]
         [DisplayName("Password")]
-        [DataType(DataType.Password)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         public string pass { get; set; }
         public string fname { get; set; }
         public string lname { get; set; }

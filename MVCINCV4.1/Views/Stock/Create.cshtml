@@ -7,50 +7,50 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function () {
-            $("#txtPtno").autocomplete({
-                source: '@Url.Action("GetPtno")'
-            });
-            $("#txtParti").autocomplete({
-                source: '@Url.Action("GetParti")'
-            });
+    $(function () {
+        $("#txtPtno").autocomplete({
+            source: '@Url.Action("GetPtno")'
+        });
+        $("#txtParti").autocomplete({
+            source: '@Url.Action("GetParti")'
+        });
 
-            $("#txtParti").keypress(function (e) {
-                if (e.keyCode == 13) {
-                    $.ajax({
-                        type: "GET",
-                        url: "@Url.Action("gdata1","Stock")",
-                        data: { aData: $("#txtParti").val() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            $.each(data, function (i, val) {
-                                $('#txtPtno').val(val.PART_NO)
-                                $('#txtUNIT').val(val.unit)
-                                $('#txtMRP').val(val.MRP)
-                                $('#txtGROP').val(val.GROP)
-                                $('#txtTYPE').val(val.CATE)
-                                $('#txtTAX').val(val.TRATE)
-                                $('#txtPPRICE').focus()
-                                $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
-                                $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
-                                $("#txtSPRICE").number(true, 2);
-                                $('#txtTVAL').number(true, 2);
-                            });
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
-                    });
-                    e.preventDefault();
-                }
-            });
+        $("#txtParti").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("gdata1","Stock")",
+                    data: { aData: $("#txtParti").val() },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            $('#txtPtno').val(val.PART_NO)
+                            $('#txtUNIT').val(val.unit)
+                            $('#txtMRP').val(val.MRP)
+                            $('#txtGROP').val(val.GROP)
+                            $('#txtTYPE').val(val.CATE)
+                            $('#txtTAX').val(val.TRATE)
+                            $('#txtPPRICE').focus()
+                            $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
+                            $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
+                            $("#txtSPRICE").number(true, 2);
+                            $('#txtTVAL').number(true, 2);
+                        });
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                });
+                e.preventDefault();
+            }
+        });
 
-            $("#txtPtno").keypress(function (e) {
-                if (e.keyCode == 13) {
-                    $.ajax({
-                        type: "GET",
-                        url: "@Url.Action("gdata2","Stock")",
+        $("#txtPtno").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("gdata2","Stock")",
                         data: { aData: $("#txtPtno").val() },
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -91,6 +91,11 @@
 
             $('#txtPPRICE').keypress(function (e) {
                 if (e.keyCode == 13) {
+                    $('#txtLMODI').val(new Date($.now()))
+                    $('#txtSSTA').val("NEW")
+                    $('#txtAEDT').val("NEW")
+                    $('#txtRID').val(new Date($.now()))
+                    $('#txtUSER').val('@HttpContext.Current.User.Identity.Name.ToString()')
                     $('#txtQTY').focus()
                     e.preventDefault();
                 }
@@ -109,7 +114,7 @@
 
             $('#txtRCNO').keypress(function (e) {
                 if (e.keyCode == 13) {
-                    $('#txtUSER').val("A1587")
+                    $('#txtDPCODE').val("A1587")
                     $('#txtEOR').focus()
                     e.preventDefault();
                 }
@@ -131,6 +136,7 @@
     {
         @Html.AntiForgeryToken()
 
+    <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
             <tr>
@@ -261,6 +267,13 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.USER1, new { @class = "form-control", @id = "txtUSER", @placeholder = "USER NAME" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @Html.HiddenFor(model => model.lmodi, new { @id = "txtLMODI"})
+                    @Html.HiddenFor(model => model.SSTA, new { @id = "txtSSTA" })
+                    @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
                 </td>
             </tr>
         </table>

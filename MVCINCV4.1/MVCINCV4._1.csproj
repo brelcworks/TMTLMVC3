@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\PopController.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="CUST.cs">
       <DependentUpon>DB1.tt</DependentUpon>
@@ -283,6 +284,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="JUNK\CRT.txt" />
+    <Content Include="JUNK\EDT.txt" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
@@ -301,6 +303,8 @@
     <Content Include="Views\Stock\Delete.cshtml" />
     <Content Include="Views\Stock\List.cshtml" />
     <Content Include="Views\Stock\Create.cshtml" />
+    <Content Include="Views\Pop\List.cshtml" />
+    <Content Include="Views\Pop\Create.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

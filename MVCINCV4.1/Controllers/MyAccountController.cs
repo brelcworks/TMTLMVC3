@@ -23,7 +23,7 @@ namespace MVCINCV4._1.Controllers
                 var user = dc.user1.Where(a => a.uid.Equals(l.uid) && a.pass.Equals(l.pass)).FirstOrDefault();
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.uid, false);
+                    FormsAuthentication.SetAuthCookie(user.uid, true);
                     if (Url.IsLocalUrl(ReturnUrl))
                     {
                         return Redirect(ReturnUrl);
