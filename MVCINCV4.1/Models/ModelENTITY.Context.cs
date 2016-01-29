@@ -18,6 +18,7 @@ namespace MVCINCV4._1.Models
         public MVCINCDBENTITY()
             : base("name=MVCINCDBENTITY")
         {
+            Database.SetInitializer<MVCINCDBENTITY>(new CreateDatabaseIfNotExists<MVCINCDBENTITY>());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -25,6 +26,6 @@ namespace MVCINCV4._1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<USER> USERs { get; set; }
+        public virtual  DbSet<USER> USERs { get; set; }
     }
 }
