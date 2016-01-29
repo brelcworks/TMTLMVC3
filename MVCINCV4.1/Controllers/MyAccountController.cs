@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCINCV4._1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,14 +17,16 @@ namespace MVCINCV4._1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult login(user1 l, string ReturnUrl = "")
+        public ActionResult login(USER L, string ReturnUrl = "")
         {
             using (DB1Entities dc = new DB1Entities())
+            using (MVCINCDBENTITY DC1 = new MVCINCDBENTITY())
+
             {
-                var user = dc.user1.Where(a => a.uid.Equals(l.uid) && a.pass.Equals(l.pass)).FirstOrDefault();
+                var user = DC1.USERs.Where(a => a.UNAME.Equals(L.UNAME) && a.PASS.Equals(L.PASS)).FirstOrDefault();
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.uid, true);
+                    FormsAuthentication.SetAuthCookie(user.FNAME, false);
                     if (Url.IsLocalUrl(ReturnUrl))
                     {
                         return Redirect(ReturnUrl);

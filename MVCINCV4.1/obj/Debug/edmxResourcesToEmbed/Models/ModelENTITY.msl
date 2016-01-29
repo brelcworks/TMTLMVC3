@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MVCINCDBModelStoreContainer" CdmEntityContainer="MVCINCDBENTITY">
+    <EntitySetMapping Name="USERs">
+      <EntityTypeMapping TypeName="MVCINCDBModel.USER">
+        <MappingFragment StoreEntitySet="USER">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UNAME" ColumnName="UNAME" />
+          <ScalarProperty Name="PASS" ColumnName="PASS" />
+          <ScalarProperty Name="FNAME" ColumnName="FNAME" />
+          <ScalarProperty Name="LNAME" ColumnName="LNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,16 +1,17 @@
 ﻿@model MVCINCV4._1.MAINPOPU
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <h4>ADD NEW POPULATION</h4>
+        <h4>MODIFY POPULATION</h4>
         <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
             <tr>
                 <td>@Html.LabelFor(model => model.RID)</td>
@@ -25,7 +26,7 @@
                 </td>
                 <td>@Html.LabelFor(model => model.cntype)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.cntype, new { @class = "form-control"})
+                    @Html.TextBoxFor(model => model.cntype, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.cntype)
                 </td>
             </tr>

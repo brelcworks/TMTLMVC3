@@ -35,5 +35,19 @@ namespace MVCINCV4._1.Controllers
             }
             return RedirectToAction("List");
         }
+
+        [Authorize]
+        public ActionResult Edit(int id = 0)
+        {
+            return View(dc.MAINPOPU.Find(id));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(MAINPOPU e)
+        {
+            dc.Entry(e).State = EntityState.Modified;
+            dc.SaveChanges();
+            return RedirectToAction("List");
+        }
     }
 }
