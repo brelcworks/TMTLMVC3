@@ -188,24 +188,8 @@
     <Compile Include="MAINPOPU.cs">
       <DependentUpon>DB1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelENTITY.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelENTITY.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelENTITY.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelENTITY.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelENTITY.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelENTITY.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\USER.cs">
-      <DependentUpon>ModelENTITY.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\DBCTX.cs" />
+    <Compile Include="Models\user2.cs" />
     <Compile Include="PMR.cs">
       <DependentUpon>DB1.tt</DependentUpon>
     </Compile>
@@ -318,16 +302,6 @@
     <Content Include="JUNK\EDT.txt" />
     <Content Include="JUNK\POPEDT.txt" />
     <Content Include="JUNK\POPMOD.txt" />
-    <Content Include="Models\ModelENTITY.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelENTITY.edmx</DependentUpon>
-      <LastGenOutput>ModelENTITY.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelENTITY.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelENTITY.edmx</DependentUpon>
-      <LastGenOutput>ModelENTITY.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
@@ -348,14 +322,8 @@
     <Content Include="Views\Pop\List.cshtml" />
     <Content Include="Views\Pop\Create.cshtml" />
     <Content Include="Views\Pop\Edit.cshtml" />
-    <EntityDeploy Include="Models\ModelENTITY.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelENTITY.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelENTITY.edmx.diagram">
-      <DependentUpon>ModelENTITY.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\MyAccount\login.cshtml" />
+    <Content Include="Views\MyAccount\Create.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

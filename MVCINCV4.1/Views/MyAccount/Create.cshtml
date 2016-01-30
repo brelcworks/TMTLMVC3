@@ -1,18 +1,17 @@
 ﻿@model MVCINCV4._1.Models.user2
 
 @{
-    ViewBag.Title = "login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create";
 }
 
-<h2>Login</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Login to Account</legend>
+        <legend>user2</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.uid)
@@ -30,21 +29,21 @@
             @Html.ValidationMessageFor(model => model.pass)
         </div>
 
-        @*<div class="editor-label">
-        @Html.LabelFor(model => model.fname)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.fname)
-        @Html.ValidationMessageFor(model => model.fname)
-    </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fname)
+            @Html.ValidationMessageFor(model => model.fname)
+        </div>
 
-    <div class="editor-label">
-        @Html.LabelFor(model => model.lname)
-    </div>
-    <div class="editor-field">
-        @Html.EditorFor(model => model.lname)
-        @Html.ValidationMessageFor(model => model.lname)
-    </div>*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.lname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lname)
+            @Html.ValidationMessageFor(model => model.lname)
+        </div>
 
         <p>
             <input type="submit" value="Create" />
@@ -52,7 +51,9 @@
     </fieldset>
 }
 
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -17,16 +17,15 @@ namespace MVCINCV4._1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult login(USER L, string ReturnUrl = "")
+        public ActionResult login(user2 L, string ReturnUrl = "")
         {
-            using (DB1Entities dc = new DB1Entities())
-            using (MVCINCDBENTITY DC1 = new MVCINCDBENTITY())
+            using (DBCTX DC1 = new DBCTX())
 
             {
-                var user = DC1.USERs.Where(a => a.UNAME.Equals(L.UNAME) && a.PASS.Equals(L.PASS)).FirstOrDefault();
+                var user = DC1.user.Where(a => a.uid.Equals(L.uid) && a.pass.Equals(L.pass )).FirstOrDefault();
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.FNAME, false);
+                    FormsAuthentication.SetAuthCookie(user.fname, false);
                     if (Url.IsLocalUrl(ReturnUrl))
                     {
                         return Redirect(ReturnUrl);
@@ -45,6 +44,25 @@ namespace MVCINCV4._1.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Create(user2 e)
+        {
+            using (DBCTX DC1 = new DBCTX())
+            {
+                using (DC1)
+                {
+                    DC1.user.Add(e);
+                    DC1.SaveChanges();
+                }
+                return RedirectToAction("login");
+            }
         }
     }
 }
