@@ -188,7 +188,17 @@
     <Compile Include="MAINPOPU.cs">
       <DependentUpon>DB1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BILL.cs" />
+    <Compile Include="Models\BILL1.cs" />
+    <Compile Include="Models\CUST.cs" />
+    <Compile Include="Models\CUSTOMER.cs" />
     <Compile Include="Models\DBCTX.cs" />
+    <Compile Include="Models\MAINPOPU.cs" />
+    <Compile Include="Models\PMR.cs" />
+    <Compile Include="Models\PURCHSE.cs" />
+    <Compile Include="Models\PURCHSE1.cs" />
+    <Compile Include="Models\SHEET1.cs" />
+    <Compile Include="Models\TABLE2.cs" />
     <Compile Include="Models\user2.cs" />
     <Compile Include="PMR.cs">
       <DependentUpon>DB1.tt</DependentUpon>
@@ -302,6 +312,7 @@
     <Content Include="JUNK\EDT.txt" />
     <Content Include="JUNK\POPEDT.txt" />
     <Content Include="JUNK\POPMOD.txt" />
+    <Content Include="JUNK\STCLST.txt" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
@@ -317,13 +328,13 @@
     <Content Include="Views\Stock\Details.cshtml" />
     <Content Include="Views\Stock\Edit.cshtml" />
     <Content Include="Views\Stock\Delete.cshtml" />
-    <Content Include="Views\Stock\List.cshtml" />
     <Content Include="Views\Stock\Create.cshtml" />
     <Content Include="Views\Pop\List.cshtml" />
     <Content Include="Views\Pop\Create.cshtml" />
     <Content Include="Views\Pop\Edit.cshtml" />
     <Content Include="Views\MyAccount\login.cshtml" />
-    <Content Include="Views\MyAccount\Create.cshtml" />
+    <Content Include="Views\Stock\List.cshtml" />
+    <Content Include="Views\MyAccount\Register.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

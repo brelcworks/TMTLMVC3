@@ -14,20 +14,12 @@ namespace MVCINCV4._1.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     
-    public class user2
+    public partial class CUST
     {
         [Key]
         public int CID { get; set; }
-        [Required(ErrorMessage = "Please Provide Username", AllowEmptyStrings = false)]
-        [DisplayName("User Name")]
-        public string uid { get; set; }
-        [Required(ErrorMessage = "Please Provide Password", AllowEmptyStrings = false)]
-        [DisplayName("Password")]
-        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
-        public string pass { get; set; }
-        [DisplayName("First Name")]
-        public string fname { get; set; }
-        [DisplayName("Last Name")]
-        public string lname { get; set; }
+        public string CUST1 { get; set; }
+        public string SECTOR { get; set; }
+        public string DPCODE { get; set; }
     }
 }

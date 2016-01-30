@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h5>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h5>
+<fieldset>
+    <h4>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h4>
+</fieldset>
+   
 
 

@@ -1,11 +1,11 @@
-﻿@model IEnumerable<MVCINCV4._1.Models.TABLE2>
+﻿@model IEnumerable<MVCINCV4._1.TABLE1>
 
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h2>List</h2>
+<h5>STOCK MANAGEMENT</h5>
 
 <p>
     @Html.ActionLink("Create New", "Create")

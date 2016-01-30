@@ -46,23 +46,18 @@ namespace MVCINCV4._1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Create()
+        public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(user2 e)
+        public ActionResult Register(user2 e)
         {
-            using (DBCTX DC1 = new DBCTX())
-            {
-                using (DC1)
-                {
-                    DC1.user.Add(e);
-                    DC1.SaveChanges();
-                }
-                return RedirectToAction("login");
-            }
+            DBCTX DC = new DBCTX();
+                DC.user.Add(e);
+                DC.SaveChanges();
+            return RedirectToAction("login");
         }
     }
 }

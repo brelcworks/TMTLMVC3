@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCINCV4._1.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace MVCINCV4._1.Controllers
 {
     public class StockController : Controller
     {
-        DB1Entities dc = new DB1Entities();
+        DBCTX dc = new DBCTX();
         [Authorize]
         public ActionResult List()
         {
-            return View(dc.TABLE1.ToList());
+            return View(dc.STOCK.ToList());
         }
         [Authorize]
         public ActionResult Create()
@@ -25,11 +26,11 @@ namespace MVCINCV4._1.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Create(TABLE1 e)
+        public ActionResult Create(TABLE2 e)
         {
             using (dc)
             {
-                dc.TABLE1.Add(e);
+                dc.STOCK.Add(e);
                 dc.SaveChanges();
             }
             return RedirectToAction("List");
@@ -38,7 +39,7 @@ namespace MVCINCV4._1.Controllers
         public JsonResult GetParti(string term)
         {
             List<string> itms;
-            itms = dc.TABLE1.Where(x => x.PARTI.StartsWith(term))
+            itms = dc.STOCK.Where(x => x.PARTI.StartsWith(term))
                 .Select(y => y.PARTI).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
@@ -48,7 +49,7 @@ namespace MVCINCV4._1.Controllers
         public JsonResult GetPtno(string term)
         {
             List<string> itms;
-            itms = dc.TABLE1.Where(x => x.PART_NO.StartsWith(term))
+            itms = dc.STOCK.Where(x => x.PART_NO.StartsWith(term))
                 .Select(y => y.PART_NO).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
@@ -56,17 +57,17 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Details(int id = 0)
         {
-            return View(dc.TABLE1.Find(id));
+            return View(dc.STOCK.Find(id));
         }
 
         [Authorize]
         public ActionResult Edit(int id = 0)
         {
-            return View(dc.TABLE1.Find(id));
+            return View(dc.STOCK.Find(id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(TABLE1 e)
+        public ActionResult Edit(TABLE2 e)
         {
             dc.Entry(e).State = EntityState.Modified;
             dc.SaveChanges();
@@ -76,22 +77,22 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Delete(int id = 0)
         {
-            return View(dc.TABLE1.Find(id));
+            return View(dc.STOCK.Find(id));
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult delete_conf(int id)
         {
-            TABLE1 tc = dc.TABLE1.Find(id);
-            dc.TABLE1.Remove(tc);
+            TABLE2 tc = dc.STOCK.Find(id);
+            dc.STOCK.Remove(tc);
             dc.SaveChanges();
             return RedirectToAction("List");
         }
 
         public JsonResult gdata1(string aData)
         {
-            List<SHEET1> STLIST = new List<SHEET1>();
-            using (DB1Entities FC = new DB1Entities())
+            List<MVCINCV4._1.Models.SHEET1> STLIST = new List<MVCINCV4._1.Models.SHEET1>();
+            using (DBCTX FC = new DBCTX())
             {
                 STLIST = FC.SHEET1.Where(A => A.PARTI.Equals(aData)).ToList();
             }
@@ -100,8 +101,8 @@ namespace MVCINCV4._1.Controllers
 
         public JsonResult gdata2(string aData)
         {
-            List<SHEET1> STLIST = new List<SHEET1>();
-            using (DB1Entities FC = new DB1Entities())
+            List<MVCINCV4._1.Models.SHEET1> STLIST = new List<MVCINCV4._1.Models.SHEET1>();
+            using (DBCTX FC = new DBCTX())
             {
                 STLIST = FC.SHEET1.Where(A => A.PART_NO.Equals(aData)).ToList();
             }
