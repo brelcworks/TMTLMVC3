@@ -1,14 +1,63 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.TABLE2>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "List of Stock Items";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+@section scripts
+{
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
 
-<h2>List</h2>
+
+        $("#btnCreate").click(function () {
+            InitializeDialog($("#departmentdialog"));
+
+            $("#departmentdialog").dialog("open");
+        });
+
+
+
+        //Method to Initialize the DialogBox
+        function InitializeDialog($element) {
+
+
+            $element.dialog({
+                autoOpen: false,
+                width: 800,
+                resizable: true,
+                draggable: true,
+                title: "ADD NEW ITEM",
+                model: true,
+                show: 'slide',
+                closeText: 'x',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                open: function (event, ui) {
+                    //Load the Partial View Here using Controller and Action
+                    $element.load('/Stock/Add_item');
+                },
+
+                close: function () {
+                    $(this).dialog('close');
+                }
+
+            });
+
+        }
+    });
+
+
+</script>
+    }
+
+<h2>List of Stock Items</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href='@Url.Action("Create","Stock")' class="btn btn-success btn-xs">Create Item</a>
+    <button id="btnCreate" value="Create" class="btn btn-primary btn-xs">
+        Add New Item
+    </button>
 </p>
 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
     <tr>
@@ -155,3 +204,7 @@
     }
 
 </table>
+
+<div id="departmentdialog" title="Add New Item"
+     style="overflow: hidden;background-color:lightblue;
+border-bottom-width:5px"></div>

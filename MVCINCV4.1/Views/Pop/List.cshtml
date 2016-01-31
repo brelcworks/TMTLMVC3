@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCINCV4._1.MAINPOPU>
+﻿@model IEnumerable<MVCINCV4._1.Models.MAINPOPU >
 
 @{
     ViewBag.Title = "List";
@@ -12,61 +12,31 @@
 </p>
 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
     <tr>
-        <th>
+                                                @*<th>
             @Html.DisplayNameFor(model => model.RID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RID1)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ENS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ALSN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RAT_PH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHASE)
-        </th>
-        <th>
+                <th>
+                @Html.DisplayNameFor(model => model.ALSN)
+            </th>
+                    <th>
             @Html.DisplayNameFor(model => model.MODEL)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BSN)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CPN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHNO)
-        </th>
-        <th>
+                            <th>
             @Html.DisplayNameFor(model => model.ADDR)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOC)
-        </th>
-        <th>
+                                     <th>
             @Html.DisplayNameFor(model => model.SPIN)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AMC)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CHMR)
-        </th>
-        <th>
+                                            <th>
             @Html.DisplayNameFor(model => model.CHMD)
         </th>
         <th>
@@ -144,67 +114,68 @@
         <th>
             @Html.DisplayNameFor(model => model.DSTA)
         </th>
+                                                *@
+        <th>
+            @Html.DisplayNameFor(model => model.SID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ENS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAT_PH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHASE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHNO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CHMR)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RID1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CNAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SNAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ENS)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ALSN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RAT_PH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHASE)
-            </td>
-            <td>
+                                                                        @*<td>
+            @Html.DisplayFor(modelItem => item.RID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RID1)
+        </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.ALSN)
+                </td>
+                             <td>
                 @Html.DisplayFor(modelItem => item.MODEL)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BSN)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CPN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHNO)
-            </td>
-            <td>
+                                         <td>
                 @Html.DisplayFor(modelItem => item.ADDR)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DOC)
-            </td>
-            <td>
+                                                    <td>
                 @Html.DisplayFor(modelItem => item.SPIN)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AMC)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CHMR)
-            </td>
-            <td>
+                                                                 <td>
                 @Html.DisplayFor(modelItem => item.CHMD)
             </td>
             <td>
@@ -281,6 +252,37 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DSTA)
+            </td>
+                                                                        *@
+            <td>
+                @Html.DisplayFor(modelItem => item.SID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ENS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAT_PH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHASE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHMR)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.RID }) |

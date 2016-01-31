@@ -1,0 +1,78 @@
+﻿@model MVCINCV4._1.Models.SHEET1
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ADD NEW ITEM</legend>
+        <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+            <tr>
+                <td>@Html.LabelFor(model => model.PART_NO)</td>
+                <td>
+                    @Html.EditorFor(model => model.PART_NO)
+                    @Html.ValidationMessageFor(model => model.PART_NO)
+                </td>
+                <td>@Html.LabelFor(model => model.CATE)</td>
+                <td>
+                    @Html.EditorFor(model => model.CATE)
+                    @Html.ValidationMessageFor(model => model.CATE)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PARTI)</td>
+                <td>
+                    @Html.EditorFor(model => model.PARTI)
+                    @Html.ValidationMessageFor(model => model.PARTI)
+                </td>
+                <td>@Html.LabelFor(model => model.GROP)</td>
+                <td>
+                    @Html.EditorFor(model => model.GROP)
+                    @Html.ValidationMessageFor(model => model.GROP)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.MRP)</td>
+                <td>
+                    @Html.EditorFor(model => model.MRP)
+                    @Html.ValidationMessageFor(model => model.MRP)
+                </td>
+                <td>@Html.LabelFor(model => model.unit)</td>
+                <td>
+                    @Html.EditorFor(model => model.unit)
+                    @Html.ValidationMessageFor(model => model.unit)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.TRATE)</td>
+                <td>
+                    @Html.EditorFor(model => model.TRATE)
+                    @Html.ValidationMessageFor(model => model.TRATE)
+                </td>
+                <td>@Html.LabelFor(model => model.DPCODE)</td>
+                <td>
+                    @Html.EditorFor(model => model.DPCODE)
+                    @Html.ValidationMessageFor(model => model.DPCODE)
+                </td>
+            </tr>
+        </table>
+       
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.lmodi)
+            @Html.HiddenFor(model => model.rid1)
+            @Html.HiddenFor(model => model.AEDT)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

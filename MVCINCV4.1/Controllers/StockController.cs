@@ -39,7 +39,7 @@ namespace MVCINCV4._1.Controllers
         public JsonResult GetParti(string term)
         {
             List<string> itms;
-            itms = dc.STOCK.Where(x => x.PARTI.StartsWith(term))
+            itms = dc.SHEET1.Where(x => x.PARTI.StartsWith(term))
                 .Select(y => y.PARTI).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
@@ -49,7 +49,7 @@ namespace MVCINCV4._1.Controllers
         public JsonResult GetPtno(string term)
         {
             List<string> itms;
-            itms = dc.STOCK.Where(x => x.PART_NO.StartsWith(term))
+            itms = dc.SHEET1.Where(x => x.PART_NO.StartsWith(term))
                 .Select(y => y.PART_NO).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
@@ -91,7 +91,7 @@ namespace MVCINCV4._1.Controllers
 
         public JsonResult gdata1(string aData)
         {
-            List<MVCINCV4._1.Models.SHEET1> STLIST = new List<MVCINCV4._1.Models.SHEET1>();
+            List<SHEET1> STLIST = new List<SHEET1>();
             using (DBCTX FC = new DBCTX())
             {
                 STLIST = FC.SHEET1.Where(A => A.PARTI.Equals(aData)).ToList();
@@ -101,12 +101,29 @@ namespace MVCINCV4._1.Controllers
 
         public JsonResult gdata2(string aData)
         {
-            List<MVCINCV4._1.Models.SHEET1> STLIST = new List<MVCINCV4._1.Models.SHEET1>();
+            List<SHEET1> STLIST = new List<SHEET1>();
             using (DBCTX FC = new DBCTX())
             {
                 STLIST = FC.SHEET1.Where(A => A.PART_NO.Equals(aData)).ToList();
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        public ActionResult Add_item()
+        {
+            return PartialView("Add_item");
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Add_item(SHEET1 e)
+        {
+            using (dc)
+            {
+                dc.SHEET1.Add(e);
+                dc.SaveChanges();
+            }
+            return RedirectToAction("List");
         }
     }
 }

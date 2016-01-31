@@ -1,7 +1,7 @@
 ﻿@model MVCINCV4._1.Models.TABLE2 
 
 @{
-    ViewBag.Title = "EDIT ITEM";
+    ViewBag.Title = "EDIT STOCK ITEM";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 @section scripts
@@ -17,6 +17,7 @@
 
             $("#txtParti").keypress(function (e) {
                 if (e.keyCode == 13) {
+                    $('#txtMRP').focus()
                     $.ajax({
                         type: "GET",
                         url: "@Url.Action("gdata1","Stock")",
@@ -31,7 +32,6 @@
                                 $('#txtGROP').val(val.GROP)
                                 $('#txtTYPE').val(val.CATE)
                                 $('#txtTAX').val(val.TRATE)
-                                $('#txtPPRICE').focus()
                                 $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
                                 $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
                                 $("#txtSPRICE").number(true, 2);
@@ -48,6 +48,7 @@
 
             $("#txtPtno").keypress(function (e) {
                 if (e.keyCode == 13) {
+                    $('#txtMRP').focus()
                     $.ajax({
                         type: "GET",
                         url: "@Url.Action("gdata2","Stock")",
@@ -62,7 +63,6 @@
                                 $('#txtGROP').val(val.GROP)
                                 $('#txtTYPE').val(val.CATE)
                                 $('#txtTAX').val(val.TRATE)
-                                $('#txtPPRICE').focus()
                                 var tax = parseFloat($('#txtTAX').val()) + 100
                                 var spr = parseFloat($('#txtMRP').val()) / tax * 100
                                 $('#txtSPRICE').val(spr.toFixed(2))
@@ -107,7 +107,7 @@
                     var tot1 = parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtQTY').val())
                     $('#txtTOTAL').val(tot.toFixed(2))
                     $('#txtSTOT').val(tot1.toFixed(2))
-                    $('#txtRCNO').focus()
+                    $('#txtTVAL').focus()
                     e.preventDefault();
                 }
             });
@@ -119,9 +119,51 @@
                     e.preventDefault();
                 }
             });
+
+            $('#txtMRP').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtTAX').focus()
+                    e.preventDefault();
+                }
+            });
+
+            $('#txtTAX').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtSPRICE').focus()
+                    e.preventDefault();
+                }
+            });
+
+            $('#txtSPRICE').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtPPRICE').focus()
+                    e.preventDefault();
+                }
+            });
+
+            $('#txtTVAL').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtTYPE').focus()
+                    e.preventDefault();
+                }
+            });
+
+            $('#txtTYPE').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtUNIT').focus()
+                    e.preventDefault();
+                }
+            });
+
+            $('#txtUNIT').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtRCNO').focus()
+                    e.preventDefault();
+                }
+            });
         });
 
-    </script>
+</script>
 }
 <style type="text/css">
     .focus {

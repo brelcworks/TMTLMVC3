@@ -151,42 +151,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="BILL.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BILL1.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\PopController.cs" />
     <Compile Include="Controllers\StockController.cs" />
-    <Compile Include="CUST.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CUSTOMER.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="MAINPOPU.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BILL.cs" />
     <Compile Include="Models\BILL1.cs" />
@@ -200,25 +170,7 @@
     <Compile Include="Models\SHEET1.cs" />
     <Compile Include="Models\TABLE2.cs" />
     <Compile Include="Models\user2.cs" />
-    <Compile Include="PMR.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PURCHSE.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PURCHSE1.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SHEET1.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TABLE1.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="user1.cs">
-      <DependentUpon>DB1.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DB1.sdf">
@@ -287,16 +239,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="DB1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DB1.Context.cs</LastGenOutput>
-      <DependentUpon>DB1.edmx</DependentUpon>
-    </Content>
-    <Content Include="DB1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DB1.cs</LastGenOutput>
-      <DependentUpon>DB1.edmx</DependentUpon>
-    </Content>
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -316,13 +259,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
-    <EntityDeploy Include="DB1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DB1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DB1edmx.diagram">
-      <DependentUpon>DB1.edmx</DependentUpon>
-    </Content>
     <Content Include="App.config" />
     <Content Include="Views\Home\AfterLogin.cshtml" />
     <Content Include="Views\Stock\Details.cshtml" />
@@ -335,6 +271,7 @@
     <Content Include="Views\MyAccount\login.cshtml" />
     <Content Include="Views\Stock\List.cshtml" />
     <Content Include="Views\MyAccount\Register.cshtml" />
+    <Content Include="Views\Stock\Add_item.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

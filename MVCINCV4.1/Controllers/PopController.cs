@@ -7,12 +7,13 @@ using System.Web.Script.Services;
 using System.Web.Security;
 using System.Web.Services;
 using System.Data.Entity;
+using MVCINCV4._1.Models;
 
 namespace MVCINCV4._1.Controllers
 {
     public class PopController : Controller
     {
-        DB1Entities dc = new DB1Entities();
+        DBCTX dc = new DBCTX();
         [Authorize]
         public ActionResult List()
         {

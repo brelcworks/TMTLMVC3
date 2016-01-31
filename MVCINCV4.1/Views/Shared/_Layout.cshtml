@@ -13,49 +13,50 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
 
-                    <div class="navbar-form navbar-right">
-                        
-                    </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                  
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("My Profile", "AfterLogin", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        <br />
-        <br />
-        <ul class="btn pull-right">
-            @{
-                if (Request.IsAuthenticated)
-                {
-                    using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
-                    {
-                        <li><a href="javascript:document.getElementById('LogoutForm').submit()">Sign-Out</a></li>
-                    }
-                }
-                else
-                {
-                    <li><a>@Html.ActionLink("Signin", "login", "MyAccount")</a></li>
-                }
-            }
-        </ul>
+    </nav>
 
-        @RenderBody()
-        <hr />
+    <div>
+        <div style="width: 98%; margin-right: 1%; margin-left: 1%" class="table table-responsive">
+            <br />
+            <br />
+            <hr />
+            @RenderBody()
+            <hr />
+        </div>
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
