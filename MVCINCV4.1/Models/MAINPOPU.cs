@@ -16,9 +16,9 @@ namespace MVCINCV4._1.Models
     
     public partial class MAINPOPU
     {
-        [DisplayName("RECORD NO")]
-        public int RID { get; set; }
         [Key]
+        public int RID { get; set; }
+        [DisplayName("RECORD NO")]
         public string RID1 { get; set; }
         [DisplayName("SITE ID")]
         public string SID { get; set; }

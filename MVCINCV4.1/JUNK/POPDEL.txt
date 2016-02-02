@@ -1,0 +1,323 @@
+﻿@model MVCINCV4._1.Models.MAINPOPU
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<hr/>
+<fieldset>
+    <legend>@Html.DisplayFor(model => model.SNAME)</legend>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SNAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ENS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ENS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ALSN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ALSN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAT_PH)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RAT_PH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHASE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PHASE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODEL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MODEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BSN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BSN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CPN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHNO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PHNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADDR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ADDR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DOC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SPIN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SPIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AMC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AMC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHMR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CHMR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHMD)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CHMD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lhmr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.lhmr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lsd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.lsd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nsd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nsd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ahm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ahm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DGNO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DGNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTION)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ACTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIST)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DIST)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STATE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.STATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AMAKE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AMAKE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WARR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WARR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OEA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OEA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SSTA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SSTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hmage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.hmage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DPCODE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DPCODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lmodi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.lmodi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AEDT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AEDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.llop)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.llop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.solenoid)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.solenoid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chalt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.chalt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.starter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.starter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cntype)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.cntype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cnmake)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.cnmake)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sauto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.sauto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FRAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DSTA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DSTA)
+        </dd>
+    </dl>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

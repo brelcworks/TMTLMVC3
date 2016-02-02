@@ -50,5 +50,22 @@ namespace MVCINCV4._1.Controllers
             dc.SaveChanges();
             return RedirectToAction("List");
         }
+
+        [Authorize]
+        public ActionResult Delete(int id)
+        {
+            MAINPOPU frnds = new MAINPOPU();
+            frnds = dc.MAINPOPU.Find(id);
+            return PartialView("Delete", frnds);  
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult delete_conf(int id)
+        {
+            MAINPOPU tc = dc.MAINPOPU.Find(id);
+            dc.MAINPOPU.Remove(tc);
+            dc.SaveChanges();
+            return RedirectToAction("List");
+        }
     }
 }
