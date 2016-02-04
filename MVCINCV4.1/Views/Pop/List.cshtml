@@ -48,6 +48,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Pmr", "Add_Pmr")
 </p>
 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
     <tr>
@@ -324,9 +325,9 @@
                 @Html.DisplayFor(modelItem => item.CHMR)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RID }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete</a>  
+                <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete |</a>
+                @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID })   
             </td>
         </tr>
     }

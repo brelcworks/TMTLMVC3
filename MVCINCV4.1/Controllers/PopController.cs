@@ -67,5 +67,11 @@ namespace MVCINCV4._1.Controllers
             dc.SaveChanges();
             return RedirectToAction("List");
         }
+
+        [Authorize]
+        public ActionResult Add_Pmr(int id = 0)
+        {
+            return View(new PMRMODEL {PMRs =new PMR(), MAINPOP =dc.MAINPOPU.Find (id)});
+        }
     }
 }

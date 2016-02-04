@@ -123,7 +123,7 @@ namespace MVCINCV4._1.Controllers
                 dc.SHEET1.Add(e);
                 dc.SaveChanges();
             }
-            return RedirectToAction("List");
+            return RedirectToAction("Create");
         }
     }
 }

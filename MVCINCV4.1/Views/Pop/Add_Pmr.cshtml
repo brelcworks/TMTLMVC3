@@ -1,0 +1,271 @@
+﻿@model MVCINCV4._1.Models.PMRMODEL
+
+@{
+    ViewBag.Title = "Add_Pmr";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<style type="text/css">
+    .input-xs {
+        height: 22px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+
+    .focus {
+        border: 2px solid red;
+        background-color: #FEFED5;
+    }
+</style>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <h6>ADD NEW ISSUE FOR SITE: &nbsp; @Html.DisplayFor(model => model.MAINPOP.SNAME)</h6>
+        <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.recid)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.recid, new { @class = "form-control input-xs", @id = "txtRID" })
+                    @Html.ValidationMessageFor(model => model.PMRs.recid)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.CUST)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.CUST, new { @class = "form-control input-xs", @id = "txtCUST" })
+                    @Html.ValidationMessageFor(model => model.PMRs.CUST)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.CCATE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.CCATE, new { @class = "form-control input-xs", @id = "txtCCATE" })
+                    @Html.ValidationMessageFor(model => model.PMRs.CCATE)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.ENGINE_No)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.ENGINE_No, new { @class = "form-control input-xs", @id = "txtENS" })
+                    @Html.ValidationMessageFor(model => model.PMRs.ENGINE_No)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.DOI)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.DOI, new { @class = "form-control input-xs", @id = "txtDOI" })
+                    @Html.ValidationMessageFor(model => model.PMRs.DOI)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.CNAT)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.CNAT)
+                    @Html.ValidationMessageFor(model => model.PMRs.CNAT)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.SNAME)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.SNAME)
+                    @Html.ValidationMessageFor(model => model.PMRs.SNAME)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.WARR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.WARR)
+                    @Html.ValidationMessageFor(model => model.PMRs.WARR)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.SERV)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.SERV)
+                    @Html.ValidationMessageFor(model => model.PMRs.SERV)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.SID)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.SID)
+                    @Html.ValidationMessageFor(model => model.PMRs.SID)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.OEA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.OEA)
+                    @Html.ValidationMessageFor(model => model.PMRs.OEA)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.STA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.STA)
+                    @Html.ValidationMessageFor(model => model.PMRs.STA)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.DGNO)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.DGNO)
+                    @Html.ValidationMessageFor(model => model.PMRs.DGNO)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.AMC)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.AMC)
+                    @Html.ValidationMessageFor(model => model.PMRs.AMC)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.RFAIL)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.RFAIL)
+                    @Html.ValidationMessageFor(model => model.PMRs.RFAIL)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.KVA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.KVA)
+                    @Html.ValidationMessageFor(model => model.PMRs.KVA)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.DOS)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.DOS)
+                    @Html.ValidationMessageFor(model => model.PMRs.DOS)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.ACTION)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.ACTION)
+                    @Html.ValidationMessageFor(model => model.PMRs.ACTION)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.MODEL)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.MODEL)
+                    @Html.ValidationMessageFor(model => model.PMRs.MODEL)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.CDATI)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.CDATI)
+                    @Html.ValidationMessageFor(model => model.PMRs.CDATI)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.Report)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.Report)
+                    @Html.ValidationMessageFor(model => model.PMRs.Report)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.AMAKE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.AMAKE)
+                    @Html.ValidationMessageFor(model => model.PMRs.AMAKE)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.HMR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.HMR)
+                    @Html.ValidationMessageFor(model => model.PMRs.HMR)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.Technician)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.Technician)
+                    @Html.ValidationMessageFor(model => model.PMRs.Technician)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.ALSN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.ALSN)
+                    @Html.ValidationMessageFor(model => model.PMRs.ALSN)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.STYPE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.STYPE)
+                    @Html.ValidationMessageFor(model => model.PMRs.STYPE)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.SLA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.SLA)
+                    @Html.ValidationMessageFor(model => model.PMRs.SLA)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.BSN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.BSN)
+                    @Html.ValidationMessageFor(model => model.PMRs.BSN)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.TTR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.TTR)
+                    @Html.ValidationMessageFor(model => model.PMRs.TTR)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.RESLA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.RESLA)
+                    @Html.ValidationMessageFor(model => model.PMRs.RESLA)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.DIST)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.DIST)
+                    @Html.ValidationMessageFor(model => model.PMRs.DIST)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.TSLOT)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.TSLOT)
+                    @Html.ValidationMessageFor(model => model.PMRs.TSLOT)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.DPCODE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.DPCODE)
+                    @Html.ValidationMessageFor(model => model.PMRs.DPCODE)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PMRs.STATE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.STATE)
+                    @Html.ValidationMessageFor(model => model.PMRs.STATE)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.METERIAL)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.METERIAL)
+                    @Html.ValidationMessageFor(model => model.PMRs.METERIAL)
+                </td>
+                <td>@Html.LabelFor(model => model.MAINPOP.nsd)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.MAINPOP.nsd)
+                    @Html.ValidationMessageFor(model => model.MAINPOP.nsd)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.MAINPOP.ahm)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.MAINPOP.ahm)
+                    @Html.ValidationMessageFor(model => model.MAINPOP.ahm)
+                </td>
+                <td>@Html.LabelFor(model => model.MAINPOP.hmage)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.MAINPOP.hmage)
+                    @Html.ValidationMessageFor(model => model.MAINPOP.hmage)
+                </td>
+                <td>@Html.LabelFor(model => model.PMRs.REM)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PMRs.REM)
+                    @Html.ValidationMessageFor(model => model.PMRs.REM)
+                </td>
+            </tr>
+            @Html.HiddenFor(model => model.PMRs.AEDT)
+            @Html.HiddenFor(model => model.PMRs.lmodi)
+            @Html.HiddenFor(model => model.PMRs.SSTA)
+            @Html.HiddenFor(model => model.MAINPOP.RID)
+            @Html.HiddenFor(model => model.MAINPOP.lsd)
+            @Html.HiddenFor(model => model.MAINPOP.lhmr)
+            @Html.HiddenFor(model => model.MAINPOP.CHMD)
+            @Html.HiddenFor(model => model.MAINPOP.CHMR)
+        </table>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -6,7 +6,7 @@
     </div>  
                     <h3>Are you sure you want to delete this?</h3>
                     <fieldset>
-                        <legend>@Html.DisplayFor(model => model.SNAME)</legend>
+                        <legend>SITE NAME: &nbsp; @Html.DisplayFor(model => model.SNAME)</legend>
                         <dl class="dl-horizontal">
                             <dt>
                                 @Html.DisplayNameFor(model => model.RID)
@@ -27,13 +27,6 @@
                             </dt>
                             <dd>
                                 @Html.DisplayFor(model => model.CNAME)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.SNAME)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.SNAME)
                             </dd>
 
                             <dt>
@@ -82,7 +75,6 @@
                         @Html.AntiForgeryToken()
                         <p>
                             <input type="submit" value="Delete" /> |
-                            @Html.ActionLink("Back to List", "List")
                         </p>
                     }
                

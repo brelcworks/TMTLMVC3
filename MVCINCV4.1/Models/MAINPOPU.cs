@@ -17,6 +17,7 @@ namespace MVCINCV4._1.Models
     public partial class MAINPOPU
     {
         [Key]
+        [DisplayName("RECORD NO")]
         public int RID { get; set; }
         [DisplayName("RECORD NO")]
         public string RID1 { get; set; }
@@ -45,7 +46,7 @@ namespace MVCINCV4._1.Models
         public string ADDR { get; set; }
         [DisplayName("DT. OF COMMISSIONING")]
         [DataType(System.ComponentModel.DataAnnotations.DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm:ss tt}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DOC { get; set; }
         [DisplayName("TECHNICIAN NAME")]
         public string SPIN { get; set; }

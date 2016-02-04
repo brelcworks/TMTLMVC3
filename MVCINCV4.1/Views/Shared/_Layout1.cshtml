@@ -42,13 +42,12 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>Logged In as @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</li>
                     @{
                         if (Request.IsAuthenticated)
                         {
                             using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
                             {
-                                <li><a href="javascript:document.getElementById('LogoutForm').submit()">Sign-Out</a></li>
+                                <li><a href="javascript:document.getElementById('LogoutForm').submit()">Logged In as @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") &nbsp; Sign-Out</a></li>
                             }
                         }
                         else

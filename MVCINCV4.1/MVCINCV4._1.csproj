@@ -165,6 +165,7 @@
     <Compile Include="Models\DBCTX.cs" />
     <Compile Include="Models\MAINPOPU.cs" />
     <Compile Include="Models\PMR.cs" />
+    <Compile Include="Models\PMRMODEL.cs" />
     <Compile Include="Models\PURCHSE.cs" />
     <Compile Include="Models\PURCHSE1.cs" />
     <Compile Include="Models\SHEET1.cs" />
@@ -253,6 +254,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="JUNK\CRT.txt" />
     <Content Include="JUNK\EDT.txt" />
+    <Content Include="JUNK\LOGINVIEW.txt" />
     <Content Include="JUNK\POPDEL.txt" />
     <Content Include="JUNK\POPEDT.txt" />
     <Content Include="JUNK\POPMOD.txt" />
@@ -274,6 +276,7 @@
     <Content Include="Views\MyAccount\Register.cshtml" />
     <Content Include="Views\Stock\Add_item.cshtml" />
     <Content Include="Views\Pop\Delete.cshtml" />
+    <Content Include="Views\Pop\Add_Pmr.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
