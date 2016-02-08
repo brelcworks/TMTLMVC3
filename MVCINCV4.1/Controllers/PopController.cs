@@ -73,5 +73,42 @@ namespace MVCINCV4._1.Controllers
         {
             return View(new PMRMODEL {PMRs =new PMR(), MAINPOP =dc.MAINPOPU.Find (id)});
         }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Add_Pmr(PMRMODEL e)
+        {
+            using (dc)
+            {
+                dc.PMR.Add(e.PMRs);
+                dc.SaveChanges();
+                dc.Entry(e.MAINPOP).State = EntityState.Modified;
+                dc.SaveChanges();
+            }
+            return RedirectToAction("List");
+        }
+
+        public JsonResult gdata2(string aData)
+        {
+            List<MAINPOPU> STLIST = new List<MAINPOPU>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.MAINPOPU.Where(A => A.ENS.Equals(aData)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        public ActionResult Details(int id = 0)
+        {
+            return View(dc.MAINPOPU.Find(id));
+        }
+
+        [Authorize]
+        public ActionResult View_PMR(string id)
+        {
+            List<PMR> STLIST = new List<PMR>();
+            STLIST = dc.PMR.Where(A => A.ENGINE_No.Equals(id)).ToList();
+            return View(STLIST);
+        }
     }
 }

@@ -1,0 +1,78 @@
+﻿@model MVCINCV4._1.Models.MAINPOPU
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h6>DETAILS OF SITE NAME: &nbsp; @Html.DisplayFor(model => model.SNAME)</h6>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ENS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ENS)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RAT_PH)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RAT_PH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PHASE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PHASE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODEL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MODEL)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DGNO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DGNO)
+        </dd>
+
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RID }) |
+    @Html.ActionLink("Back to List", "List")
+</p>

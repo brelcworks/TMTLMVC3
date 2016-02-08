@@ -1,7 +1,7 @@
 ﻿@model MVCINCV4._1.Models.MAINPOPU 
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "ADD NEW SITE";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 @section scripts
@@ -281,8 +281,21 @@
                     e.preventDefault();
                 }
             });
+
+            $(function () {
+                $.datetimepicker.setLocale('en');
+                $('#txtDOC').datetimepicker({
+                    format: 'd-M-Y H:i',
+                    step: 1,
+                });
+                $('#txtCHMD').datetimepicker({
+                    format: 'd-M-Y H:i',
+                    step: 1,
+                });
+            });
         });
     </script>
+@Scripts.Render("~/bundles/jqueryval")
 }
 <style type="text/css">
     .input-xs {
@@ -297,7 +310,6 @@
         background-color: #FEFED5;
     }
 </style>
-@Scripts.Render("~/bundles/jqueryval")
        @using (Html.BeginForm())
        {
             @Html.AntiForgeryToken()

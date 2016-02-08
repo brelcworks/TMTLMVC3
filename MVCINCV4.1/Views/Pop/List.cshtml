@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.MAINPOPU >
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "LIST OF SITES";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 @section scripts
@@ -13,6 +13,7 @@
             debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
+            var td = $buttonClicked.text();
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -25,7 +26,6 @@
                     $('#myModalContent').html(data);
                     $('#myModal').modal(options);
                     $('#myModal').modal('show');
-
                 },
                 error: function () {
                     alert("Dynamic content load failed.");
@@ -38,6 +38,51 @@
         $("#closbtn").click(function () {
             $('#myModal').modal('hide');
         });
+
+        $(".anchorDetail1").click(function (e) {
+            InitializeDialog($("#departmentdialog"));
+            var TeamDetailPostBackURL = '/Pop/View_PMR';
+            debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var td = $buttonClicked.text();
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "id": id },
+                datatype: "json",
+                success: function (data) {
+                    debugger;
+                    $('#myModalContent1').html(data);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+            $("#departmentdialog").dialog("open");
+            e.preventDefault();
+        });
+        //Method to Initialize the DialogBox
+        function InitializeDialog($element) {
+            $element.dialog({
+                autoOpen: false,
+                resizable: true,
+                width: 1000,
+
+                draggable: true,
+                title: "LIST OF SERVICE",
+                modal: true,
+                show: 'slide',
+                closeText: 'x',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                close: function () {
+                    $(this).dialog('close');
+                }
+            });
+        }
     });
 
 </script>
@@ -48,7 +93,6 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-    @Html.ActionLink("Add Pmr", "Add_Pmr")
 </p>
 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
     <tr>
@@ -155,37 +199,37 @@
             @Html.DisplayNameFor(model => model.DSTA)
         </th>
                                                 *@
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.SID)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.CNAME)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.SNAME)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.ENS)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.RAT_PH)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.PHASE)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.CPN)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.PHNO)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.DOC)
         </th>
-        <th>
+        <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.CHMR)
         </th>
-        <th></th>
+        <th nowrap bgcolor="#00ffe1">RECORD OPERATION</th>
     </tr>
 
     @foreach (var item in Model)
@@ -294,40 +338,41 @@
                 @Html.DisplayFor(modelItem => item.DSTA)
             </td>
                                                                         *@
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.SID)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.CNAME)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.SNAME)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.ENS)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.RAT_PH)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.PHASE)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.CPN)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.PHNO)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.DOC)
             </td>
-            <td>
+            <td nowrap>
                 @Html.DisplayFor(modelItem => item.CHMR)
             </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete |</a>
-                @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID })   
+            <td nowrap>
+                @Html.ActionLink("Details", "Details", new { id = item.RID }) |
+                <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete</a> |
+                @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID }) |
+                <a href="javascript:void(1);" class="anchorDetail1" data-id="@item.ENS">History</a>
             </td>
         </tr>
     }
@@ -340,5 +385,14 @@
             <div id='myModalContent'></div>
         </div>
     </div>
-</div>  
+</div>
+
+<div id='departmentdialog' class='modal' style="height:70%;overflow:auto">
+    <div class="modal-dialog" style="height:70%;overflow:auto;width:300%">
+        <div class="modal-content">
+            <div id='myModalContent1'></div>
+        </div>
+    </div>
+</div>    
+
 

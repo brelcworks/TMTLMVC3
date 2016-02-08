@@ -7,14 +7,16 @@
     <link rel="shortcut icon" href="~/favicon.ico" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-2.2.0.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
     <script src="~/Scripts/jquery.number.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.datetimepicker.full.js"></script>
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color :indigo">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -42,19 +44,22 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @{
-                        if (Request.IsAuthenticated)
-                        {
-                            using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
+                    <li class="navbar-brand">Logged In as @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</li>
+                    <li class="navbar-brand">
+                        @{
+                            if (Request.IsAuthenticated)
                             {
-                                <li><a href="javascript:document.getElementById('LogoutForm').submit()">Logged In as @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") &nbsp; Sign-Out</a></li>
+                                using (Html.BeginForm("Logout", "MyAccount", FormMethod.Post, new { id = "LogoutForm" }))
+                                {
+                                    <a href="javascript:document.getElementById('LogoutForm').submit()">Sign-Out</a>
+                                }
+                            }
+                            else
+                            {
+                                <a>@Html.ActionLink("Signin", "login", "MyAccount")</a>
                             }
                         }
-                        else
-                        {
-                            <li><a>@Html.ActionLink("Signin", "login", "MyAccount")</a></li>
-                        }
-                    }
+                  </li>
                 </ul>
             </div>
         </div>
