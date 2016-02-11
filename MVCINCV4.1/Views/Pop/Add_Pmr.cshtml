@@ -75,6 +75,20 @@
             if (e.keyCode == 13) {
                 $('#txtSTYPE').focus();
                 e.preventDefault();
+                var newhmr = $('#txtHMR').val();
+                var oldhmr = $('#txtPOPCHMR').val();
+                var ldt = new Date($('#txtPOPCHMD').val());
+                var ndt = new Date($('#txtCDATI').val());
+                if (newhmr <= oldhmr)
+                {
+                    alert("LAST PM / CM HMR IS GREATER THEN THE CURRENT HMR! PLEASE REVIEW");
+                    $('#txtHMR').focus();
+                }
+                if (ndt <= ldt)
+                {
+                    alert("LAST PM / CM DATE IS GREATER THEN THE CURRENT DATE! PLEASE REVIEW");
+                    $('#txtCDATI').focus();
+                }
             }
         });
 
@@ -243,7 +257,7 @@
                 if (ser == "MAJOR")
                 {
                     switch (true) {
-                        case (tt >= 12):
+                        case (tt > 12):
                             $('#txtSLA').val("OUT OF SLA");
                             break;
                         default:
@@ -252,9 +266,10 @@
                             break;
                     }
                 }
+                else
                 {
                     switch (true) {
-                        case (tt >= 6):
+                        case (tt > 6):
                             $('#txtSLA').val("OUT OF SLA");
                             break;
                         default:
@@ -269,6 +284,7 @@
         $('#txtRFAIL').keypress(function (e) {
             if (e.keyCode == 13) {
                 $('#txtACTION').focus();
+                $('#txtDPCODE').val("A1587");
                 e.preventDefault();
             }
         });
@@ -291,6 +307,45 @@
             if (e.keyCode == 13) {
                 $('#txtSLA').focus();
                 e.preventDefault();
+            }
+        });
+
+        $('#txtTECHNICIAN').focus(function (e) {
+            var chmd = new Date($('#txtPOPCHMD').val());
+            var chmr = $('#txtPOPCHMR').val();
+            if (chmd == "") {
+                alert("BLANK");
+            }
+            else {
+                var start = new Date($('#txtCDATI').val());
+                var diff = new Date(start - chmd);
+                var days = diff / 1000 / 60 / 60 / 24;
+                var difhm = $('#txtHMR').val() - chmr;
+                var ahm = difhm / days;
+                var xy = 500 / ahm;
+                var styp = $('#txtSTYPE').val();
+                if (xy >= 180) {
+                    $('#txtAHM').val(ahm);
+                    $('#txtPOPCHMR').val($('#txtCDATI').val());
+                    $('#txtPOPCHMD').val($('#txtHMR').val());
+                    start.setDate(start.getDate() + 180);
+                    if (styp == 'OIL SERVICE') {
+                        $('#txtPOPLHMR').val($('#txtHMR').val());
+                        $('#txtPOPLSD').val($('#txtCDATI').val());
+                        $('#txtNSD').val(start);
+                    }
+                }
+                else {
+                    $('#txtAHM').val(ahm);
+                    $('#txtPOPCHMR').val($('#txtCDATI').val());
+                    $('#txtPOPCHMD').val($('#txtHMR').val());
+                    start.setDate(start.getDate() + xy);
+                    if (styp == 'OIL SERVICE') {
+                        $('#txtPOPLHMR').val($('#txtHMR').val());
+                        $('#txtPOPLSD').val($('#txtCDATI').val());
+                        $('#txtNSD').val(start);
+                    }
+                }
             }
         });
 
@@ -360,7 +415,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <h6>ADD NEW ISSUE FOR SITE: &nbsp; @Html.DisplayFor(model => model.MAINPOP.SNAME)</h6>
+        <h6>ADD NEW ISSUE FOR SITE: &nbsp; @Html.DisplayFor(model => model.MAINPOP.SNAME) &nbsp; @Html.ActionLink("Back to List", "List")</h6>
         <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
             <tr>
                 <td>@Html.LabelFor(model => model.PMRs.recid)</td>
@@ -671,6 +726,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "List")
 </div>
 

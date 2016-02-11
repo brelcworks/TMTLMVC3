@@ -27,3 +27,25 @@
         $("#closbtn").click(function () {
             $('#myModal').modal('hide');
         });
+
+		 $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("lreco", "Pop")",
+                    data: { aData: $("#txtENS").val() },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var src = data.DOS;
+                        if (src == "")
+                        {
+                            alert("BLANK");
+                        }
+                        {
+                            src = src.replace(/[^0-9 +]/g, '');
+                            alert(new Date(parseInt(src)));
+                        }
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                });

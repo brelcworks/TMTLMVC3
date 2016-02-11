@@ -110,5 +110,13 @@ namespace MVCINCV4._1.Controllers
             STLIST = dc.PMR.Where(A => A.ENGINE_No.Equals(id)).ToList();
             return View(STLIST);
         }
+
+        public JsonResult lreco(string aData)
+        {
+            var lstrec = (from c in dc.PMR.Where(A => A.ENGINE_No.Equals(aData))
+                          orderby c.RECID1 descending
+                          select c).First();
+            return Json(lstrec, JsonRequestBehavior.AllowGet);
+        }
     }
 }

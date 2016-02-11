@@ -315,7 +315,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             <fieldset>
-        <h6>ADD NEW POPULATION</h6>
+        <h6>ADD NEW POPULATION &nbsp; &nbsp; @Html.ActionLink("Back to List", "List")</h6>
                 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
                     <tr>
                         <td>@Html.LabelFor(model => model.RID1)</td>
@@ -554,6 +554,6 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "List")
+    
 </div>
 
