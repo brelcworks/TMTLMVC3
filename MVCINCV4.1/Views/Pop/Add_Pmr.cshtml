@@ -310,9 +310,9 @@
             }
         });
 
-        $('#txtTECHNICIAN').focus(function (e) {
-            var chmd = new Date($('#txtPOPCHMD').val());
-            var chmr = $('#txtPOPCHMR').val();
+        $('#txtREM').focus(function (e) {
+            var chmd = new Date($('#txtPOPCHMD1').val());
+            var chmr = $('#txtPOPCHMR1').val();
             if (chmd == "") {
                 alert("BLANK");
             }
@@ -326,24 +326,26 @@
                 var styp = $('#txtSTYPE').val();
                 if (xy >= 180) {
                     $('#txtAHM').val(ahm);
-                    $('#txtPOPCHMR').val($('#txtCDATI').val());
-                    $('#txtPOPCHMD').val($('#txtHMR').val());
+                    $('#txtPOPCHMR').val($('#txtHMR').val());
+                    $('#txtPOPCHMD').val($('#txtCDATI').val());
                     start.setDate(start.getDate() + 180);
                     if (styp == 'OIL SERVICE') {
                         $('#txtPOPLHMR').val($('#txtHMR').val());
                         $('#txtPOPLSD').val($('#txtCDATI').val());
                         $('#txtNSD').val(start);
+                        $('#txtPOPNSD').val(start);
                     }
                 }
                 else {
                     $('#txtAHM').val(ahm);
-                    $('#txtPOPCHMR').val($('#txtCDATI').val());
-                    $('#txtPOPCHMD').val($('#txtHMR').val());
+                    $('#txtPOPCHMR').val($('#txtHMR').val());
+                    $('#txtPOPCHMD').val($('#txtCDATI').val());
                     start.setDate(start.getDate() + xy);
                     if (styp == 'OIL SERVICE') {
                         $('#txtPOPLHMR').val($('#txtHMR').val());
                         $('#txtPOPLSD').val($('#txtCDATI').val());
                         $('#txtNSD').val(start);
+                        $('#txtPOPNSD').val(start);
                     }
                 }
             }
@@ -358,12 +360,12 @@
 
         $('#txtRESLA').keypress(function (e) {
             if (e.keyCode == 13) {
-                $('#txtDPCODE').focus();
+                $('#txtREM').focus();
                 e.preventDefault();
             }
         });
 
-        $('#txtDPCODE').keypress(function (e) {
+        $('#txtREM').keypress(function (e) {
             if (e.keyCode == 13) {
                 $('#txtNSD').focus();
                 e.preventDefault();
@@ -372,7 +374,7 @@
 
         $('#txtNSD').keypress(function (e) {
             if (e.keyCode == 13) {
-                $('#txtREM').focus();
+                $('#txtDPCODE').focus();
                 e.preventDefault();
             }
         });
@@ -598,10 +600,10 @@
                     @Html.TextBoxFor(model => model.PMRs.TSLOT, new { @class = "form-control input-xs", @id = "txtTSLOT" })
                     @Html.ValidationMessageFor(model => model.PMRs.TSLOT)
                 </td>
-                <td>@Html.LabelFor(model => model.PMRs.DPCODE)</td>
+                <td>@Html.LabelFor(model => model.PMRs.REM)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.PMRs.DPCODE, new { @class = "form-control input-xs", @id = "txtDPCODE" })
-                    @Html.ValidationMessageFor(model => model.PMRs.DPCODE)
+                    @Html.TextBoxFor(model => model.PMRs.REM, new { @class = "form-control input-xs", @id = "txtREM" })
+                    @Html.ValidationMessageFor(model => model.PMRs.REM)
                 </td>
             </tr>
             <tr>
@@ -632,10 +634,10 @@
                     @Html.TextBoxFor(model => model.MAINPOP.hmage, new { @class = "form-control input-xs", @id = "txtHMAGE" })
                     @Html.ValidationMessageFor(model => model.MAINPOP.hmage)
                 </td>
-                <td>@Html.LabelFor(model => model.PMRs.REM)</td>
+                <td>@Html.LabelFor(model => model.PMRs.DPCODE)</td>
                 <td>
-                    @Html.TextBoxFor(model => model.PMRs.REM, new { @class = "form-control input-xs", @id = "txtREM" })
-                    @Html.ValidationMessageFor(model => model.PMRs.REM)
+                    @Html.TextBoxFor(model => model.PMRs.DPCODE, new { @class = "form-control input-xs", @id = "txtDPCODE" })
+                    @Html.ValidationMessageFor(model => model.PMRs.DPCODE)
                 </td>
             </tr>
             @Html.HiddenFor(model => model.PMRs.AEDT, new { @id = "txtAEDT" })
@@ -646,6 +648,9 @@
             @Html.HiddenFor(model => model.MAINPOP.lhmr, new { @id = "txtPOPLHMR" })
             @Html.HiddenFor(model => model.MAINPOP.CHMD, new { @id = "txtPOPCHMD" })
             @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR" })
+            @Html.HiddenFor(model => model.MAINPOP.CHMD, new { @id = "txtPOPCHMD1" })
+            @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR1" })
+            @Html.HiddenFor(model => model.MAINPOP.nsd, new { @id = "txtPOPNSD" })
             @Html.HiddenFor(model => model.MAINPOP.lmodi, new { @id = "txtPOPLMODI" })
             @Html.HiddenFor(model => model.MAINPOP.AEDT, new { @id = "txtPOPAEDT" })
             @Html.HiddenFor(model => model.MAINPOP.SSTA, new { @id = "txtPOPSSTA" })
