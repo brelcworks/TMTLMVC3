@@ -101,6 +101,27 @@ namespace MVCINCV4._1.Controllers
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public JsonResult stype(string term)
+        {
+            List<string> itms;
+            itms = dc.PMR.Where(x => x.STYPE.StartsWith(term))
+                .Select(y => y.STYPE).ToList();
+            return Json(itms, JsonRequestBehavior.AllowGet);
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public JsonResult tech(string term)
+        {
+            List<string> itms;
+            itms = dc.PMR.Where(x => x.Technician.StartsWith(term))
+                .Select(y => y.Technician).ToList();
+            return Json(itms, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         public ActionResult Details(int id = 0)
         {
@@ -206,6 +227,32 @@ namespace MVCINCV4._1.Controllers
                 Response.End();
             }
             return RedirectToAction("List");
+        }
+
+        [Authorize]
+        public ActionResult List_PMR()
+        {
+            return View(dc.PMR.ToList());
+        }
+
+        public JsonResult filrec(DateTime sdt, DateTime edt)
+        {
+            List<PMR> STLIST = new List<PMR>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.PMR.Where(A => A.CDATI >= sdt && A.CDATI <= edt).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult allrec()
+        {
+            List<PMR> STLIST = new List<PMR>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.PMR.ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

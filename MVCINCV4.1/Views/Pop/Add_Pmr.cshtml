@@ -17,45 +17,53 @@
                 $(this).removeClass("focus");
             });
 
-            
+
             $.ajax({
                 type: "GET",
                 url: "@Url.Action("gdata2","Pop")",
                 data: { aData: $("#txtPOPENS").val() },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                $.each(data, function (i, val) {
-                    $('#txtSNAME').val(val.SNAME)
-                    $('#txtSID').val(val.SID)
-                    $('#txtENS').val(val.ENS)
-                    $('#txtRID').val(new Date($.now()))
-                    $('#txtDGNO').val(val.DGNO)
-                    $('#txtKVA').val(val.RAT_PH)
-                    $('#txtMODEL').val(val.MODEL)
-                    $('#txtAMAKE').val(val.AMAKE)
-                    $('#txtALSN').val(val.ALSN)
-                    $('#txtBSN').val(val.BSN)
-                    $('#txtDIST').val(val.DIST)
-                    $('#txtSTATE').val(val.STATE)
-                    $('#txtCUST').val(val.CNAME)
-                    $('#txtDOI').val($('#txtPOPDOC').val())
-                    $('#txtWARR').val(val.WARR)
-                    $('#txtOEA').val(val.OEA)
-                    $('#txtAMC').val(val.AMC)
-                    $('#txtAEDT').val("NEW")
-                    $('#txtSSTA').val("NEW")
-                    $('#txtLMODI').val(new Date($.now()))
-                    $('#txtPOPAEDT').val("NEW")
-                    $('#txtPOPSSTA').val("MOD")
-                    $('#txtPOPLMODI').val(new Date($.now()))
-                    $('#txtDOS').focus()
-                });
-            },
-            error: function OnErrorCall(response) {
-                alert(response.status + " " + response.statusText);
-            }
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        $('#txtSNAME').val(val.SNAME)
+                        $('#txtSID').val(val.SID)
+                        $('#txtENS').val(val.ENS)
+                        $('#txtRID').val(new Date($.now()))
+                        $('#txtDGNO').val(val.DGNO)
+                        $('#txtKVA').val(val.RAT_PH)
+                        $('#txtMODEL').val(val.MODEL)
+                        $('#txtAMAKE').val(val.AMAKE)
+                        $('#txtALSN').val(val.ALSN)
+                        $('#txtBSN').val(val.BSN)
+                        $('#txtDIST').val(val.DIST)
+                        $('#txtSTATE').val(val.STATE)
+                        $('#txtCUST').val(val.CNAME)
+                        $('#txtDOI').val($('#txtPOPDOC').val())
+                        $('#txtWARR').val(val.WARR)
+                        $('#txtOEA').val(val.OEA)
+                        $('#txtAMC').val(val.AMC)
+                        $('#txtAEDT').val("NEW")
+                        $('#txtSSTA').val("NEW")
+                        $('#txtLMODI').val(new Date($.now()))
+                        $('#txtPOPAEDT').val("NEW")
+                        $('#txtPOPSSTA').val("MOD")
+                        $('#txtPOPLMODI').val(new Date($.now()))
+                        $('#txtDOS').focus()
+                    });
+                },
+                error: function OnErrorCall(response) {
+                    alert(response.status + " " + response.statusText);
+                }
+            });
         });
+
+        $("#txtSTYPE").autocomplete({
+            source: '@Url.Action("stype")'
+        });
+
+        $("#txtTECHNICIAN").autocomplete({
+            source: '@Url.Action("tech")'
         });
 
         $('#txtDOS').datetimepicker({
@@ -70,7 +78,7 @@
             theme: 'dark'
         });
 
-        
+
         $('#txtHMR').keypress(function (e) {
             if (e.keyCode == 13) {
                 $('#txtSTYPE').focus();
@@ -79,13 +87,11 @@
                 var oldhmr = $('#txtPOPCHMR').val();
                 var ldt = new Date($('#txtPOPCHMD').val());
                 var ndt = new Date($('#txtCDATI').val());
-                if (newhmr <= oldhmr)
-                {
+                if (parseFloat(newhmr) <= parseFloat(oldhmr)) {
                     alert("LAST PM / CM HMR IS GREATER THEN THE CURRENT HMR! PLEASE REVIEW");
                     $('#txtHMR').focus();
                 }
-                if (ndt <= ldt)
-                {
+                if (ndt <= ldt) {
                     alert("LAST PM / CM DATE IS GREATER THEN THE CURRENT DATE! PLEASE REVIEW");
                     $('#txtCDATI').focus();
                 }
@@ -97,7 +103,7 @@
                 $('#txtTTR').focus();
                 e.preventDefault();
                 var date1 = new Date($('#txtDOS').val())
-                var date2 =new Date($('#txtCDATI').val())
+                var date2 = new Date($('#txtCDATI').val())
                 var difference_ms = date2 - date1;
                 difference_ms = difference_ms / 1000;
                 var seconds = Math.floor(difference_ms % 60);
@@ -128,7 +134,7 @@
                         $('#txtTSLOT').val("0-10");
                 }
 
-                var hm =$('#txtHMR').val();
+                var hm = $('#txtHMR').val();
                 switch (true) {
                     case (hm >= 15000):
                         $('#txtHMAGE').val(">15000");
@@ -254,8 +260,7 @@
                 e.preventDefault();
                 var ser = $('#txtSERV').val();
                 var tt = $('#txtTTR').val();
-                if (ser == "MAJOR")
-                {
+                if (ser == "MAJOR") {
                     switch (true) {
                         case (tt > 12):
                             $('#txtSLA').val("OUT OF SLA");
@@ -266,8 +271,7 @@
                             break;
                     }
                 }
-                else
-                {
+                else {
                     switch (true) {
                         case (tt > 6):
                             $('#txtSLA').val("OUT OF SLA");
@@ -332,8 +336,21 @@
                     if (styp == 'OIL SERVICE') {
                         $('#txtPOPLHMR').val($('#txtHMR').val());
                         $('#txtPOPLSD').val($('#txtCDATI').val());
-                        $('#txtNSD').val(start);
-                        $('#txtPOPNSD').val(start);
+                        var month = new Array();
+                        month[0] = "Jan";
+                        month[1] = "Feb";
+                        month[2] = "Mar";
+                        month[3] = "Apr";
+                        month[4] = "May";
+                        month[5] = "Jun";
+                        month[6] = "Jul";
+                        month[7] = "Aug";
+                        month[8] = "Sep";
+                        month[9] = "Oct";
+                        month[10] = "Nov";
+                        month[11] = "Dec";
+                        var mon1 = month[start.getMonth()];
+                        $('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
                     }
                 }
                 else {
@@ -344,8 +361,21 @@
                     if (styp == 'OIL SERVICE') {
                         $('#txtPOPLHMR').val($('#txtHMR').val());
                         $('#txtPOPLSD').val($('#txtCDATI').val());
-                        $('#txtNSD').val(start);
-                        $('#txtPOPNSD').val(start);
+                        var month = new Array();
+                        month[0] = "Jan";
+                        month[1] = "Feb";
+                        month[2] = "Mar";
+                        month[3] = "Apr";
+                        month[4] = "May";
+                        month[5] = "Jun";
+                        month[6] = "Jul";
+                        month[7] = "Aug";
+                        month[8] = "Sep";
+                        month[9] = "Oct";
+                        month[10] = "Nov";
+                        month[11] = "Dec";
+                        var mon1 = month[start.getMonth()];
+                        $('#txtNSD').val(start.getDate() + "-" + mon1 + "-" + start.getFullYear() + " " + start.getHours() + ":" + start.getMinutes());
                     }
                 }
             }
@@ -390,7 +420,6 @@
                 $(":input:text:eq(" + nxtIdx + ")").focus();
             }
         });
-
     });
     </script>
         }
@@ -650,7 +679,6 @@
             @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR" })
             @Html.HiddenFor(model => model.MAINPOP.CHMD, new { @id = "txtPOPCHMD1" })
             @Html.HiddenFor(model => model.MAINPOP.CHMR, new { @id = "txtPOPCHMR1" })
-            @Html.HiddenFor(model => model.MAINPOP.nsd, new { @id = "txtPOPNSD" })
             @Html.HiddenFor(model => model.MAINPOP.lmodi, new { @id = "txtPOPLMODI" })
             @Html.HiddenFor(model => model.MAINPOP.AEDT, new { @id = "txtPOPAEDT" })
             @Html.HiddenFor(model => model.MAINPOP.SSTA, new { @id = "txtPOPSSTA" })
