@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
 
 @{
-    ViewBag.Title = "List_PMR";
+    ViewBag.Title = "PM / CM MANAGEMENT";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h6>RM TRACKER VIEW</h6>
-<p>
-    @Html.ActionLink("Create New", "Create") &nbsp; &nbsp; @Html.ActionLink("Export Data", "ExportData") &nbsp; &nbsp; @Html.ActionLink("Rm Tracker", "List_PMR")
-</p>
-
+<h6>PM / CM MANAGEMENT</h6>
     <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
         <tr>
             <td>
@@ -17,6 +13,9 @@
                     <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" />
                     <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" />
                     <input type="button" value="Filter" id="btnFil" class="btn btn-primary form-control" />
+                    <input type="button" value="Show All" id="btnAll" class="btn btn-warning form-control"/> 
+                    <input type="button" value="Export Data" id="btnEx" class="btn btn-primary form-control" /> 
+                    @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success form-control" })
                 </div>
             </td>
         </tr>
@@ -26,105 +25,292 @@
             </td>
         </tr>
     </table>
-
-@section scripts
+@*<table class="table table-bordered table-hover table-responsive" style="font-size:smaller" id="tbl">
+       <thead>
+           <tr>
+               <th nowrap bgcolor="#00ffe1">Customer</th>
+               <th nowrap bgcolor="#00ffe1">Issue Type</th>
+               <th nowrap bgcolor="#00ffe1">Issue Open Date</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Complaint / Service No</th>
+               <th nowrap bgcolor="#00ffe1">Site Id</th>
+               <th nowrap bgcolor="#00ffe1">Site Name</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">District</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">State</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Issue Category</th>
+               <th nowrap bgcolor="#00ffe1">Engine No</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Model</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">KVA</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">DOI</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">DG SET NO</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Alt. Make</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Alt. Sr. No</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Battery Sr. No</th>
+               <th nowrap bgcolor="#00ffe1">HMR</th>
+               <th nowrap bgcolor="#00ffe1">Issue Nature</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Serverity</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Failure Reason</th>
+               <th nowrap bgcolor="#00ffe1">Issue Status</th>
+               <th nowrap bgcolor="#00ffe1">Issue Closed Date</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Warranty Status</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Action Taken</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Material Used</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Dealer Code</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Technician Visited</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">OEA</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">AMC Status</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">TTR</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">SLA Status</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Time Slot</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Reason Of SLA</th>
+               <th nowrap bgcolor="#00ffe1" style="display:none">Remarks</th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach (var item in Model)
+           {
+               <tr>
+                   <td>@Html.DisplayFor(modelItem => item.CUST)</td>
+                   <td>@Html.DisplayFor(modelItem => item.STYPE)</td>
+                   <td>@Html.DisplayFor(modelItem => item.DOS)</td>
+                   <td style="display:none">@Html.DisplayFor(modelItem => item.recid)</td>
+                   <td>@Html.DisplayFor(modelItem => item.SID)</td>
+                   <td> @Html.DisplayFor(modelItem => item.SNAME) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.DIST) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.STATE) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.CCATE)</td>
+                   <td> @Html.DisplayFor(modelItem => item.ENGINE_No) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.MODEL) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.KVA) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.DOI) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.DGNO) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.AMAKE) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.ALSN) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.BSN) </td>
+                   <td> @Html.DisplayFor(modelItem => item.HMR) </td>
+                   <td> @Html.DisplayFor(modelItem => item.CNAT) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.SERV) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.RFAIL) </td>
+                   <td> @Html.DisplayFor(modelItem => item.STA) </td>
+                   <td>@Html.DisplayFor(modelItem => item.CDATI)  </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.WARR) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.ACTION) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.METERIAL) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.DPCODE) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.Technician) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.OEA) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.AMC) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.TTR) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.SLA) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.TSLOT) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.RESLA) </td>
+                   <td style="display:none"> @Html.DisplayFor(modelItem => item.REM) </td>
+               </tr>
+           }
+       </tbody>
+    </table>*@
+ 
+    @section scripts
 {
-    <script>
-        $(function () {
-            $("#btnFil").click(function () {
-                var dtfm = $("#dtFrm").val() + " 00:00";
-                var dtt = $("#dtTo").val() + " 23:59";
-                $.ajax({
-                    url: "@Url.Action("filrec", "Pop")",
-                    data: { sdt: dtfm, edt: dtt },
-                    type: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        loaddata(data)
-                    },
-                    error: function () {
-                        alert("Failed! Please try again")
-                    }
+        <script>
+            $(function () {
+                $("#btnFil").click(function () {
+                    var dtfm = $("#dtFrm").val() + " 00:00";
+                    var dtt = $("#dtTo").val() + " 23:59";
+                    $.ajax({
+                        url: "@Url.Action("filrec", "Pop")",
+                        data: { sdt: dtfm, edt: dtt },
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            loaddata(data)
+                        },
+                        error: function () {
+                            alert("Failed! Please try again")
+                        }
+                    });
+                });
+
+                function loaddata(data) {
+                    var tab = $('<table border="1"></table>')
+                    var thead = $('<tr></tr>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Customer</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Issue Type</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Issue Open Date</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Complaint / Service No</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Site Id</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Site Name</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">District</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">State</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Issue Category</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Engine No</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Model</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">KVA</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">DOI</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">DG SET NO</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Alt. Make</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Alt. Sr. No</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Battery Sr. No</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">HMR</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Issue Nature</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Serverity</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Failure Reason</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Issue Status</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1">Issue Closed Date</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Warranty Status</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Action Taken</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Material Used</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Dealer Code</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Technician Visited</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">OEA</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">AMC Status</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">TTR</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">SLA Status</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Time Slot</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Reason Of SLA</th>');
+                    thead.append('<th nowrap bgcolor="#00ffe1" style="display:none">Remarks</th>');
+                    tab.append(thead);
+
+                    $.each(data, function (i, val) {
+                        var trow = $('<tr></tr>');
+                        trow.append('<td>' + val.CUST + '</td>');
+                        trow.append('<td>' + val.STYPE + '</td>');
+                        var month = new Array();
+                        month[0] = "Jan";
+                        month[1] = "Feb";
+                        month[2] = "Mar";
+                        month[3] = "Apr";
+                        month[4] = "May";
+                        month[5] = "Jun";
+                        month[6] = "Jul";
+                        month[7] = "Aug";
+                        month[8] = "Sep";
+                        month[9] = "Oct";
+                        month[10] = "Nov";
+                        month[11] = "Dec";
+                        var src1 = val.DOS;
+                        if (src1 != null) {
+                            src1 = src1.replace(/[^0-9 +]/g, '');
+                            var src2 = new Date(parseInt(src1))
+                            trow.append('<td>' + src2.getDate() + "-" + month[src2.getMonth()] + "-" + src2.getFullYear() + " " + src2.getHours() + ":" + src2.getMinutes() + '</td>');
+                        }
+                        else {
+                            trow.append('<td></td>');
+                        }
+                        trow.append('<td style="display:none">' + val.recid + '</td>');
+                        trow.append('<td>' + val.SID + '</td>');
+                        trow.append('<td>' + val.SNAME + '</td>');
+                        trow.append('<td style="display:none">' + val.DIST + '</td>');
+                        trow.append('<td style="display:none">' + val.STATE + '</td>');
+                        trow.append('<td style="display:none">' + val.CCATE + '</td>');
+                        trow.append('<td>' + val.ENGINE_No + '</td>');
+                        trow.append('<td style="display:none">' + val.MODEL + '</td>');
+                        trow.append('<td style="display:none">' + val.KVA + '</td>');
+                        var src3 = val.DOI;
+                        if (src3 != null) {
+                            src3 = src3.replace(/[^0-9 +]/g, '');
+                            var src2 = new Date(parseInt(src3))
+                            trow.append('<td style="display:none">' + src2.getDate() + "-" + month[src2.getMonth()] + "-" + src2.getFullYear() + " " + src2.getHours() + ":" + src2.getMinutes() + '</td>');
+                        }
+                        else {
+                            trow.append('<td style="display:none"></td>');
+                        }
+                        trow.append('<td style="display:none">' + val.DGNO + '</td>');
+                        trow.append('<td style="display:none">' + val.AMAKE + '</td>');
+                        trow.append('<td style="display:none">' + val.ALSN + '</td>');
+                        trow.append('<td style="display:none">' + val.BSN + '</td>');
+                        trow.append('<td>' + val.HMR + '</td>');
+                        trow.append('<td style="display:none">' + val.CNAT + '</td>');
+                        trow.append('<td style="display:none">' + val.SERV + '</td>');
+                        trow.append('<td style="display:none">' + val.RFAIL + '</td>');
+                        trow.append('<td>' + val.STA + '</td>');
+                        var src = val.CDATI;
+                        if (src != null) {
+                            src = src.replace(/[^0-9 +]/g, '');
+                            var src2 = new Date(parseInt(src))
+                            trow.append('<td>' + src2.getDate() + "-" + month[src2.getMonth()] + "-" + src2.getFullYear() + " " + src2.getHours() + ":" + src2.getMinutes() + '</td>');
+                        }
+                        else {
+                            trow.append('<td></td>');
+                        }
+                        trow.append('<td style="display:none">' + val.WARR + '</td>');
+                        trow.append('<td style="display:none">' + val.ACTION + '</td>');
+                        trow.append('<td style="display:none">' + val.METERIAL + '</td>');
+                        trow.append('<td style="display:none">' + val.DPCODE + '</td>');
+                        trow.append('<td style="display:none">' + val.Technician + '</td>');
+                        trow.append('<td style="display:none">' + val.OEA + '</td>');
+                        trow.append('<td style="display:none">' + val.AMC + '</td>');
+                        trow.append('<td style="display:none">' + val.TTR + '</td>');
+                        trow.append('<td style="display:none">' + val.SLA + '</td>');
+                        trow.append('<td style="display:none">' + val.TSLOT + '</td>');
+                        trow.append('<td style="display:none">' + val.RESLA + '</td>');
+                        trow.append('<td style="display:none">' + val.REM + '</td>');
+                        tab.append(trow);
+                    });
+                    tab.addClass("table table-hover table-bordered");
+                    $('#upd').html(tab);
+                };
+
+                $(document).ready(function () {
+                    $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
+                    $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
+                    $.ajax({
+                        url: "@Url.Action("allrec", "Pop")",
+                        data: "",
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            loaddata(data)
+                        },
+                        error: function () {
+                            alert("Failed! Please try again")
+                        }
+                    });
+                });
+
+                $('#btnAll').click(function () {
+                    $.ajax({
+                        url: "@Url.Action("allrec", "Pop")",
+                        data: "",
+                        type: "GET",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            loaddata(data)
+                        },
+                        error: function () {
+                            alert("Failed! Please try again")
+                        }
+                    });
+                });
+
+                $("#btnEx").click(function (e) {
+                    var tbl = $('#upd').html();
+                    var data = tbl.replace(/<thead>/g, '')
+                    .replace(/,/g, '#')
+                    .replace(/<\/thead>/g, '')
+                    .replace(/<tbody>/g, '')
+                    .replace(/<\/tbody>/g, '')
+                    .replace(/<tr>/g, '')
+                    .replace(/<tr style="background-color: rgb(196, 196 196);"/g, '')
+                    .replace(/<\/tr>/g, '\r\n')
+                    .replace(/<th>/g, '')
+                    .replace(/<th nowrap="" bgcolor="#00ffe1">/g, '')
+                    .replace(/<th nowrap="" bgcolor="#00ffe1" style="display:none">/g, '')
+                    .replace(/<\/th>/g, ',')
+                    .replace(/<td>/g, '')
+                    .replace(/<td style="display:none">/g, '')
+                    .replace(/<\/td>/g, ',')
+                    .replace(/<table border="1" class="table table-hover table-bordered">/g, '')
+                    .replace(/<\/table>/g, '')
+                    .replace(/\t/g, '')
+                    .replace(/\n/g, '')
+                    var mylink = document.createElement('a');
+                    mylink.download = "PMR.csv";
+                    mylink.href = "data:application/csv," + escape(data);
+                    mylink.click();
                 });
             });
-
-            function loaddata(data) {
-                var tab = $('<table border="1"></table>')
-                var thead = $('<thead></thead>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Customer</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Site Id</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Site Name</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Engine No</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Issue Open Date</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Issue Closed Date</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Issue Type</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">HMR</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Issue Nature</th>');
-                thead.append('<th nowrap bgcolor="#00ffe1">Issue Status</th>');
-                tab.append(thead);
-
-                $.each(data, function (i, val) {
-                    var trow = $('<tr></tr>');
-                    trow.append('<td>' + val.CUST + '</td>');
-                    trow.append('<td>' + val.SID + '</td>');
-                    trow.append('<td>' + val.SNAME + '</td>');
-                    trow.append('<td>' + val.ENGINE_No + '</td>');
-                    var month = new Array();
-                    month[0] = "Jan";
-                    month[1] = "Feb";
-                    month[2] = "Mar";
-                    month[3] = "Apr";
-                    month[4] = "May";
-                    month[5] = "Jun";
-                    month[6] = "Jul";
-                    month[7] = "Aug";
-                    month[8] = "Sep";
-                    month[9] = "Oct";
-                    month[10] = "Nov";
-                    month[11] = "Dec";
-                    var src1 = val.DOS;
-                    if (src1 != null) {
-                        src1 = src1.replace(/[^0-9 +]/g, '');
-                        var src2 = new Date(parseInt(src1))
-                        trow.append('<td>' + src2.getDate() + "-" + month[src2.getMonth()] + "-" + src2.getFullYear() + " " + src2.getHours() + ":" + src2.getMinutes() + '</td>');
-                    }
-                    var src = val.CDATI;
-                    if (src != null) {
-                        src = src.replace(/[^0-9 +]/g, '');
-                        var src2 = new Date(parseInt(src))
-                        trow.append('<td>' + src2.getDate() + "-" + month[src2.getMonth()] + "-" + src2.getFullYear() + " " + src2.getHours() + ":" + src2.getMinutes() + '</td>');
-                    }
-                    trow.append('<td>' + val.STYPE + '</td>');
-                    trow.append('<td>' + val.HMR + '</td>');
-                    trow.append('<td>' + val.CNAT + '</td>');
-                    trow.append('<td>' + val.STA + '</td>');
-                    tab.append(trow);
-                });
-                $("tr:odd", tab).css('background-color', '#C4C4C4');
-                tab.addClass("table");
-                tab.addClass("table-bordered");
-                tab.addClass("table-hover");
-                $('#upd').html(tab);
-            };
-
-            $(document).ready(function () {
-                $('#dtFrm').datepicker({ dateFormat: 'dd-MM-yy' });
-                $('#dtTo').datepicker({ dateFormat: 'dd-MM-yy' });
-                $.ajax({
-                    url: "@Url.Action("allrec", "Pop")",
-                    data: "",
-                type: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    loaddata(data)
-                },
-                error: function () {
-                    alert("Failed! Please try again")
-                }
-            });
-            });
-        });
-    </script>
+        </script>
     }

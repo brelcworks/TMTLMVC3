@@ -295,6 +295,7 @@
 
         $('#txtACTION').keypress(function (e) {
             if (e.keyCode == 13) {
+                $('#txtPOPACTION').val($('#txtACTION').val());
                 $('#txtREPORT').focus();
                 e.preventDefault();
             }
@@ -748,7 +749,7 @@
 
             @Html.HiddenFor(model => model.MAINPOP.starter)
 
-            @Html.HiddenFor(model => model.MAINPOP.ACTION)
+            @Html.HiddenFor(model => model.MAINPOP.ACTION, new { @id = "txtPOPACTION" })
 
             @Html.HiddenFor(model => model.MAINPOP.DPCODE)
         </table>

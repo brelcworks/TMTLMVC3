@@ -62,7 +62,6 @@
                 }
             });
             $("#departmentdialog").dialog("open");
-            e.preventDefault();
         });
         //Method to Initialize the DialogBox
         function InitializeDialog($element) {
@@ -92,9 +91,9 @@
 <h2>List of Sites</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") &nbsp; &nbsp; @Html.ActionLink("Export Data", "ExportData") &nbsp; &nbsp; @Html.ActionLink("Rm Tracker", "List_PMR")
+    @Html.ActionLink("Create New", "Create") &nbsp; &nbsp; @Html.ActionLink("Export Data", "ExportData") &nbsp; &nbsp; @Html.ActionLink("Manage Issues", "List_PMR")
 </p>
-<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+<table class="table table-bordered table-hover table-responsive" style="font-size:x-small">
     <tr>
                                                 @*<th>
             @Html.DisplayNameFor(model => model.RID)
@@ -227,7 +226,7 @@
             @Html.DisplayNameFor(model => model.DOC)
         </th>
         <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.CHMR)
+            HMR
         </th>
         <th nowrap bgcolor="#00ffe1">RECORD OPERATION</th>
     </tr>
@@ -372,7 +371,7 @@
                 @Html.ActionLink("Details", "Details", new { id = item.RID }) |
                 <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete</a> |
                 @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID }) |
-                <a href="javascript:void(0);" class="anchorDetail1" data-id="@item.ENS">History</a>
+                <a href="javascript:void(1);" class="anchorDetail1" data-id="@item.ENS">History</a>
             </td>
         </tr>
     }
