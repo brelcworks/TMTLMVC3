@@ -1,0 +1,170 @@
+﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
+
+@{
+    ViewBag.Title = "PM / CM MANAGEMENT";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h6>PM / CM MANAGEMENT</h6>
+<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+    <tr>
+        <td>
+            <div class="navbar-form">
+                <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" />
+                <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" />
+                <input type="button" value="Filter" id="btnFil" onclick="loaddata()" class="btn btn-primary" />
+
+                @Html.ActionLink("Show All", "List_PMR", "pop", null, new { @class = "btn btn-warning" })
+                <input type="button" value="Export Data" id="btnEx" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="upd"></div>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered table-hover table-responsive" style="font-size:x-small" id="tbl">
+    <thead>
+        <tr>
+            <th nowrap bgcolor="#00ffe1">Customer</th>
+            <th nowrap bgcolor="#00ffe1">Issue Type</th>
+            <th nowrap bgcolor="#00ffe1">Issue Open Date</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Complaint / Service No</th>
+            <th nowrap bgcolor="#00ffe1">Site Id</th>
+            <th nowrap bgcolor="#00ffe1">Site Name</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">District</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">State</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Issue Category</th>
+            <th nowrap bgcolor="#00ffe1">Engine No</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Model</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">KVA</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">DOI</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">DG SET NO</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Alt. Make</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Alt. Sr. No</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Battery Sr. No</th>
+            <th nowrap bgcolor="#00ffe1">HMR</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Issue Nature</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Serverity</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Failure Reason</th>
+            <th nowrap bgcolor="#00ffe1">Issue Status</th>
+            <th nowrap bgcolor="#00ffe1">Issue Closed Date</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Warranty Status</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Action Taken</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Material Used</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Dealer Code</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Technician Visited</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">OEA</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">AMC Status</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">TTR</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">SLA Status</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Time Slot</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Reason Of SLA</th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">Remarks</th>
+            <th nowrap bgcolor="#00ffe1">Record Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td nowrap>@Html.DisplayFor(modelItem => item.CUST)</td>
+                <td nowrap>@Html.DisplayFor(modelItem => item.STYPE)</td>
+                <td nowrap>@Html.DisplayFor(modelItem => item.DOS)</td>
+                <td nowrap style="display:none">@Html.DisplayFor(modelItem => item.recid)</td>
+                <td nowrap>@Html.DisplayFor(modelItem => item.SID)</td>
+                <td nowrap> @Html.DisplayFor(modelItem => item.SNAME) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.DIST) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.STATE) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.CCATE)</td>
+                <td nowrap> @Html.DisplayFor(modelItem => item.ENGINE_No) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.MODEL) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.KVA) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.DOI) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.DGNO) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.AMAKE) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.ALSN) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.BSN) </td>
+                <td nowrap> @Html.DisplayFor(modelItem => item.HMR) </td>
+                <td style="display:none"> @Html.DisplayFor(modelItem => item.CNAT) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.SERV) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.RFAIL) </td>
+                <td nowrap> @Html.DisplayFor(modelItem => item.STA) </td>
+                <td nowrap>@Html.DisplayFor(modelItem => item.CDATI)  </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.WARR) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.ACTION) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.METERIAL) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.DPCODE) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.Technician) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.OEA) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.AMC) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.TTR) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.SLA) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.TSLOT) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.RESLA) </td>
+                <td nowrap style="display:none"> @Html.DisplayFor(modelItem => item.REM) </td>
+                <td nowrap><a href="javascript:void(0);" class="anchorDetail" data-id="@item.RECID1">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+            $(function () {
+                $(".anchorDetail").click(function () {
+                    debugger;
+                    var $buttonClicked = $(this);
+                    var ens = $buttonClicked.attr('data-id');
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                        type: "GET",
+                        url: '/Pop/PMR_Dtls',
+                        contentType: "application/json; charset=utf-8",
+                        data: { "ens": ens },
+                        datatype: "json",
+                        success: function (data) {
+                            debugger;
+                            $('#myModalContent').html(data);
+                            $('#myModal').modal(options);
+                            $('#myModal').modal('show');
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+                });
+
+                $("#closbtn").click(function () {
+                    $('#myModal').modal('hide');
+                });
+
+                $("#btnEx").click(function (e) {
+                    $('#tbl').tableExport({ type: 'excel', escape: 'false' });
+                });
+
+                function loaddata() {
+                    var dtfm = $("#dtFrm").val() + " 00:00";
+                    var dtt = $("#dtTo").val() + " 23:59";
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("fil_pmr", "Pop")",
+                        data: { sdt: dtfm, edt: dtt },
+                        datatype: "html"
+                    });
+                }
+            });
+    </script>
+}
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog" style="width:80%;background-color:lightcyan">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>

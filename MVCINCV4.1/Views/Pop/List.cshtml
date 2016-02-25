@@ -7,7 +7,6 @@
 @section scripts
 {
 <script>
-    var TeamDetailPostBackURL = '/Pop/Delete';
     $(function () {
         $(".anchorDetail").click(function () {
             debugger;
@@ -15,25 +14,23 @@
             var id = $buttonClicked.attr('data-id');
             var td = $buttonClicked.text();
             var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: TeamDetailPostBackURL,
-                contentType: "application/json; charset=utf-8",
-                data: { "id": id },
-                datatype: "json",
-                success: function (data) {
-                    debugger;
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(options);
-                    $('#myModal').modal('show');
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
+                $.ajax({
+                    type: "GET",
+                    url: '/Pop/Delete',
+                    contentType: "application/json; charset=utf-8",
+                    data: { "id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
         });
-        //$("#closebtn").on('click',function(){
-        //    $('#myModal').modal('hide');
 
         $("#closbtn").click(function () {
             $('#myModal').modal('hide');
@@ -45,7 +42,6 @@
             debugger;
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
-            var td = $buttonClicked.text();
             var options = { "backdrop": "static", keyboard: true };
             $.ajax({
                 type: "GET",
@@ -83,6 +79,7 @@
             });
         }
     });
+
 
 </script>
   
@@ -371,7 +368,7 @@
                 @Html.ActionLink("Details", "Details", new { id = item.RID }) |
                 <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete</a> |
                 @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID }) |
-                <a href="javascript:void(1);" class="anchorDetail1" data-id="@item.ENS">History</a>
+                <a href="javascript:void(0);" class="anchorDetail1" data-id="@item.ENS">History</a>
             </td>
         </tr>
     }

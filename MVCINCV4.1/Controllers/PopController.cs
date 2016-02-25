@@ -130,10 +130,10 @@ namespace MVCINCV4._1.Controllers
 
         [Authorize]
         public ActionResult View_PMR(string id)
-        {
+        { 
             List<PMR> STLIST = new List<PMR>();
             STLIST = dc.PMR.Where(A => A.ENGINE_No.Equals(id)).ToList();
-            return View(STLIST);
+            return PartialView("View_PMR", STLIST);
         }
 
         public JsonResult lreco(string aData)
@@ -253,6 +253,22 @@ namespace MVCINCV4._1.Controllers
                 STLIST = FC.PMR.ToList();
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [Authorize]
+        public ActionResult PMR_Dtls(int ens)
+        {
+            return PartialView("PMR_Dtls", dc.PMR.Find(ens));
+        }
+
+        public ActionResult fil_pmr(DateTime sdt, DateTime edt)
+        {
+            List<PMR> STLIST = new List<PMR>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.PMR.Where(A => A.CDATI >= sdt && A.CDATI <= edt).ToList();
+            }
+            return View(STLIST);
         }
     }
 }
