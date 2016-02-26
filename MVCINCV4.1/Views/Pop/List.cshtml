@@ -8,6 +8,51 @@
 {
 <script>
     $(function () {
+        $(".dtl").click(function () {
+            debugger;
+            var $btdtl = $(this);
+            var dtlid = $btdtl.attr('data-id');
+            var dtlopt = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: '/Pop/Details',
+                contentType: "application/json; charset=utf-8",
+                data: { "id": dtlid },
+                datatype: "json",
+                success: function (data) {
+                    debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(dtlopt);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+        $(".dtl1").click(function () {
+            debugger;
+            var $btdtl = $(this);
+            var dtlid = $btdtl.attr('data-id');
+            var dtlopt = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: '/Pop/View_PMR',
+                contentType: "application/json; charset=utf-8",
+                data: { "id": dtlid },
+                datatype: "json",
+                success: function (data) {
+                    debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(dtlopt);
+                    $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
         $(".anchorDetail").click(function () {
             debugger;
             var $buttonClicked = $(this);
@@ -85,7 +130,7 @@
   
         }
 
-<h2>List of Sites</h2>
+<h6>LIST OF SITES</h6>
 
 <p>
     @Html.ActionLink("Create New", "Create") &nbsp; &nbsp; @Html.ActionLink("Export Data", "ExportData") &nbsp; &nbsp; @Html.ActionLink("Manage Issues", "List_PMR")
@@ -365,28 +410,32 @@
                 @Html.DisplayFor(modelItem => item.CHMR)
             </td>
             <td nowrap>
-                @Html.ActionLink("Details", "Details", new { id = item.RID }) |
+                <a href="javascript:void(0);" class="dtl" data-id="@item.RID">Details</a> |
                 <a href="javascript:void(0);" class="anchorDetail" data-id="@item.RID">Delete</a> |
                 @Html.ActionLink("Add Pmr", "Add_Pmr", new { id = item.RID }) |
-                <a href="javascript:void(0);" class="anchorDetail1" data-id="@item.ENS">History</a>
+                <a href="javascript:void(0);" class="dtl1" data-id="@item.ENS">History</a>
             </td>
         </tr>
     }
 
 </table>
 
-<div id='myModal' class='modal'>
-    <div class="modal-dialog">
+<div id='myModal' class='modal' style="height:70%;overflow:auto;width:80%">
+    <div class="modal-dialog" style="height:70%;overflow:auto;width:80%;background-color:lightcyan">
         <div class="modal-content">
-            <div id='myModalContent'></div>
+            <div style="overflow:auto;width:80%" id='myModalContent'>
+                <script>
+
+                </script>
+            </div>
         </div>
     </div>
 </div>
 
-<div id='departmentdialog' class='modal' style="height:70%;overflow:auto">
-    <div class="modal-dialog" style="height:70%;overflow:auto;width:300%;background-color:lightcyan">
+<div id='departmentdialog' class='modal'>
+    <div class="modal-dialog" style="width:80%;background-color:lightcyan">
         <div class="modal-content">
-            <div id='myModalContent1'></div>
+            <div  id='myModalContent1'></div>
         </div>
     </div>
 </div>

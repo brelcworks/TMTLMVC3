@@ -10,13 +10,14 @@
         <tr>
             <td>
                 <div class="navbar-form">
-                    <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" />
-                    <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" />
-                    <input type="button" value="Filter" id="btnFil" onclick="loaddata()" class="btn btn-primary" />
-                    @Html.ActionLink("send", "list_pmr", null, new { id = "send" })
-                    @Html.ActionLink("Show All", "List_PMR", "pop", null, new { @class = "btn btn-warning" })
-                    <input type="button" value="Export Data" id="btnEx" class="btn btn-primary" />
-                    @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
+                    <form method="post" action="/pop/fil_pmr">
+                        <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" name="sdt" />
+                        <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" name="edt" />
+                        <input type="submit" value="Filter" class="btn btn-primary" />
+                        @Html.ActionLink("Show All", "List_PMR", "pop", null, new { @class = "btn btn-warning" })
+                        <input type="button" value="Export Data" id="btnEx" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
+                    </form>
                 </div>
             </td>
         </tr>
@@ -147,13 +148,7 @@
                     $('#tbl').tableExport({ type: 'excel', escape: 'false' });
                 });
 
-                    $('#send').click(function() {
-                        var dtfm = $("#dtFrm").val() + " 00:00";
-                        var dtt = $("#dtTo").val() + " 23:59";
-                        this.href = this.href + '?sdt=' + encodeURIComponent(dtfm);
-                        this.href = this.href + '?edt=' + encodeURIComponent(dtt);
-                    });
-
+                   
                     $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
                     $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
             });

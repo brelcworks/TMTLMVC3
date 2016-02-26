@@ -1,77 +1,75 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
-<script src="~/Scripts/jquery-2.2.0.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#txtSnme').html('SERVICE DETAILS FOR SITE ID: ' + $('#tblPmr tr:last').find('td:first').html() + ' | SITE NAME: ' + $('#tblPmr tr:last').find('td:nth-child(2)').html());
-    });
-</script>
+<div>
+    
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Delete Record</h4>
+    </div>
     <h6 id="txtSnme"></h6>
     <table id="tblPmr" class="table table-bordered table-responsive table-hover" style="font-size:smaller">
         <tr>
-                        @*
-            <th>
-            @Html.DisplayNameFor(model => model.METERIAL)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.CUST)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.recid)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.DIST)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.STATE)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.CCATE)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.MODEL)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.DOI)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.DGNO)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.AMAKE)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.ALSN)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.BSN)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.SSTA)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.DPCODE)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.lmodi)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.AEDT)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.OEA)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.AMC)
-            </th>
-                <th>
-                @Html.DisplayNameFor(model => model.WARR)
-            </th>
-            <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.ENGINE_No)
-        </th>
-                        *@
+            @*
+                    <th>
+                    @Html.DisplayNameFor(model => model.METERIAL)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.CUST)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.recid)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.DIST)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.STATE)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.CCATE)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.MODEL)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.DOI)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.DGNO)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.AMAKE)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.ALSN)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.BSN)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.SSTA)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.DPCODE)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.lmodi)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.AEDT)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.OEA)
+                    </th>
+                    <th>
+                    @Html.DisplayNameFor(model => model.AMC)
+                    </th>
+                        <th>
+                        @Html.DisplayNameFor(model => model.WARR)
+                    </th>
+                    <th nowrap bgcolor="#00ffe1">
+                    @Html.DisplayNameFor(model => model.ENGINE_No)
+                </th>
+            *@
             <th nowrap bgcolor="#00ffe1" style="display:none">
                 @Html.DisplayNameFor(model => model.SID)
             </th>
@@ -135,68 +133,68 @@
         @foreach (var item in Model)
         {
             <tr>
-                                @*
-              <td>
-                @Html.DisplayFor(modelItem => item.METERIAL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CUST)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.recid)
-            </td>
-                                        <td>
-                        @Html.DisplayFor(modelItem => item.DIST)
+                @*
+                          <td>
+                            @Html.DisplayFor(modelItem => item.METERIAL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUST)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.recid)
+                        </td>
+                                                    <td>
+                                    @Html.DisplayFor(modelItem => item.DIST)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.STATE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CCATE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MODEL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DOI)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DGNO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AMAKE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ALSN)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BSN)
+                                </td>
+                                                                    <td>
+                                    @Html.DisplayFor(modelItem => item.SSTA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DPCODE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.lmodi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AEDT)
+                                </td>
+                                                                                    <td>
+                                    @Html.DisplayFor(modelItem => item.OEA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AMC)
+                                </td>
+                                                                                                     <td>
+                                    @Html.DisplayFor(modelItem => item.WARR)
+                                </td>
+                         <td nowrap>
+                        @Html.DisplayFor(modelItem => item.ENGINE_No)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.STATE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CCATE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MODEL)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DOI)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DGNO)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AMAKE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ALSN)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BSN)
-                    </td>
-                                                        <td>
-                        @Html.DisplayFor(modelItem => item.SSTA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DPCODE)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.lmodi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AEDT)
-                    </td>
-                                                                        <td>
-                        @Html.DisplayFor(modelItem => item.OEA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AMC)
-                    </td>
-                                                                                         <td>
-                        @Html.DisplayFor(modelItem => item.WARR)
-                    </td>
-             <td nowrap>
-            @Html.DisplayFor(modelItem => item.ENGINE_No)
-        </td>
-                                *@
+                *@
                 <td nowrap style="display:none">
                     @Html.DisplayFor(modelItem => item.SID)
                 </td>
@@ -258,3 +256,4 @@
         }
 
     </table>
+</div>

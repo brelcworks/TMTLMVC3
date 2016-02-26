@@ -125,7 +125,7 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Details(int id = 0)
         {
-            return View(dc.MAINPOPU.Find(id));
+            return PartialView("Details_P", dc.MAINPOPU.Find(id));
         }
 
         [Authorize]
@@ -260,13 +260,17 @@ namespace MVCINCV4._1.Controllers
         {
             return PartialView("PMR_Dtls", dc.PMR.Find(ens));
         }
-
-        public ActionResult fil_pmr(DateTime sdt, DateTime edt)
+        [HttpPost]
+        public ActionResult fil_pmr(string sdt, string edt)
         {
             List<PMR> STLIST = new List<PMR>();
+            DateTime sdt1 = Convert.ToDateTime(sdt);
+            DateTime edt1 = Convert.ToDateTime(edt);
+            TimeSpan ts = new TimeSpan(23, 59, 59);
+            edt1 = edt1.Add(ts);
             using (DBCTX FC = new DBCTX())
             {
-                STLIST = FC.PMR.Where(A => A.CDATI >= sdt && A.CDATI <= edt).ToList();
+                STLIST = FC.PMR.Where(A => A.CDATI >= sdt1 && A.CDATI <= edt1).ToList();
             }
             return View(STLIST);
         }

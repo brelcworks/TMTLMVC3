@@ -413,3 +413,12 @@
                     $('#myModal').modal('hide');
                 });
             });
+
+			 @using (Html.BeginForm("fil_pmr", "Pop"))
+                    {
+                        <b>Acess Textbox </b>
+                        @Html.TextBox("sdt", "")
+                        @Html.TextBox("edt", "")
+                        <br />
+                        <input type="submit" value="Submit TextBox" />
+                    }
