@@ -10,68 +10,54 @@
         <tr>
             <td>
                 <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.SID)
+                                                                                @*<dt>
+            @Html.DisplayNameFor(model => model.SID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SNAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SNAME)
+        </dd>
+                             <dt>
+                            @Html.DisplayNameFor(model => model.recid)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.recid)
+                        </dd>
+                                             <dt>
+                        @Html.DisplayNameFor(model => model.SSTA)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.SID)
+                        @Html.DisplayFor(model => model.SSTA)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.SNAME)
+                        @Html.DisplayNameFor(model => model.DPCODE)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.SNAME)
+                        @Html.DisplayFor(model => model.DPCODE)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.ENGINE_No)
+                        @Html.DisplayNameFor(model => model.lmodi)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ENGINE_No)
+                        @Html.DisplayFor(model => model.lmodi)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.DOS)
+                        @Html.DisplayNameFor(model => model.AEDT)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.DOS)
+                        @Html.DisplayFor(model => model.AEDT)
                     </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.STYPE)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.STYPE)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.HMR)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.HMR)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Report)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Report)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Technician)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Technician)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.METERIAL)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.METERIAL)
-                    </dd>
+                                                                
+                                                                                *@
 
                     <dt>
                         @Html.DisplayNameFor(model => model.CUST)
@@ -79,64 +65,35 @@
                     <dd>
                         @Html.DisplayFor(model => model.CUST)
                     </dd>
-
                     <dt>
-                        @Html.DisplayNameFor(model => model.recid)
+                        @Html.DisplayNameFor(model => model.ENGINE_No)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.recid)
+                        @Html.DisplayFor(model => model.ENGINE_No)
                     </dd>
-
                     <dt>
-                        @Html.DisplayNameFor(model => model.CDATI)
+                        @Html.DisplayNameFor(model => model.DGNO)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CDATI)
+                        @Html.DisplayFor(model => model.DGNO)
                     </dd>
-
                     <dt>
-                        @Html.DisplayNameFor(model => model.DIST)
+                        @Html.DisplayNameFor(model => model.KVA)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.DIST)
+                        @Html.DisplayFor(model => model.KVA)
                     </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.STATE)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.STATE)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CCATE)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.CCATE)
-                    </dd>
-                </dl>
-            </td>
-            <td>
-                <dl class="dl-horizontal">
                     <dt>
                         @Html.DisplayNameFor(model => model.MODEL)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.MODEL)
                     </dd>
-
                     <dt>
                         @Html.DisplayNameFor(model => model.DOI)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.DOI)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.DGNO)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.DGNO)
                     </dd>
 
                     <dt>
@@ -159,7 +116,71 @@
                     <dd>
                         @Html.DisplayFor(model => model.BSN)
                     </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AMC)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AMC)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WARR)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.WARR)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.OEA)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OEA)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DIST)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DIST)
+                    </dd>
 
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.STATE)
+                    </dd>
+                </dl>
+            </td>
+            <td>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.STYPE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.STYPE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DOS)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DOS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CDATI)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CDATI)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CCATE)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CCATE)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HMR)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HMR)
+                    </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.CNAT)
                     </dt>
@@ -189,31 +210,10 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.WARR)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.WARR)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.ACTION)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.ACTION)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.OEA)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.OEA)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AMC)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.AMC)
                     </dd>
 
                     <dt>
@@ -243,42 +243,26 @@
                     <dd>
                         @Html.DisplayFor(model => model.RESLA)
                     </dd>
-
                     <dt>
-                        @Html.DisplayNameFor(model => model.KVA)
+                        @Html.DisplayNameFor(model => model.Report)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.KVA)
+                        @Html.DisplayFor(model => model.Report)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.SSTA)
+                        @Html.DisplayNameFor(model => model.Technician)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.SSTA)
+                        @Html.DisplayFor(model => model.Technician)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.DPCODE)
+                        @Html.DisplayNameFor(model => model.METERIAL)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.DPCODE)
+                        @Html.DisplayFor(model => model.METERIAL)
                     </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.lmodi)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.lmodi)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AEDT)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.AEDT)
-                    </dd>
-
                     <dt>
                         @Html.DisplayNameFor(model => model.REM)
                     </dt>

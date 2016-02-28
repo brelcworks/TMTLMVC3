@@ -15,15 +15,18 @@
                         <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" name="edt" />
                         <input type="submit" value="Filter" class="btn btn-primary" />
                         @Html.ActionLink("Show All", "List_PMR", "pop", null, new { @class = "btn btn-warning" })
-                        <input type="button" value="Export Data" id="btnEx" class="btn btn-primary" />
                         @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
                     </form>
                 </div>
             </td>
-        </tr>
-        <tr>
             <td>
-                <div id="upd"></div>
+                <div class="navbar-form">
+                    <form method="post" action="/pop/exp_pmr">
+                        <input type="submit" value="Export Data" id="btnEx" class="btn btn-primary" />
+                        <input type="hidden" id="dtFrm1" placeholder="Search Records From Date" class="form-control" name="sdt" />
+                        <input type="hidden" id="dtTo1" placeholder="Search Records To Date" class="form-control" name="edt" />
+                    </form>
+                </div>
             </td>
         </tr>
     </table>
@@ -144,13 +147,14 @@
                     $('#myModal').modal('hide');
                 });
 
-                $("#btnEx").click(function (e) {
-                    $('#tbl').tableExport({ type: 'excel', escape: 'false' });
+                $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
+                $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
+                $('#dtFrm').change(function () {
+                    $('#dtFrm1').val($('#dtFrm').val());
                 });
-
-                   
-                    $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
-                    $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
+                $('#dtTo').change(function () {
+                    $('#dtTo1').val($('#dtTo').val());
+                });
             });
         </script>
     }

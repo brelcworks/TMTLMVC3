@@ -1,9 +1,38 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
 <div>
-    
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                $('#txtSnme').html("SITE ID:  " + $('#tblPmr tr:last').find('td:nth-child(2)').html() + " | SITE NAME:  " + $('#tblPmr tr:last').find('td:nth-child(3)').text());
+            });
+            $(".REDEL").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var td = $buttonClicked.text();
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: '/Pop/PMR_Dtls1',
+                    contentType: "application/json; charset=utf-8",
+                    data: { "ens": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+        });
+    </script>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">Delete Record</h4>
+        <h4 class="modal-title" id="myModalLabel">LIST OF ISSUES</h4>
     </div>
     <h6 id="txtSnme"></h6>
     <table id="tblPmr" class="table table-bordered table-responsive table-hover" style="font-size:smaller">
@@ -66,15 +95,17 @@
                         <th>
                         @Html.DisplayNameFor(model => model.WARR)
                     </th>
-                    <th nowrap bgcolor="#00ffe1">
-                    @Html.DisplayNameFor(model => model.ENGINE_No)
-                </th>
+                   
             *@
+            <th nowrap bgcolor="#00ffe1">RECORD OPERATION</th>
             <th nowrap bgcolor="#00ffe1" style="display:none">
                 @Html.DisplayNameFor(model => model.SID)
             </th>
             <th nowrap bgcolor="#00ffe1" style="display:none">
                 @Html.DisplayNameFor(model => model.SNAME)
+            </th>
+            <th nowrap bgcolor="#00ffe1" style="display:none">
+                @Html.DisplayNameFor(model => model.ENGINE_No)
             </th>
             <th nowrap bgcolor="#00ffe1">
                 @Html.DisplayNameFor(model => model.DOS)
@@ -191,15 +222,17 @@
                                                                                                      <td>
                                     @Html.DisplayFor(modelItem => item.WARR)
                                 </td>
-                         <td nowrap>
-                        @Html.DisplayFor(modelItem => item.ENGINE_No)
-                    </td>
+                         
                 *@
+                <td><a href="javascript:void(0);" class="REDEL" data-id="@item.RECID1">Details</a></td>
                 <td nowrap style="display:none">
                     @Html.DisplayFor(modelItem => item.SID)
                 </td>
                 <td nowrap style="display:none">
                     @Html.DisplayFor(modelItem => item.SNAME)
+                </td>
+                <td nowrap style="display:none">
+                    @Html.DisplayFor(modelItem => item.ENGINE_No)
                 </td>
                 <td nowrap>
                     @Html.DisplayFor(modelItem => item.DOS)
@@ -256,4 +289,12 @@
         }
 
     </table>
+   
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog" style="width:80%;background-color:lightcyan">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -422,3 +422,31 @@
                         <br />
                         <input type="submit" value="Submit TextBox" />
                     }
+
+
+
+					String constring = ConfigurationManager.ConnectionStrings["DBCTX"].ConnectionString;
+                SqlConnection con = new SqlConnection(constring);
+                string query = "select * From Employee";
+                DataTable dt = new DataTable();
+                dt.TableName = "Employee";
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(query, con);
+                da.Fill(dt);
+                con.Close();
+                
+
+				GridView gv = new GridView();
+                gv.DataSource = dc.PMR.ToList();
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=Marklist.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
