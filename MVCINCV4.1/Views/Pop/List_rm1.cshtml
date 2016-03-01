@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source =
+       {
+           datatype: "json",
+           datafields: [
+                { name: 'SID', type: 'string' },
+                { name: 'SNAME', type: 'string' },
+                { name: 'CUST', type: 'string' },
+                { name: 'STYPE', type: 'string' },
+                { name: 'CCATE', type: 'string' }
+           ],
+           url: '/Pop/List_rm'
+       };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // initialize jqxGrid
+            $("#grid").jqxGrid(
+                {
+                    width: '98%',
+                    height: '85%',
+                    source: dataAdapter,
+                    sortable: true,
+                    filterable: true,
+                    theme: 'energyblue',
+                    editable: true,
+                    columns: [
+                        { text: "SITE ID", datafield: "SID" },
+                        { text: "SITE NAME", datafield: "SNAME" },
+                        { text: "CUSTOMER", datafield: "CUST" },
+                        { text: "ISSUE TYPE", datafield: "STYPE" },
+                        { text: "ISSUE CATEGORY", datafield: "CCATE" }
+                    ]
+                });
+        });
+    </script>
+}
+<h2>Index</h2>
+<div id="grid"></div>
+
