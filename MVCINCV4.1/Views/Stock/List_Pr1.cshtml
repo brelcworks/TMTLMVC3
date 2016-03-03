@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVCINCV4._1.Models.SHEET1>
+
+@{
+    ViewBag.Title = "List_Pr1";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#grid').jqGrid({
+                url: '/Stock/List_Pr/',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames: ['ID', 'Part No', 'Part Name', 'Mrp', 'Item Group', 'Item Category', 'Tax Rate', 'Unit'],
+                colModel: [
+                    { name: 'RID', hidden: true, index: 'RID' },
+                    { name: 'PART_NO', index: 'PART_NO', editable: true },
+                    { name: 'PARTI', index: 'PARTI', editable: true },
+                    { name: 'MRP', index: 'MRP', editable: true },
+                    { name: 'GROP', index: 'GROP', editable: true },
+                    { name: 'CATE', index: 'CATE', editable: true },
+                    { name: 'TRATE', index: 'TRATE', editable: true },
+                    { name: 'unit', index: 'unit', editable: true }
+                ],
+                pager: jQuery('#pager'),
+                height: '100%',
+                viewrecords: true,
+                caption: 'PRICE LIST',
+                emptyrecords: 'BLANK',
+                autowidth: true,
+                sortable: true,
+                sortname: 'PART_NO'
+            }).navGrid('#pager', { view: false, del: false, add: true, edit: false },
+   {}, // default settings for edit
+   {
+       zIndex: 100,
+       url: '/Stock/crt',
+       closeOnEscape: true,
+       closeAfterAdd: true,
+       afterComplete: function (response) {
+           if (response.responseText)
+           {
+               alert(response.responseText);
+           }
+       }
+   }, // default settings for add
+   {}, // delete
+   {closeOnEscape: true, multipleSearch: true, 
+       closeAfterSearch: true }, // search options
+   {}
+ );
+        });
+    </script>
+        }
+<input style='margin-top: 10px;' type="button" value="Export to Excel" id='excelExport' />
+<table id="grid"></table>
+<div id="pager"></div>
+<h2>List_Pr1</h2>

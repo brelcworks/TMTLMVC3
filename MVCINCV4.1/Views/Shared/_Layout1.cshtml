@@ -17,6 +17,7 @@
     <script src="~/Scripts/tableExport.js"></script>
     <link href="~/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
     <link href="~/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" />
+    <link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
     <script src="~/jqwidgets/jqxcore.js"></script>
     <script src="~/jqwidgets/jqxdata.js"></script>
     <script src="~/jqwidgets/jqxbuttons.js"></script>
@@ -32,6 +33,11 @@
     <script src="~/jqwidgets/jqxgrid.pager.js"></script>
     <script src="~/jqwidgets/jqxgrid.grouping.js"></script>
     <script src="~/jqwidgets/jqxgrid.edit.js"></script>
+    <script src="~/jqwidgets/jqxwindow.js"></script>
+    <script src="~/jqwidgets/jqxdata.export.js"></script>
+    <script src="~/jqwidgets/jqxgrid.export.js"></script>
+    <script src="~/Scripts/i18n/grid.locale-en.js"></script>
+    <script src="~/Scripts/jquery.jqGrid.min.js"></script>
     @RenderSection("scripts", required: false)
 </head>
 <body>
@@ -59,6 +65,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventory<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Stock", "List", "Stock")</li>
+                            <li>@Html.ActionLink("Price List", "List_Pr1", "Stock")</li>
                         </ul>
                     </li>
                 </ul>

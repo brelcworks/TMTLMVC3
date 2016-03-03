@@ -467,3 +467,117 @@
     <script src="~/jqwidgets/jqxgrid.sort.js"></script>
     <script src="~/jqwidgets/jqxgrid.pager.js"></script>
     <script src="~/jqwidgets/jqxgrid.grouping.js"></script>
+
+
+	int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            
+            var dbResult = dc.SHEET1.Select(
+                a => new
+                {
+                    a.RID,
+                    a.PART_NO,
+                   a.PARTI,
+                    a.MRP,
+                    a.GROP,
+                   a.CATE,
+                    a.TRATE,
+                    a.unit
+                });
+            int totalRecords = dbResult.Count();
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            if (sord.ToUpper() == "DESC")
+            {
+                dbResult = dbResult.OrderByDescending(s => s.PARTI);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            else
+            {
+                dbResult = dbResult.OrderBy(s => s.PARTI);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            var JsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = dbResult
+            };
+
+			 $('#grid').jqGrid({
+                url: '/Stock/List_Pr',
+                datatype: 'json',
+                mtype: 'GET',
+                colNames: ['ID', 'Part No', 'Part Name', 'Mrp', 'Item Group', 'Item Category', 'Tax Rate', 'Unit'],
+                colModel: [
+                    { key: true, name: 'RID', index: 'RID' },
+                    { key: false, name: 'PART_NO', index: 'PART_NO' },
+                    { key: false, name: 'PARTI', index: 'PARTI' },
+                    { key: false, name: 'MRP', index: 'MRP' },
+                    { key: false, name: 'GROP', index: 'GROP' },
+                    { key: false, name: 'CATE', index: 'CATE' },
+                    { key: false, name: 'TRATE', index: 'TRATE' },
+                    { key: false, name: 'unit', index: 'unit' }
+                ],
+                pager: jQuery('#pager'),
+                rowNum: 10,
+                rowList: [10, 20, 30, 40],
+                height: '100%',
+                viewrecords: true,
+                caption: 'PRICE LIST',
+                emptyrecords: 'BLANK',
+                jsonReader: {
+                    root: 'rows',
+                    page: 'page',
+                    total: 'total',
+                    records: 'records',
+                    id: '0'
+                },
+                autowidth: true,
+                multiselect: false
+            });
+
+			 $('#grid').jqGrid({
+                caption: "Employee Details",
+                url: '/Stock/List_Pr/',
+                datatype: "json",
+                contentType: "application/json; charset-utf-8",
+                mtype: 'GET',
+                colNames: ['ID', 'Part No', 'Part Name', 'Mrp', 'Item Group', 'Item Category', 'Tax Rate', 'Unit'],
+                colModel: [
+                      { name: 'RID', index: 'RID' },
+                    { name: 'PART_NO', index: 'PART_NO' },
+                    { name: 'PARTI', index: 'PARTI' },
+                    { name: 'MRP', index: 'MRP' },
+                    { name: 'GROP', index: 'GROP' },
+                    { name: 'CATE', index: 'CATE' },
+                    { name: 'TRATE', index: 'TRATE' },
+                    {  name: 'unit', index: 'unit' }
+                ],
+                rowNum: 10,
+                loadonce: true
+
+            });
+
+            jQuery("#grid").jqGrid('navGrid', '#pager', { edit: true, add: true, del: true });
+
+
+			var jsonData = new
+            {
+                total = 1,
+                page = 1,
+                records = dc.SHEET1.ToList().Count,
+                rows = (from a in dc.SHEET1.ToList()select new
+                  {
+                      id = a.RID,
+                   cell = new string[]{ a.PART_NO,
+                   a.PARTI,
+                    a.MRP,
+                    a.GROP,
+                   a.CATE,
+                    a.TRATE,
+                    a.unit 
+            }
+                  }).ToArray()
+            };  
+

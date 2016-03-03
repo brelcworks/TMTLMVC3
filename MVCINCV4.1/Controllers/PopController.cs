@@ -563,16 +563,8 @@ namespace MVCINCV4._1.Controllers
         public JsonResult List_rm()
         {
             var dbResult = dc.PMR.ToList();
-            var employees = (from employee in dbResult
-                             select new
-                             {
-                                 employee.SID,
-                                 employee.SNAME,
-                                 employee.CUST,
-                                 employee.STYPE,
-                                 employee.CCATE
-                             });
-            return Json(employees, JsonRequestBehavior.AllowGet);
+           
+            return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult List_rm1()

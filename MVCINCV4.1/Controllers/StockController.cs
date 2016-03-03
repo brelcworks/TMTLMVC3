@@ -125,5 +125,83 @@ namespace MVCINCV4._1.Controllers
             }
             return RedirectToAction("Create");
         }
+
+        public JsonResult List_Pr(int page, int rows, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+
+            var dbResult = dc.SHEET1.Select(
+                a => new
+                {
+                    a.RID,
+                    a.PART_NO,
+                    a.PARTI,
+                    a.MRP,
+                    a.GROP,
+                    a.CATE,
+                    a.TRATE,
+                    a.unit
+                });
+            int totalRecords = dbResult.Count();
+            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)rows);
+            if (sord.ToUpper() == "DESC")
+            {
+                dbResult = dbResult.OrderByDescending(s => s.PARTI);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            else
+            {
+                dbResult = dbResult.OrderBy(s => s.PARTI);
+                dbResult = dbResult.Skip(pageIndex * pageSize).Take(pageSize);
+            }
+            var JsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (from a in dc.SHEET1.ToList()select new
+                  {
+                      id = a.RID,
+                   cell = new string[]{ a.PART_NO,
+                   a.PARTI,
+                    a.MRP,
+                    a.GROP,
+                   a.CATE,
+                    a.TRATE,
+                    a.unit 
+            }
+                  }).ToArray()
+            };  
+            return Json(JsonData, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        public ActionResult List_Pr1()
+        {
+            return View(dc.SHEET1.ToList());
+        }
+        [HttpPost]
+        public string crt([Bind(Exclude = "RID")] SHEET1 objPMR)
+        {
+            string msg;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dc.SHEET1.Add(objPMR);
+                    dc.SaveChanges();
+                    msg = "Saved Successfully";
+                }
+                else
+                {
+                    msg = "Validation Failed";
+                }
+            }
+            catch(Exception ex)
+            {
+                msg = ex.Message;
+            }
+            return msg;
+        }
     }
 }
