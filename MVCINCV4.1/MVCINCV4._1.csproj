@@ -781,6 +781,7 @@
     <Content Include="Scripts\i18n\grid.locale-tw.js" />
     <Content Include="Scripts\i18n\grid.locale-ua.js" />
     <Content Include="Scripts\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\INC\LST_RM.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.min.js" />
     <Content Include="Scripts\jquery.base64.js" />

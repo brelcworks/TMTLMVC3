@@ -581,3 +581,29 @@
                   }).ToArray()
             };  
 
+<table class="table table-bordered table-hover table-responsive">
+            <tr>
+                <td>SITE ID:</td>
+                <td align="left"><input id="firstName" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>SITE NAME:</td>
+                <td align="left"><input id="lastName" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>CUSTOMER:</td>
+                <td align="left"><input id="product" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>ISSUE TYPE:</td>
+                <td align="left"><input id="quantity" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>ISSUE CATEGORY:</td>
+                <td align="left"><input id="price" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td style="padding-top: 10px;" align="right"><input id="Cancel" type="button" value="OK" /></td>
+            </tr>
+        </table>

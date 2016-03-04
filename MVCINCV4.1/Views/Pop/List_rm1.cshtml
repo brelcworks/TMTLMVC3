@@ -1,123 +1,276 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.PMR>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "PM / CM MANAGEMENT";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 @section scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var source =
-       {
-           datatype: "json",
-           datafields: [
-                { name: 'RECID1', type: 'string' },
-                { name: 'SID', type: 'string' },
-                { name: 'SNAME', type: 'string' },
-                { name: 'CUST', type: 'string' },
-                { name: 'STYPE', type: 'string' },
-                { name: 'CCATE', type: 'string' },
-                { name: 'DOS', type: 'date' },
-                { name: 'CDATI', type: 'date' },
-                { name: 'ENGINE_No', type: 'string' },
-                { name: 'HMR', type: 'string' },
-                { name: 'STA', type: 'string' },
-           ],
-           url: '/Pop/List_rm'
-       };
-            var editrow = -1;
-            var dataAdapter = new $.jqx.dataAdapter(source);
-            // initialize jqxGrid
-            $("#grid").jqxGrid(
-                {
-                    width: '98%',
-                    height: '100%',
-                    source: dataAdapter,
-                    sortable: true,
-                    filterable: true,
-                    theme: 'energyblue',
-                    editable: true,
-                    columns: [
-                        {text: "RECORD NO", datafield: "RECID1", hidden: true},
-                        { text: "SITE ID", datafield: "SID" },
-                        { text: "SITE NAME", datafield: "SNAME" },
-                        { text: "CUSTOMER", datafield: "CUST" },
-                        { text: "ISSUE TYPE", datafield: "STYPE" },
-                        { text: "ISSUE CATEGORY", datafield: "CCATE" },
-                        { text: "DT. OF ISSUE", datafield: "DOS", cellsformat: 'dd-MMM-yyyy hh:mm:ss tt' },
-                        { text: "DT. OF CLOSURE", datafield: "CDATI", cellsformat: 'dd-MMM-yyyy hh:mm:ss tt' },
-                        { text: "ENGINE NO", datafield: "ENGINE_No" },
-                        { text: "HMR", datafield: "HMR" },
-                        { text: "ISSUE STATUS", datafield: "STA" },
-                        {
-                            text: 'Details', datafield: 'Details', columntype: 'button', width: 80, sortable: false, filterable: false, cellsrenderer: function () {
-                                return "Details";
-                            }, buttonclick: function (row) {
-                                editrow = row;
-                                var offset = $("#grid").offset();
-                                $("#popupWindow").jqxWindow({ position: { x: parseInt(offset.left) + 60, y: parseInt(offset.top) + 60 } });
-                                var dataRecord = $("#grid").jqxGrid('getrowdata', editrow);
-                                $("#firstName").val(dataRecord.SID);
-                                $("#lastName").val(dataRecord.SNAME);
-                                $("#product").val(dataRecord.CUST);
-                                $("#quantity").val(dataRecord.STYPE);
-                                $("#price").val(dataRecord.CCATE);
-                                $("#popupWindow").jqxWindow('open');
-                            }
-                        }
-                    ]
-                });
-            $("#popupWindow").jqxWindow({
-                width: '80%', resizable: true, isModal: true, autoOpen: false, cancelButton: $("#Cancel"), modalOpacity: 0.01
-            });
-
-            $("#popupWindow").on('open', function () {
-                $("#firstName").jqxInput('selectAll');
-            });            $("#Cancel").jqxButton({ theme: 'energyblue' });
-            $("#excelExport").jqxButton({
-                theme: 'energyblue'
-            });
-
-            $("#excelExport").click(function () {
-                $("#grid").jqxGrid('exportdata', 'xls', 'jqxGrid');
-            });
-        });
-    </script>
+    <script src="~/Scripts/INC/LST_RM.js"></script>
 }
 <h6>PM / CM MANAGEMENT</h6>
-<input style='margin-top: 10px;' type="button" value="Export to Excel" id='excelExport' />
-<br/>
-<div id="grid"></div>
+<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+    <tr>
+        <td>
+            <div class="navbar-form">
+                <form method="post" action="/pop/exp_pmr">
+                    <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" name="sdt" />
+                    <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" name="edt" />
+                    <input type="submit" value="Export Data" id="btnEx" class="btn btn-primary" />
+                </form>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="grid"></div>
+        </td>
+    </tr>
+</table>
+    <div id='myModal' class='modal'>
+        <div class="modal-dialog" style="width:80%;background-color:lightcyan">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
 <div id="popupWindow">
     <div>Details</div>
     <div style="overflow: hidden;">
         <table class="table table-bordered table-hover table-responsive">
             <tr>
-                <td>SITE ID:</td>
-                <td align="left"><input id="firstName" class="form-control" /></td>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            SITE ID:
+                        </dt>
+                        <dd>
+                            <input id="sid" class="form-control" />
+                        </dd>
+                        <dt>
+                            SITE NAME:
+                        </dt>
+                        <dd>
+                            <input id="sname" />
+                        </dd>
+                        <dt>
+                            CUSTOMER:
+                        </dt>
+                        <dd>
+                            <input id="cust" />
+                        </dd>
+                        <dt>
+                            ENGINE SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="engine_no" />
+                        </dd>
+                        <dt>
+                            DG SET NO:
+                        </dt>
+                        <dd>
+                            <input id="dgno" />
+                        </dd>
+                        <dt>
+                            KVA
+                        </dt>
+                        <dd>
+                            <input id="kva" />
+                        </dd>
+                        <dt>
+                            MODEL
+                        </dt>
+                        <dd>
+                            <input id="model" />
+                        </dd>
+                        <dt>
+                            DT. OF. COMM.
+                        </dt>
+                        <dd>
+                            <input id="doi" />
+                        </dd>
+
+                        <dt>
+                            ALT. MAKE:
+                        </dt>
+                        <dd>
+                            <input id="amake" />
+                        </dd>
+
+                        <dt>
+                            ALT. SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="alsn" />
+                        </dd>
+
+                        <dt>
+                            BATT. SR. NO:
+                        </dt>
+                        <dd>
+                            <input id="bsn" />
+                        </dd>
+                        <dt>
+                            AMC STATUS:
+                        </dt>
+                        <dd>
+                            <input id="amc" />
+                        </dd>
+                        <dt>
+                            WARRANTY STATUS:
+                        </dt>
+                        <dd>
+                            <input id="warr" />
+                        </dd>
+                        <dt>
+                            OEA NAME:
+                        </dt>
+                        <dd>
+                            <input id="oea" />
+                        </dd>
+                        <dt>
+                            DISTRICT:
+                        </dt>
+                        <dd>
+                            <input id="dist" />
+                        </dd>
+
+                        <dt>
+                            STATE:
+                        </dt>
+                        <dd>
+                            <input id="state" />
+                        </dd>
+                    </dl>
+                </td>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            ISSUE TYPE:
+                        </dt>
+                        <dd>
+                            <input id="stype" />
+                        </dd>
+                        <dt>
+                            DT. OF. ISSUE:
+                        </dt>
+                        <dd>
+                            <input id="dos" />
+                        </dd>
+                        <dt>
+                            ISSUE CLOUSER DT.:
+                        </dt>
+                        <dd>
+                            <input id="cdati" />
+                        </dd>
+                        <dt>
+                            ISSUE CATEGORY:
+                        </dt>
+                        <dd>
+                            <input id="ccate" />
+                        </dd>
+                        <dt>
+                            HMR:
+                        </dt>
+                        <dd>
+                            <input id="hmr" />
+                        </dd>
+                        <dt>
+                            ISSUE NATURE:
+                        </dt>
+                        <dd>
+                            <input id="cnat" />
+                        </dd>
+
+                        <dt>
+                            SEVERITY:
+                        </dt>
+                        <dd>
+                            <input id="serv" />
+                        </dd>
+
+                        <dt>
+                            FAILURE REASON:
+                        </dt>
+                        <dd>
+                            <input id="rfail" />
+                        </dd>
+
+                        <dt>
+                            ISSUE STATUS:
+                        </dt>
+                        <dd>
+                            <input id="sta" />
+                        </dd>
+
+                        <dt>
+                            ACTION TAKEN:
+                        </dt>
+                        <dd>
+                            <input id="action" />
+                        </dd>
+
+                        <dt>
+                            TTR:
+                        </dt>
+                        <dd>
+                            <input id="ttr" />
+                        </dd>
+
+                        <dt>
+                            SLA STATUS:
+                        </dt>
+                        <dd>
+                            <input id="sla" />
+                        </dd>
+
+                        <dt>
+                            TIME SLOT:
+                        </dt>
+                        <dd>
+                            <input id="tslot" />
+                        </dd>
+
+                        <dt>
+                            SLA REASON:
+                        </dt>
+                        <dd>
+                            <input id="resla" />
+                        </dd>
+                        <dt>
+                            REPORT NO:
+                        </dt>
+                        <dd>
+                            <input id="report" />
+                        </dd>
+
+                        <dt>
+                            TECHNICIAN:
+                        </dt>
+                        <dd>
+                            <input id="technician" />
+                        </dd>
+
+                        <dt>
+                            METERIAL USED:
+                        </dt>
+                        <dd>
+                            <input id="meterial" />
+                        </dd>
+                        <dt>
+                            REMARKS:
+                        </dt>
+                        <dd>
+                            <input id="rem" />
+                        </dd>
+                    </dl>
+                </td>
             </tr>
             <tr>
-                <td>SITE NAME:</td>
-                <td align="left"><input id="lastName" class="form-control" /></td>
-            </tr>
-            <tr>
-                <td>CUSTOMER:</td>
-                <td align="left"><input id="product" class="form-control" /></td>
-            </tr>
-            <tr>
-                <td>ISSUE TYPE:</td>
-                <td align="left"><input id="quantity" class="form-control" /></td>
-            </tr>
-            <tr>
-                <td>ISSUE CATEGORY:</td>
-                <td align="left"><input id="price" class="form-control" /></td>
-            </tr>
-            <tr>
-                <td align="right"></td>
-                <td style="padding-top: 10px;" align="right"><input id="Cancel" type="button" value="OK" /></td>
+                <td colspan="2">
+                    <input id="Cancel" type="button" value="OK" />
+                </td>
             </tr>
         </table>
     </div>
 </div>
-
 
 
