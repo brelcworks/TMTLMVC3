@@ -6,129 +6,7 @@
 }
 @section scripts
 {
-<script>
-    $(function () {
-        $(".dtl").click(function () {
-            debugger;
-            var $btdtl = $(this);
-            var dtlid = $btdtl.attr('data-id');
-            var dtlopt = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Pop/Details',
-                contentType: "application/json; charset=utf-8",
-                data: { "id": dtlid },
-                datatype: "json",
-                success: function (data) {
-                    debugger;
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(dtlopt);
-                    $('#myModal').modal('show');
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-        });
-
-        $(".dtl1").click(function () {
-            debugger;
-            var $btdtl = $(this);
-            var dtlid = $btdtl.attr('data-id');
-            var dtlopt = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: '/Pop/View_PMR',
-                contentType: "application/json; charset=utf-8",
-                data: { "id": dtlid },
-                datatype: "json",
-                success: function (data) {
-                    debugger;
-                    $('#myModalContent').html(data);
-                    $('#myModal').modal(dtlopt);
-                    $('#myModal').modal('show');
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-        });
-        $(".anchorDetail").click(function () {
-            debugger;
-            var $buttonClicked = $(this);
-            var id = $buttonClicked.attr('data-id');
-            var td = $buttonClicked.text();
-            var options = { "backdrop": "static", keyboard: true };
-                $.ajax({
-                    type: "GET",
-                    url: '/Pop/Delete',
-                    contentType: "application/json; charset=utf-8",
-                    data: { "id": id },
-                    datatype: "json",
-                    success: function (data) {
-                        debugger;
-                        $('#myModalContent').html(data);
-                        $('#myModal').modal(options);
-                        $('#myModal').modal('show');
-                    },
-                    error: function () {
-                        alert("Dynamic content load failed.");
-                    }
-                });
-        });
-
-        
-        $("#closbtn").click(function () {
-            $('#myModal').modal('hide');
-        });
-
-        $(".anchorDetail1").click(function (e) {
-            InitializeDialog($("#departmentdialog"));
-            var uri = '/Pop/View_PMR';
-            debugger;
-            var $buttonClicked = $(this);
-            var id = $buttonClicked.attr('data-id');
-            var options = { "backdrop": "static", keyboard: true };
-            $.ajax({
-                type: "GET",
-                url: uri,
-                contentType: "application/json; charset=utf-8",
-                data: { "id": id },
-                datatype: "json",
-                success: function (data) {
-                    debugger;
-                    $('#myModalContent1').html(data);
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-            $("#departmentdialog").dialog("open");
-        });
-        //Method to Initialize the DialogBox
-        function InitializeDialog($element) {
-            $element.dialog({
-                autoOpen: false,
-                resizable: true,
-                width: 1000,
-                position: { my: "left top", at: "left+50 top+100", of: window },
-                draggable: true,
-                title: "LIST OF SERVICE",
-                modal: true,
-                show: 'slide',
-                closeText: 'x',
-                dialogClass: 'alert',
-                closeOnEscape: true,
-                close: function () {
-                    $(this).dialog('close');
-                }
-            });
-        }
-    });
-
-
-</script>
-  
+<script src="~/Scripts/INC/LST_POP.js"></script>
         }
 
 <h6>LIST OF SITES</h6>
@@ -136,9 +14,10 @@
 <p>
     @Html.ActionLink("Create New", "Create") &nbsp; &nbsp; @Html.ActionLink("Export Data", "ExportData")  &nbsp; &nbsp; @Html.ActionLink("Manage Issues", "List_rm1")
 </p>
-<table class="table table-bordered table-hover table-responsive" style="font-size:x-small">
+    <div id="grid"></div>
+@*<table class="table table-bordered table-hover table-responsive" style="font-size:x-small">
     <tr>
-                                                @*<th>
+                                                <th>
             @Html.DisplayNameFor(model => model.RID)
         </th>
         <th>
@@ -240,7 +119,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DSTA)
         </th>
-                                                *@
+                                               
         <th nowrap bgcolor="#00ffe1">
             @Html.DisplayNameFor(model => model.SID)
         </th>
@@ -277,7 +156,7 @@
     @foreach (var item in Model)
     {
         <tr>
-                                                                        @*<td>
+                                                                        <td>
             @Html.DisplayFor(modelItem => item.RID)
         </td>
         <td>
@@ -379,7 +258,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DSTA)
             </td>
-                                                                        *@
+                                                                        
             <td nowrap>
                 @Html.DisplayFor(modelItem => item.SID)
             </td>
@@ -419,10 +298,10 @@
         </tr>
     }
 
-</table>
+</table>*@
 
 <div id='myModal' class='modal'>
-    <div class="modal-dialog" style="width:80%;background-color:lightcyan;overflow:auto">
+    <div class="modal-dialog" style="width:96%;background-color:lightcyan;overflow:auto">
         <div class="modal-content">
             <div id='myModalContent' style="width:98%;overflow:auto;margin-left:2%">
                 <script>

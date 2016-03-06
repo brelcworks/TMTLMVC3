@@ -734,6 +734,7 @@
     <Content Include="JUNK\EDT.txt" />
     <Content Include="JUNK\LOGINVIEW.txt" />
     <Content Include="JUNK\MIX.txt" />
+    <Content Include="JUNK\OLD-PMR-DTL.txt" />
     <Content Include="JUNK\POPDEL.txt" />
     <Content Include="JUNK\POPEDT.txt" />
     <Content Include="JUNK\POPMOD.txt" />
@@ -781,7 +782,10 @@
     <Content Include="Scripts\i18n\grid.locale-tw.js" />
     <Content Include="Scripts\i18n\grid.locale-ua.js" />
     <Content Include="Scripts\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\INC\AD_PMR.js" />
+    <Content Include="Scripts\INC\LST_POP.js" />
     <Content Include="Scripts\INC\LST_RM.js" />
+    <Content Include="Scripts\INC\POP_EDT.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.min.js" />
     <Content Include="Scripts\jquery.base64.js" />

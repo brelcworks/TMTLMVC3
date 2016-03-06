@@ -64,7 +64,7 @@ namespace MVCINCV4._1.Controllers
             return PartialView("Delete", frnds);  
         }
 
-        [HttpPost, ActionName("Delete")]
+       
         public ActionResult delete_conf(int id)
         {
             MAINPOPU tc = dc.MAINPOPU.Find(id);
@@ -127,6 +127,14 @@ namespace MVCINCV4._1.Controllers
         public ActionResult Details(int id = 0)
         {
             return PartialView("Details_P", dc.MAINPOPU.Find(id));
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Details(MAINPOPU e)
+        {
+            dc.Entry(e).State = EntityState.Modified;
+            dc.SaveChanges();
+            return RedirectToAction("List");
         }
 
         [Authorize]
@@ -257,9 +265,9 @@ namespace MVCINCV4._1.Controllers
         }
 
         [Authorize]
-        public ActionResult PMR_Dtls(int ens)
+        public ActionResult PMR_Dtls(int ens, string ens1)
         {
-            return PartialView("PMR_Dtls", dc.PMR.Find(ens));
+            return PartialView("PMR_Dtls", new PMRMODEL { PMRs = dc.PMR.Find(ens), MAINPOP = dc.MAINPOPU.Where(a=> a.ENS.Contains(ens1)).FirstOrDefault() });
         }
         [HttpPost]
         public ActionResult fil_pmr(string sdt, string edt)
@@ -570,6 +578,12 @@ namespace MVCINCV4._1.Controllers
         public ActionResult List_rm1()
         {
             return View(dc.PMR.ToList());
+        }
+        public JsonResult List_POP()
+        {
+            var dbResult = dc.MAINPOPU.ToList();
+
+            return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
     }
 }

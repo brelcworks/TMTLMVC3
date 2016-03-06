@@ -15,6 +15,7 @@
                     <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" name="sdt" />
                     <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" name="edt" />
                     <input type="submit" value="Export Data" id="btnEx" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
                 </form>
             </div>
         </td>

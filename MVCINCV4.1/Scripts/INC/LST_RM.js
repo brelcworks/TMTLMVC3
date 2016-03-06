@@ -52,12 +52,13 @@
                             $("#popupWindow").jqxWindow({ position: 'top, left' });
                             var dataRecord = $("#grid").jqxGrid('getrowdata', editrow);
                             var ens = dataRecord.RECID1;
+                            var td = dataRecord.ENGINE_No;
                             var options = { "backdrop": "static", keyboard: true };
                             $.ajax({
                                 type: "GET",
                                 url: '/Pop/PMR_Dtls',
                                 contentType: "application/json; charset=utf-8",
-                                data: { "ens": ens },
+                                data: { "ens": ens, "ens1": td },
                                 datatype: "json",
                                 success: function (data) {
                                     debugger;

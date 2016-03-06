@@ -1,0 +1,537 @@
+﻿@*<table class="table table-bordered table-hover table-responsive">
+        <tr>
+            <td>
+                <dl class="dl-horizontal">
+                   <dt>
+                            @Html.LabelFor(model => model.SID)
+                        </dt>
+                        <dd>
+                            @Html.TextBoxFor(model => model.SID)
+                        </dd>
+
+                        <dt>
+                            @Html.LabelFor(model => model.SNAME)
+                        </dt>
+                        <dd>
+                            @Html.TextBoxFor(model => model.SNAME)
+                        </dd>
+                                             <dt>
+                                            @Html.LabelFor(model => model.recid)
+                                        </dt>
+                                        <dd>
+                                            @Html.TextBoxFor(model => model.recid)
+                                        </dd>
+                                                             <dt>
+                                        @Html.LabelFor(model => model.SSTA)
+                                    </dt>
+                                    <dd>
+                                        @Html.TextBoxFor(model => model.SSTA)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.LabelFor(model => model.DPCODE)
+                                    </dt>
+                                    <dd>
+                                        @Html.TextBoxFor(model => model.DPCODE)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.LabelFor(model => model.lmodi)
+                                    </dt>
+                                    <dd>
+                                        @Html.TextBoxFor(model => model.lmodi)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.LabelFor(model => model.AEDT)
+                                    </dt>
+                                    <dd>
+                                        @Html.TextBoxFor(model => model.AEDT)
+                                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.CUST)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.CUST, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.ENGINE_No)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.ENGINE_No, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.DGNO)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.DGNO, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.KVA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.KVA, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.MODEL)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.MODEL, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.DOI)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.DOI, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.AMAKE)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.AMAKE, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.ALSN)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.ALSN, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.BSN)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.BSN, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.AMC)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.AMC, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.WARR)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.WARR, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.OEA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.OEA, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.DIST)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.DIST, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.STATE)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.STATE, new { @class = "form-control input-xs" })
+                    </dd>
+                </dl>
+            </td>
+            <td>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.LabelFor(model => model.STYPE)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.STYPE, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.DOS)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.DOS, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.CDATI)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.CDATI, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.CCATE)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.CCATE, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.HMR)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.HMR, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.CNAT)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.CNAT, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.SERV)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.SERV, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.RFAIL)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.RFAIL, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.STA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.STA, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.ACTION)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.ACTION, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.TTR)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.TTR, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.SLA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.SLA, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.TSLOT)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.TSLOT, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.RESLA)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.RESLA, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.Report)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.Report, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.Technician)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.Technician, new { @class = "form-control input-xs" })
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.METERIAL)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.METERIAL, new { @class = "form-control input-xs" })
+                    </dd>
+                    <dt>
+                        @Html.LabelFor(model => model.REM)
+                    </dt>
+                    <dd>
+                        @Html.TextBoxFor(model => model.REM, new { @class = "form-control input-xs" })
+                    </dd>
+                </dl>
+            </td>
+        </tr>
+    </table>*@
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.SID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SNAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SNAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ENGINE_No)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ENGINE_No)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DOS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DOS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STYPE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STYPE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HMR)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HMR)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Technician)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Technician)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.METERIAL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.METERIAL)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CUST)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CUST)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.recid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.recid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CDATI)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CDATI)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DIST)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DIST)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CCATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CCATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MODEL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MODEL)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DOI)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DOI)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DGNO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DGNO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AMAKE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AMAKE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ALSN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ALSN)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BSN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BSN)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CNAT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CNAT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SERV)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SERV)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RFAIL)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RFAIL)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WARR)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WARR)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ACTION)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ACTION)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OEA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OEA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AMC)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AMC)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TTR)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TTR)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SLA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SLA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TSLOT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TSLOT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RESLA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RESLA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KVA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KVA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SSTA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SSTA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DPCODE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DPCODE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lmodi)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lmodi)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AEDT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AEDT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.REM)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.REM)
+    </div>*@

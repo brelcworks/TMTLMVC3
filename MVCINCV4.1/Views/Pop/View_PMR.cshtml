@@ -9,13 +9,15 @@
                 debugger;
                 var $buttonClicked = $(this);
                 var id = $buttonClicked.attr('data-id');
-                var td = $buttonClicked.text();
+                var arr = id.split(',');
+                var id1 = arr[0];
+                var td = arr[1];
                 var options = { "backdrop": "static", keyboard: true };
                 $.ajax({
                     type: "GET",
-                    url: '/Pop/PMR_Dtls1',
+                    url: '/Pop/PMR_Dtls',
                     contentType: "application/json; charset=utf-8",
-                    data: { "ens": id },
+                    data: { "ens": id1 , "ens1": td },
                     datatype: "json",
                     success: function (data) {
                         debugger;
@@ -224,7 +226,7 @@
                                 </td>
                          
                 *@
-                <td><a href="javascript:void(0);" class="REDEL" data-id="@item.RECID1">Details</a></td>
+                <td><a href="javascript:void(0);" class="REDEL" data-id="@item.RECID1, @item.ENGINE_No">Details</a></td>
                 <td nowrap style="display:none">
                     @Html.DisplayFor(modelItem => item.SID)
                 </td>

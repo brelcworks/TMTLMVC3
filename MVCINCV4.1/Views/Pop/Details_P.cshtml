@@ -1,11 +1,29 @@
 ﻿@model MVCINCV4._1.Models.MAINPOPU
+<style type="text/css">
+    .input-xs {
+        height: 22px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+
+    .focus {
+        border: 2px solid red;
+        background-color: #FEFED5;
+    }
+
+    .custom-date-style {
+        background-color: red !important;
+    }
+</style>
+<script src="~/Scripts/INC/POP_EDT.js"></script>
 <div>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">Site Details</h4>
     </div>
-    <h6>DETAILS OF SITE NAME: &nbsp; @Html.DisplayFor(model => model.SNAME)</h6>
-    <div style="text-align:left">
+    @*<div style="text-align:left">
         <hr />
         <table class="table table-bordered table-hover table-responsive" style="font-size:smaller;border-color:red">
             <tr>
@@ -238,9 +256,252 @@
                 </td>
             </tr>
         </table>
-    </div>
-
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.RID }) |
-    </p>
- </div>
+    </div>*@
+@Scripts.Render("~/bundles/jqueryval")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+            <tr>
+                <td colspan="4">
+                    <h6>DETAILS OF SITE NAME: &nbsp; @Html.DisplayFor(model => model.SNAME)</h6>
+                </td>
+                <td>
+                    <input type="submit" value="Update" class="btn btn-primary form-control" />
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "delete_conf", new { id = Model.RID }, new { @class = "btn btn-danger form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.RID1)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.RID1, new { @class = "form-control input-xs", @id = "txtRID1" })
+                    @Html.ValidationMessageFor(model => model.RID1)
+                </td>
+                <td>@Html.LabelFor(model => model.RAT_PH)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.RAT_PH, new { @class = "form-control input-xs input-sm", @id = "txtRATPH" })
+                    @Html.ValidationMessageFor(model => model.RAT_PH)
+                </td>
+                <td>@Html.LabelFor(model => model.cntype)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.cntype, new { @class = "form-control input-xs", @id = "txtCNTYPE" })
+                    @Html.ValidationMessageFor(model => model.cntype)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.CNAME)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CNAME, new { @class = "form-control input-xs", @id = "txtCNAME" })
+                    @Html.ValidationMessageFor(model => model.CNAME)
+                </td>
+                <td>@Html.LabelFor(model => model.PHASE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PHASE, new { @class = "form-control input-xs", @id = "txtPHASE" })
+                    @Html.ValidationMessageFor(model => model.PHASE)
+                </td>
+                <td>@Html.LabelFor(model => model.cnmake)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.cnmake, new { @class = "form-control input-xs", @id = "txtCNMAKE" })
+                    @Html.ValidationMessageFor(model => model.cnmake)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.SNAME)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
+                    @Html.ValidationMessageFor(model => model.SNAME)
+                </td>
+                <td>@Html.LabelFor(model => model.MODEL)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.MODEL, new { @class = "form-control input-xs", @id = "txtMODEL" })
+                    @Html.ValidationMessageFor(model => model.MODEL)
+                </td>
+                <td>@Html.LabelFor(model => model.sauto)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.sauto, new { @class = "form-control input-xs", @id = "txtSAUTO" })
+                    @Html.ValidationMessageFor(model => model.sauto)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.SID)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.SID, new { @class = "form-control input-xs", @id = "txtSID" })
+                    @Html.ValidationMessageFor(model => model.SID)
+                </td>
+                <td>@Html.LabelFor(model => model.ENS)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ENS, new { @class = "form-control input-xs", @id = "txtENS" })
+                    @Html.ValidationMessageFor(model => model.ENS)
+                </td>
+                <td>@Html.LabelFor(model => model.CHMR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CHMR, new { @class = "form-control input-xs", @id = "txtCHMR" })
+                    @Html.ValidationMessageFor(model => model.CHMR)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.ADDR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ADDR, new { @class = "form-control input-xs", @id = "txtADDR" })
+                    @Html.ValidationMessageFor(model => model.ADDR)
+                </td>
+                <td>@Html.LabelFor(model => model.DGNO)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.DGNO, new { @class = "form-control input-xs", @id = "txtDGNO" })
+                    @Html.ValidationMessageFor(model => model.DGNO)
+                </td>
+                <td>@Html.LabelFor(model => model.CHMD)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CHMD, new { @class = "form-control input-xs", @id = "txtCHMD" })
+                    @Html.ValidationMessageFor(model => model.CHMD)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.DIST)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.DIST, new { @class = "form-control input-xs", @id = "txtDIST" })
+                    @Html.ValidationMessageFor(model => model.DIST)
+                </td>
+                <td>@Html.LabelFor(model => model.AMAKE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.AMAKE, new { @class = "form-control input-xs", @id = "txtAMAKE" })
+                    @Html.ValidationMessageFor(model => model.AMAKE)
+                </td>
+                <td>@Html.LabelFor(model => model.lhmr)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.lhmr, new { @class = "form-control input-xs", @id = "txtLHMR" })
+                    @Html.ValidationMessageFor(model => model.lhmr)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.STATE)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.STATE, new { @class = "form-control input-xs", @id = "txtSTATE" })
+                    @Html.ValidationMessageFor(model => model.STATE)
+                </td>
+                <td>@Html.LabelFor(model => model.ALSN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ALSN, new { @class = "form-control input-xs", @id = "txtALSN" })
+                    @Html.ValidationMessageFor(model => model.ALSN)
+                </td>
+                <td>@Html.LabelFor(model => model.lsd)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.lsd, new { @class = "form-control input-xs", @id = "txtLSD" })
+                    @Html.ValidationMessageFor(model => model.lsd)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.CPN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.CPN, new { @class = "form-control input-xs", @id = "txtCPN" })
+                    @Html.ValidationMessageFor(model => model.CPN)
+                </td>
+                <td>@Html.LabelFor(model => model.FRAME)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.FRAME, new { @class = "form-control input-xs", @id = "txtFRAME" })
+                    @Html.ValidationMessageFor(model => model.FRAME)
+                </td>
+                <td>@Html.LabelFor(model => model.nsd)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.nsd, new { @class = "form-control input-xs", @id = "txtNSD" })
+                    @Html.ValidationMessageFor(model => model.nsd)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.PHNO)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.PHNO, new { @class = "form-control input-xs", @id = "txtPHNO" })
+                    @Html.ValidationMessageFor(model => model.PHNO)
+                </td>
+                <td>@Html.LabelFor(model => model.BSN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.BSN, new { @class = "form-control input-xs", @id = "txtBSN" })
+                    @Html.ValidationMessageFor(model => model.BSN)
+                </td>
+                <td>@Html.LabelFor(model => model.SPIN)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.SPIN, new { @class = "form-control input-xs", @id = "txtSPIN" })
+                    @Html.ValidationMessageFor(model => model.SPIN)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.OEA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.OEA, new { @class = "form-control input-xs", @id = "txtOEA" })
+                    @Html.ValidationMessageFor(model => model.OEA)
+                </td>
+                <td>@Html.LabelFor(model => model.llop)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.llop, new { @class = "form-control input-xs", @id = "txtLLOP" })
+                    @Html.ValidationMessageFor(model => model.llop)
+                </td>
+                <td>@Html.LabelFor(model => model.hmage)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.hmage, new { @class = "form-control input-xs", @id = "txtHMAGE" })
+                    @Html.ValidationMessageFor(model => model.hmage)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.DOC)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.DOC, new { @class = "form-control input-xs", @id = "txtDOC" })
+                    @Html.ValidationMessageFor(model => model.DOC)
+                </td>
+                <td>@Html.LabelFor(model => model.solenoid)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.solenoid, new { @class = "form-control input-xs", @id = "txtSOLENOID" })
+                    @Html.ValidationMessageFor(model => model.solenoid)
+                </td>
+                <td>@Html.LabelFor(model => model.ahm)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ahm, new { @class = "form-control input-xs", @id = "txtAHM" })
+                    @Html.ValidationMessageFor(model => model.ahm)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.AMC)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.AMC, new { @class = "form-control input-xs", @id = "txtAMC" })
+                    @Html.ValidationMessageFor(model => model.AMC)
+                </td>
+                <td>@Html.LabelFor(model => model.chalt)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.chalt, new { @class = "form-control input-xs", @id = "txtCHALT" })
+                    @Html.ValidationMessageFor(model => model.chalt)
+                </td>
+                <td>@Html.LabelFor(model => model.DSTA)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.DSTA, new { @class = "form-control input-xs", @id = "txtDSTA" })
+                    @Html.ValidationMessageFor(model => model.DSTA)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(model => model.WARR)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.WARR, new { @class = "form-control input-xs", @id = "txtWARR" })
+                    @Html.ValidationMessageFor(model => model.WARR)
+                </td>
+                <td>@Html.LabelFor(model => model.starter)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.starter, new { @class = "form-control input-xs", @id = "txtSTARTER" })
+                    @Html.ValidationMessageFor(model => model.starter)
+                </td>
+                <td>@Html.LabelFor(model => model.ACTION)</td>
+                <td>
+                    @Html.TextBoxFor(model => model.ACTION, new { @class = "form-control input-xs", @id = "txtACTION" })
+                    @Html.ValidationMessageFor(model => model.ACTION)
+                </td>
+            </tr>
+                    @Html.HiddenFor(model => model.SSTA, new { @id = "txtSSTA" })
+                    @Html.HiddenFor(model => model.DPCODE, new { @id = "txtDPCODE" })
+                    @Html.HiddenFor(model => model.lmodi, new { @id = "txtLMODI" })
+                    @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
+                    @Html.HiddenFor(model => model.RID, new { @id = "txtRID" })
+        </table>
+        </fieldset>
+}
+</div>
