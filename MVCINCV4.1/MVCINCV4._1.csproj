@@ -783,6 +783,7 @@
     <Content Include="Scripts\i18n\grid.locale-ua.js" />
     <Content Include="Scripts\i18n\grid.locale-vi.js" />
     <Content Include="Scripts\INC\AD_PMR.js" />
+    <Content Include="Scripts\INC\demos.js" />
     <Content Include="Scripts\INC\LST_POP.js" />
     <Content Include="Scripts\INC\LST_RM.js" />
     <Content Include="Scripts\INC\POP_EDT.js" />
@@ -822,6 +823,7 @@
     <Content Include="Views\Pop\Details_P.cshtml" />
     <Content Include="Views\Pop\List_rm1.cshtml" />
     <Content Include="Views\Stock\List_Pr1.cshtml" />
+    <Content Include="Views\Pop\edt_Pmr.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -51,14 +51,14 @@
                             var offset = $("#grid").offset();
                             $("#popupWindow").jqxWindow({ position: 'top, left' });
                             var dataRecord = $("#grid").jqxGrid('getrowdata', editrow);
-                            var ens = dataRecord.RECID1;
+                            var ens = dataRecord.RECID1;
                             var td = dataRecord.ENGINE_No;
                             var options = { "backdrop": "static", keyboard: true };
                             $.ajax({
                                 type: "GET",
                                 url: '/Pop/PMR_Dtls',
                                 contentType: "application/json; charset=utf-8",
-                                data: { "ens": ens, "ens1": td },
+                                data: { "ens": ens },
                                 datatype: "json",
                                 success: function (data) {
                                     debugger;
@@ -83,7 +83,8 @@
 
         $("#popupWindow").on('open', function () {
             $("#sid").jqxInput('selectAll');
-        });        $("#Cancel").jqxButton({ theme: 'energyblue' });
+        });
+        $("#Cancel").jqxButton({ theme: 'energyblue' });
     });
     $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
     $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });

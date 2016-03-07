@@ -13,9 +13,9 @@
             type: "GET",
             url: "/Pop/gdata2",
             data: { aData: $("#txtPOPENS").val() },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
             $.each(data, function (i, val) {
                 $('#txtSNAME').val(val.SNAME)
                 $('#txtSID').val(val.SID)
@@ -50,11 +50,31 @@
 });
 
 $("#txtSTYPE").autocomplete({
-    source: '@Url.Action("pop/stype")'
+    source: function (request, response) {
+        $.ajax({
+            url: '/Pop/stype',
+            type: "POST",
+            dataType: "json",
+            data: { term: request.term },
+            success: function (data) {
+                response(data);
+            }
+        });
+    }
 });
 
 $("#txtTECHNICIAN").autocomplete({
-    source: '@Url.Action("pop/tech")'
+    source: function (request, response) {
+        $.ajax({
+            url: '/Pop/tech',
+            type: "POST",
+            dataType: "json",
+            data: { term: request.term },
+            success: function (data) {
+                response(data);
+            }
+        });
+    }
 });
 
 $('#txtDOS').datetimepicker({

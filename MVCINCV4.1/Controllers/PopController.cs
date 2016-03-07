@@ -265,9 +265,9 @@ namespace MVCINCV4._1.Controllers
         }
 
         [Authorize]
-        public ActionResult PMR_Dtls(int ens, string ens1)
+        public ActionResult PMR_Dtls(int ens)
         {
-            return PartialView("PMR_Dtls", new PMRMODEL { PMRs = dc.PMR.Find(ens), MAINPOP = dc.MAINPOPU.Where(a=> a.ENS.Contains(ens1)).FirstOrDefault() });
+            return PartialView("PMR_Dtls", dc.PMR.Find(ens));
         }
         [HttpPost]
         public ActionResult fil_pmr(string sdt, string edt)
@@ -584,6 +584,12 @@ namespace MVCINCV4._1.Controllers
             var dbResult = dc.MAINPOPU.ToList();
 
             return Json(dbResult, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult edt_Pmr(int id, string ens)
+        {
+            return View(new PMRMODEL { PMRs = dc.PMR.Find(id), MAINPOP = dc.MAINPOPU.Where(a=> a.ENS.Equals(ens)).FirstOrDefault() });
         }
     }
 }
