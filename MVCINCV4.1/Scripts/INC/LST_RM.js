@@ -30,6 +30,7 @@
                 filterable: true,
                 altrows: true,
                 theme: 'energyblue',
+                showtoolbar: true,
                 editable: true,
                 columns: [
                     { text: "RECORD NO", datafield: "RECID1", hidden: true },
@@ -72,7 +73,46 @@
                             });
                         }
                     }
-                ]
+                ],
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 5px;'></div>");
+                    var span = $("<span style='float: left; margin-top: 5px; margin-right: 4px;'>Search Site: </span>");
+                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' />");
+                    var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;'>Add New Site</a>");
+                    var btn2 = $("<a href='/Pop/ExportData' style='float: left; margin-left:5px; position: relative; top: -4px;'>Export Data</a>");
+                    var btn3 = $("<a href='/Pop/List_rm1' style='float: left; margin-left:5px; position: relative; top: -4px;'>Manage Issues</a>");
+                    toolbar.append(container);
+                    container.append(span);
+                    container.append(input);
+                    container.append(btn1);
+                    container.append(btn2);
+                    container.append(btn3);
+                    btn1.jqxButton({ template: "success" });
+                    btn2.jqxButton({ template: "warning" });
+                    btn3.jqxButton({ template: "primary" });
+                    if (theme != "") {
+                        input.addClass('jqx-widget-content-' + theme);
+                        input.addClass('jqx-rc-all-' + theme);
+                    }
+                    var oldVal = "";
+                    input.on('keydown', function (event) {
+                        if (input.val().length >= 2) {
+                            if (me.timer) {
+                                clearTimeout(me.timer);
+                            }
+                            if (oldVal != input.val()) {
+                                me.timer = setTimeout(function () {
+                                    addFiter(input.val());
+                                }, 1000);
+                                oldVal = input.val();
+                            }
+                        }
+                        else {
+                            $("#grid").jqxGrid('clearfilters');
+                        }
+                    });
+                }
             });
         $("#closbtn").click(function () {
             $('#myModal').modal('hide');
@@ -88,4 +128,16 @@
     });
     $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
     $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
+
+    function addFiter(value) {
+        $("#grid").jqxGrid('clearfilters');
+        var filtertype = 'stringfilter';
+        var filtergroup = new $.jqx.filter();
+        var filter = filtergroup.createfilter('stringfilter', value, 'CONTAINS');
+        filtergroup.addfilter(2, filter);
+        // add the filters.
+        $("#grid").jqxGrid('addfilter', 'SNAME', filtergroup);
+        // apply the filters.
+        $("#grid").jqxGrid('applyfilters');
+    }
 });

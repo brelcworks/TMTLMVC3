@@ -27,9 +27,14 @@
                 viewrecords: true,
                 caption: 'PRICE LIST',
                 emptyrecords: 'BLANK',
-                autowidth: true,
-                sortable: true,
-                sortname: 'PART_NO'
+                jsonReader: {
+                    root: 'rows',
+                    page: 'page',
+                    total: 'total',
+                    records: 'records',
+                    repeatitems: false,
+                    id: '0'
+                },
             }).navGrid('#pager', { view: false, del: false, add: true, edit: false },
    {}, // default settings for edit
    {

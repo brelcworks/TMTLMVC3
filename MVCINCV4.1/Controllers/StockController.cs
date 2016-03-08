@@ -160,18 +160,7 @@ namespace MVCINCV4._1.Controllers
                 total = totalPages,
                 page,
                 records = totalRecords,
-                rows = (from a in dc.SHEET1.ToList()select new
-                  {
-                      id = a.RID,
-                   cell = new string[]{ a.PART_NO,
-                   a.PARTI,
-                    a.MRP,
-                    a.GROP,
-                   a.CATE,
-                    a.TRATE,
-                    a.unit 
-            }
-                  }).ToArray()
+                rows = dbResult
             };  
             return Json(JsonData, JsonRequestBehavior.AllowGet);
         }
