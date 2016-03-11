@@ -20,11 +20,12 @@
    };
         var editrow = -1;
         var dataAdapter = new $.jqx.dataAdapter(source);
+        var height1 = $(window).height() - 170;
         // initialize jqxGrid
         $("#grid").jqxGrid(
             {
-                width: '98%',
-                height: '100%',
+                width: '99%',
+                height: height1,
                 source: dataAdapter,
                 sortable: true,
                 filterable: true,
@@ -77,20 +78,26 @@
                 rendertoolbar: function (toolbar) {
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
-                    var span = $("<span style='float: left; margin-top: 5px; margin-right: 4px;'>Search Site: </span>");
-                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' />");
+                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' placeholder='SEARCH SITE'/>");
                     var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;'>Add New Site</a>");
-                    var btn2 = $("<a href='/Pop/ExportData' style='float: left; margin-left:5px; position: relative; top: -4px;'>Export Data</a>");
-                    var btn3 = $("<a href='/Pop/List_rm1' style='float: left; margin-left:5px; position: relative; top: -4px;'>Manage Issues</a>");
-                    toolbar.append(container);
-                    container.append(span);
                     container.append(input);
                     container.append(btn1);
-                    container.append(btn2);
-                    container.append(btn3);
+                    container.append($('#dv1'));
+                    var tbl = $("<table></table>");
+                    var tr = $("<tr></tr>");
+                    var td2 = $("<td></td>");
+                    td2.append($('#dp1'));
+                    tr.append(td2);
+                    var td1 = $("<td></td>");
+                    td1.append(container);
+                    tr.append(td1);
+                    tbl.append(tr);
+                    toolbar.append(tbl);
                     btn1.jqxButton({ template: "success" });
-                    btn2.jqxButton({ template: "warning" });
-                    btn3.jqxButton({ template: "primary" });
+                    $('#btnEx').jqxButton({ template: "info" });
+                    $('#btnBCK').jqxButton({ template: "danger" });
+                    $("#dtFrm").jqxInput({ placeHolder: "Search Records From Date", height: 25, width: 200, minLength: 1 });
+                    $("#dtTo").jqxInput({ placeHolder: "Search Records To Date", height: 25, width: 200, minLength: 1 });
                     if (theme != "") {
                         input.addClass('jqx-widget-content-' + theme);
                         input.addClass('jqx-rc-all-' + theme);
@@ -128,7 +135,7 @@
     });
     $('#dtFrm').datepicker({ dateFormat: 'dd-M-yy' });
     $('#dtTo').datepicker({ dateFormat: 'dd-M-yy' });
-
+    
     function addFiter(value) {
         $("#grid").jqxGrid('clearfilters');
         var filtertype = 'stringfilter';
@@ -136,8 +143,25 @@
         var filter = filtergroup.createfilter('stringfilter', value, 'CONTAINS');
         filtergroup.addfilter(2, filter);
         // add the filters.
-        $("#grid").jqxGrid('addfilter', 'SNAME', filtergroup);
+        var searchColumnIndex = $("#dp1").jqxDropDownList('selectedIndex');
+        switch (searchColumnIndex) {
+            case 0:
+                $("#grid").jqxGrid('addfilter', 'SNAME', filtergroup);
+                break;
+            case 1:
+                $("#grid").jqxGrid('addfilter', 'SID', filtergroup);
+                break;
+            case 2:
+                $("#grid").jqxGrid('addfilter', 'ENGINE_No', filtergroup);
+                break;
+        }
         // apply the filters.
         $("#grid").jqxGrid('applyfilters');
     }
+    $("#dp1").jqxDropDownList({
+        autoDropDownHeight: true, selectedIndex: 0, width: 200,
+        source: [
+            'SITE NAME', 'SITE ID', 'ENGINE NO'
+        ]
+    });
 });

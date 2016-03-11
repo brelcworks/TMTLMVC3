@@ -10,14 +10,7 @@
 <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
     <tr>
         <td>
-            <div class="navbar-form">
-                <form method="post" action="/pop/exp_pmr">
-                    <input type="text" id="dtFrm" placeholder="Search Records From Date" class="form-control" name="sdt" />
-                    <input type="text" id="dtTo" placeholder="Search Records To Date" class="form-control" name="edt" />
-                    <input type="submit" value="Export Data" id="btnEx" class="btn btn-primary" />
-                    @Html.ActionLink("Back to List", "List", "pop", null, new { @class = "btn btn-success" })
-                </form>
-            </div>
+            
         </td>
     </tr>
     <tr>
@@ -272,6 +265,15 @@
             </tr>
         </table>
     </div>
+</div>
+<div id="dp1"></div>
+<div id="dv1" class="ui-front">
+    <form method="post" action="/pop/exp_pmr">
+        <input type="text" id="dtFrm"  name="sdt"/>
+        <input type="text" id="dtTo" placeholder="Search Records To Date" name="edt"/>
+        <input type="submit" value="Export Data" id="btnEx" />
+        @Html.ActionLink("Back to List", "List", "pop", null, new { @id = "btnBCK" })
+    </form>
 </div>
 
 
