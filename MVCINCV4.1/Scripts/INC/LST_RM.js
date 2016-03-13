@@ -30,8 +30,9 @@
                 sortable: true,
                 filterable: true,
                 altrows: true,
-                theme: 'energyblue',
+                theme: 'ui-redmond',
                 showtoolbar: true,
+                showstatusbar: true,
                 editable: true,
                 columns: [
                     { text: "RECORD NO", datafield: "RECID1", hidden: true },
@@ -78,11 +79,10 @@
                 rendertoolbar: function (toolbar) {
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
-                    var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' placeholder='SEARCH SITE'/>");
-                    var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;'>Add New Site</a>");
+                    var input = $("<input id='searchField' type='text' style='float: left;' />");
+                    var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;' role='button'>Add New Site</a>");
                     container.append(input);
                     container.append(btn1);
-                    container.append($('#dv1'));
                     var tbl = $("<table></table>");
                     var tr = $("<tr></tr>");
                     var td2 = $("<td></td>");
@@ -94,14 +94,7 @@
                     tbl.append(tr);
                     toolbar.append(tbl);
                     btn1.jqxButton({ template: "success" });
-                    $('#btnEx').jqxButton({ template: "info" });
-                    $('#btnBCK').jqxButton({ template: "danger" });
-                    $("#dtFrm").jqxInput({ placeHolder: "Search Records From Date", height: 25, width: 200, minLength: 1 });
-                    $("#dtTo").jqxInput({ placeHolder: "Search Records To Date", height: 25, width: 200, minLength: 1 });
-                    if (theme != "") {
-                        input.addClass('jqx-widget-content-' + theme);
-                        input.addClass('jqx-rc-all-' + theme);
-                    }
+                    $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
                     var oldVal = "";
                     input.on('keydown', function (event) {
                         if (input.val().length >= 2) {
@@ -119,6 +112,13 @@
                             $("#grid").jqxGrid('clearfilters');
                         }
                     });
+                },
+                renderstatusbar: function (sbar) {
+                    sbar.append($('#dv1'));
+                    $('#btnEx').jqxButton({ template: "info" });
+                    $('#btnBCK').jqxButton({ template: "danger" });
+                    $("#dtFrm").jqxInput({ placeHolder: "From Date", height: 25, width: 200, minLength: 1 });
+                    $("#dtTo").jqxInput({ placeHolder: "To Date", height: 25, width: 200, minLength: 1 });
                 }
             });
         $("#closbtn").click(function () {

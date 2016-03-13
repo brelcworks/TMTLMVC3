@@ -266,11 +266,11 @@
         </table>
     </div>
 </div>
-<div id="dp1"></div>
-<div id="dv1" class="ui-front">
+<div id="dp1" style="margin-left:5px"></div>
+<div id="dv1" class="ui-front" style="margin-top:5px; margin-left:5px">
     <form method="post" action="/pop/exp_pmr">
-        <input type="text" id="dtFrm"  name="sdt"/>
-        <input type="text" id="dtTo" placeholder="Search Records To Date" name="edt"/>
+        <input type="text" id="dtFrm" name="sdt"/>
+        <input type="text" id="dtTo" name="edt"/>
         <input type="submit" value="Export Data" id="btnEx" />
         @Html.ActionLink("Back to List", "List", "pop", null, new { @id = "btnBCK" })
     </form>

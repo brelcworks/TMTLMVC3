@@ -156,18 +156,18 @@
                     sortable: true,
                     filterable: true,
                     altrows: true,
-                    theme: 'energyblue',
+                    theme: 'ui-redmond',
                     editable: true,
                     showtoolbar: true,
                     columns: [
                         { text: "RECORD NO", datafield: "RID", hidden: true },
                         { text: "SITE ID", datafield: "SID" },
-                        { text: "SITE NAME", datafield: "SNAME" },
+                        { text: "SITE NAME", datafield: "SNAME", minwidth:110 },
                         { text: "CUSTOMER", datafield: "CNAME" },
                         { text: "ENGINE NO", datafield: "ENS" },
                         { text: "RATING", datafield: "RAT_PH" },
                         { text: "PHASE", datafield: "PHASE" },
-                        { text: "CONTACT PERSON", datafield: "CPN" },
+                        { text: "CONTACT PERSON", datafield: "CPN", minwidth: 60 },
                         { text: "PHONE NO", datafield: "PHNO" },
                         { text: "DT. OF COMMISSIONING", datafield: "DOC", cellsformat: 'dd-MM-yyyy', width: '10%' },
                         { text: "HMR", datafield: "lhmr" },
@@ -243,7 +243,7 @@
                     rendertoolbar: function (toolbar) {
                         var me = this;
                         var container = $("<div style='margin: 5px;'></div>");
-                        var input = $("<input class='jqx-input jqx-widget-content jqx-rc-all' id='searchField' type='text' style='height: 23px; float: left; width: 223px;' placeholder='SEARCH SITE' />");
+                        var input = $("<input id='searchField' type='text' style='float: left;' />");
                         var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;'>Add New Site</a>");
                         var btn2 = $("<a href='/Pop/ExportData' style='float: left; margin-left:5px; position: relative; top: -4px;'>Export Data</a>");
                         var btn3 = $("<a href='/Pop/List_rm1' style='float: left; margin-left:5px; position: relative; top: -4px;'>Manage Issues</a>");
@@ -264,10 +264,7 @@
                         btn1.jqxButton({ template: "success" });
                         btn2.jqxButton({ template: "warning" });
                         btn3.jqxButton({ template: "primary" });
-                        if (theme != "") {
-                            input.addClass('jqx-widget-content-' + theme);
-                            input.addClass('jqx-rc-all-' + theme);
-                        }
+                        $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
                         var oldVal = "";
                         input.on('keydown', function (event) {
                             if (input.val().length >= 2) {

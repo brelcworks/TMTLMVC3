@@ -22,7 +22,7 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            return PartialView("Create");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -63,7 +63,7 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Edit(int id = 0)
         {
-            return View(dc.STOCK.Find(id));
+            return PartialView("Edit", dc.STOCK.Find(id));
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -191,6 +191,35 @@ namespace MVCINCV4._1.Controllers
                 msg = ex.Message;
             }
             return msg;
+        }
+        public string edt(SHEET1 objPMR)
+        {
+            string msg;
+            try
+            {
+                dc.Entry(objPMR).State = EntityState.Modified;
+                dc.SaveChanges();
+                msg = "Saved Successfully";
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            return msg;
+        }
+
+        public string dlt(int id)
+        {
+            SHEET1 dl = dc.SHEET1.Find(id);
+            dc.SHEET1.Remove(dl);
+            dc.SaveChanges();
+            return "Deleted Successfully!";
+        }
+
+        public JsonResult List_SC()
+        {
+            var dbResult = dc.STOCK.ToList();
+            return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
     }
 }

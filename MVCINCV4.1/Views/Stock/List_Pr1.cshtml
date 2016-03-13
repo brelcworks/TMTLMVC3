@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.SHEET1>
 
 @{
-    ViewBag.Title = "List_Pr1";
+    ViewBag.Title = "PRICE LIST";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 @section scripts {
@@ -11,16 +11,16 @@
                 url: '/Stock/List_Pr/',
                 datatype: 'json',
                 mtype: 'GET',
-                colNames: ['ID', 'Part No', 'Part Name', 'Mrp', 'Item Group', 'Item Category', 'Tax Rate', 'Unit'],
+                colNames: ['RID', 'Part No', 'Part Name', 'Mrp', 'Item Group', 'Item Category', 'Tax Rate', 'Unit'],
                 colModel: [
-                    { name: 'RID', hidden: true, index: 'RID' },
-                    { name: 'PART_NO', index: 'PART_NO', editable: true },
-                    { name: 'PARTI', index: 'PARTI', editable: true },
-                    { name: 'MRP', index: 'MRP', editable: true },
-                    { name: 'GROP', index: 'GROP', editable: true },
-                    { name: 'CATE', index: 'CATE', editable: true },
-                    { name: 'TRATE', index: 'TRATE', editable: true },
-                    { name: 'unit', index: 'unit', editable: true }
+                    { key: true, hidden: true, name: 'RID', index: 'RID', editable: true },
+                    { key: false, name: 'PART_NO', index: 'PART_NO', editable: true },
+                    { key: false, name: 'PARTI', index: 'PARTI', editable: true },
+                    { key: false, name: 'MRP', index: 'MRP', editable: true },
+                    { key: false, name: 'GROP', index: 'GROP', editable: true },
+                    { key: false, name: 'CATE', index: 'CATE', editable: true },
+                    { key: false, name: 'TRATE', index: 'TRATE', editable: true },
+                    { key: false, name: 'unit', index: 'unit', editable: true }
                 ],
                 pager: jQuery('#pager'),
                 height: '100%',
@@ -35,8 +35,19 @@
                     repeatitems: false,
                     id: '0'
                 },
-            }).navGrid('#pager', { view: false, del: false, add: true, edit: false },
-   {}, // default settings for edit
+            }).navGrid('#pager', { edit: true, add: true, del: true, refresh: true, search: true, view:true },
+   {
+       zIndex: 100,
+       url: '/Stock/edt',
+       closeOnEscape: true,
+       closeAfterEdit: true,
+       recreateForm: true,
+       afterComplete: function (response) {
+           if (response.responseText) {
+               alert(response.responseText);
+           }
+       }
+   },
    {
        zIndex: 100,
        url: '/Stock/crt',
@@ -48,15 +59,22 @@
                alert(response.responseText);
            }
        }
-   }, // default settings for add
-   {}, // delete
-   {closeOnEscape: true, multipleSearch: true, 
-       closeAfterSearch: true }, // search options
-   {}
- );
+   },
+   {
+       zIndex: 100,
+       url: '/Stock/dlt',
+       closeOnEscape: true,
+       closeAfterDelete: true,
+       recreateForm: true,
+       msg: "Are You Want to Delete This Record",
+       afterComplete: function (response) {
+           if (response.responseText) {
+               alert(response.responseText);
+           }
+       }
+   });
         });
     </script>
         }
-<input style='margin-top: 10px;' type="button" value="Export to Excel" id='excelExport' />
 <table id="grid"></table>
 <div id="pager"></div>

@@ -5,155 +5,327 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        var source =
+       {
+           datatype: "json",
+           datafields: [
+                { name: 'RID1', type: 'string' },
+                { name: 'TYPE', type: 'string' },
+                { name: 'PART_NO', type: 'string' },
+                { name: 'PARTI', type: 'string' },
+                { name: 'MRP', type: 'string' },
+                { name: 'QTY', type: 'string' },
+                { name: 'TOTAL', type: 'string' },
+                { name: 'RACKNO', type: 'string' },
+                { name: 'UNIT', type: 'string' },
+                { name: 'EOR', type: 'string' },
+           ],
+           url: '/Stock/List_SC'
+       };
+        var editrow = -1;
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        var height1 = $(window).height() - 170;
+        $("#grid").jqxGrid({
+            width: '99%',
+            height: height1,
+            source: dataAdapter,
+            sortable: true,
+            filterable: true,
+            altrows: true,
+            theme: 'ui-redmond',
+            editable: true,
+            showtoolbar: true,
+            columns: [
+                        { text: "RECORD NO", datafield: "RID1", hidden: true },
+                        { text: "TYPE", datafield: "TYPE" },
+                        { text: "PART NO", datafield: "PART_NO" },
+                        { text: "PART NAME", datafield: "PARTI" },
+                        { text: "MRP", datafield: "MRP" },
+                        { text: "QTY", datafield: "QTY" },
+                        { text: "TOTAL", datafield: "TOTAL" },
+                        { text: "RACK NO", datafield: "RACKNO" },
+                        { text: "UNIT", datafield: "UNIT" },
+                        { text: "E. O. R", datafield: "EOR" },
+                        {
+                            text: 'Details', datafield: 'Details', columntype: 'button', width: 80, sortable: false,  filterable: false, cellsrenderer: function () {
+                                return "Deatils";
+                            },
+                            buttonclick: function (row) {
+                                editrow = row;
+                                var offset = $("#grid").offset();
+                                var dataRecord = $("#grid").jqxGrid('getrowdata', editrow);
+                                var ens = dataRecord.RID1;
+                                var options = { "backdrop": "static", keyboard: true };
+                                $.ajax({
+                                    type: "GET",
+                                    url: '/Stock/Edit',
+                                    contentType: "application/json; charset=utf-8",
+                                    data: { "id": ens },
+                                    datatype: "json",
+                                    success: function (data) {
+                                        debugger;
+                                        $('#myModalContent').html(data);
+                                        $('#myModal').modal(options);
+                                        $('#myModal').modal('show');
+                                    },
+                                    error: function () {
+                                        alert("Dynamic content load failed.");
+                                    }
+                                });
+                            }
+                        }
+            ],
+            rendertoolbar: function (toolbar) {
+                var me = this;
+                var container = $("<div style='margin: 5px;'></div>");
+                var input = $("<input id='searchField' type='text' style='float: left;' />");
+                var btn1 = $("<input type='button' value='Add New Item' style='margin-left:5px'/>");
+                container.append(input);
+                container.append(btn1);
+                var tbl = $("<table></table>");
+                var tr = $("<tr></tr>");
+                var td2 = $("<td></td>");
+                td2.append($('#dp1'));
+                tr.append(td2);
+                var td1 = $("<td></td>");
+                td1.append(container);
+                tr.append(td1);
+                tbl.append(tr);
+                toolbar.append(tbl);
+                btn1.jqxButton({ template: "success" });
+                $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
+                var oldVal = "";
+                input.on('keydown', function (event) {
+                    if (input.val().length >= 2) {
+                        if (me.timer) {
+                            clearTimeout(me.timer);
+                        }
+                        if (oldVal != input.val()) {
+                            me.timer = setTimeout(function () {
+                                addFiter(input.val());
+                            }, 1000);
+                            oldVal = input.val();
+                        }
+                    }
+                    else {
+                        $("#grid").jqxGrid('clearfilters');
+                    }
+                });
+                btn1.on('click', function (e) {
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                        type: "GET",
+                        url: '/Stock/Create',
+                        contentType: "application/json; charset=utf-8",
+                        data: "",
+                        datatype: "json",
+                        success: function (data) {
+                            debugger;
+                            $('#myModalContent').html(data);
+                            $('#myModal').modal(options);
+                            $('#myModal').modal('show');
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+                });
+            }
+        });
+        $("#closbtn").click(function () {
+            $('#myModal').modal('hide');
+        });
+        function addFiter(value) {
+            $("#grid").jqxGrid('clearfilters');
+            var filtertype = 'stringfilter';
+            var filtergroup = new $.jqx.filter();
+            var filter = filtergroup.createfilter('stringfilter', value, 'CONTAINS');
+            filtergroup.addfilter(2, filter);
+            var searchColumnIndex = $("#dp1").jqxDropDownList('selectedIndex');
+            switch (searchColumnIndex) {
+                case 0:
+                    $("#grid").jqxGrid('addfilter', 'PART_NO', filtergroup);
+                    break;
+                case 1:
+                    $("#grid").jqxGrid('addfilter', 'PARTI', filtergroup);
+                    break;
+            }
+            // apply the filters.
+            $("#grid").jqxGrid('applyfilters');
+        }
 
+        $("#dp1").jqxDropDownList({
+            autoDropDownHeight: true, selectedIndex: 0, width: 200,
+            source: [
+                'PART NO', 'PART NAME'
+            ]
+        });
+    });
+    </script>
+    }
 <h2>List of Stock Items</h2>
-
-<p>
-    <a href='@Url.Action("Create","Stock")' class="btn btn-success btn-xs">Create Item</a>
-</p>
-<table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
-    <tr>
-        @*<th>
-                @Html.DisplayNameFor(model => model.RID)
-            </th>
-                     <th>
-                    @Html.DisplayNameFor(model => model.TAX)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TVAL)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.STOTAL)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PPRICE)
+<div id="grid"></div>
+    @*<p>
+        <a href='@Url.Action("Create","Stock")' class="btn btn-success btn-xs">Create Item</a>
+    </p>
+    <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
+        <tr>
+           <th>
+                    @Html.DisplayNameFor(model => model.RID)
                 </th>
                          <th>
-                @Html.DisplayNameFor(model => model.SPRICE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SSTA)
-            </th>
-                                 <th>
-                @Html.DisplayNameFor(model => model.DPCODE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lmodi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.grop)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AEDT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.USER1)
-            </th>
-        *@
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.TYPE)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.PART_NO)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.PARTI)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.MRP)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.QTY)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.TOTAL)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.RACKNO)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.UNIT)
-        </th>
-        <th nowrap bgcolor="#00ffe1">
-            @Html.DisplayNameFor(model => model.EOR)
-        </th>
-        <th nowrap bgcolor="#00ffe1">ITEM OPERATION</th>
-    </tr>
+                        @Html.DisplayNameFor(model => model.TAX)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TVAL)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STOTAL)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PPRICE)
+                    </th>
+                             <th>
+                    @Html.DisplayNameFor(model => model.SPRICE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SSTA)
+                </th>
+                                     <th>
+                    @Html.DisplayNameFor(model => model.DPCODE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lmodi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.grop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AEDT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.USER1)
+                </th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.RID)
-                </td>
-                        <td>
-                        @Html.DisplayFor(modelItem => item.TAX)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TVAL)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.STOTAL)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PPRICE)
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.TYPE)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.PART_NO)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.PARTI)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.MRP)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.QTY)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.TOTAL)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.RACKNO)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.UNIT)
+            </th>
+            <th nowrap bgcolor="#00ffe1">
+                @Html.DisplayNameFor(model => model.EOR)
+            </th>
+            <th nowrap bgcolor="#00ffe1">ITEM OPERATION</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => item.RID)
                     </td>
                             <td>
-                    @Html.DisplayFor(modelItem => item.SPRICE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SSTA)
-                </td>
-                                    <td>
-                    @Html.DisplayFor(modelItem => item.DPCODE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lmodi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.grop)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AEDT)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.USER1)
-                </td>
-            *@
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.TYPE)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.PART_NO)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.PARTI)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.MRP)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.QTY)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.TOTAL)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.RACKNO)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.UNIT)
-            </td>
-            <td nowrap>
-                @Html.DisplayFor(modelItem => item.EOR)
-            </td>
-            <td nowrap>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RID1 }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RID1 }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RID1 })
-            </td>
-        </tr>
-    }
+                            @Html.DisplayFor(modelItem => item.TAX)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TVAL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.STOTAL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PPRICE)
+                        </td>
+                                <td>
+                        @Html.DisplayFor(modelItem => item.SPRICE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SSTA)
+                    </td>
+                                        <td>
+                        @Html.DisplayFor(modelItem => item.DPCODE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lmodi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.grop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AEDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.USER1)
+                    </td>
 
-</table>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.TYPE)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.PART_NO)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.PARTI)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.MRP)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.QTY)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.TOTAL)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.RACKNO)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.UNIT)
+                </td>
+                <td nowrap>
+                    @Html.DisplayFor(modelItem => item.EOR)
+                </td>
+                <td nowrap>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RID1 }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RID1 }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RID1 })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog" style="width:96%;background-color:lightcyan;overflow:auto">
+        <div class="modal-content">
+            <div id='myModalContent' style="width:98%;overflow:auto;margin-left:2%">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dp1"></div>
 

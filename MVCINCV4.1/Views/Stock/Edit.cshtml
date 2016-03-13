@@ -1,11 +1,22 @@
 ﻿@model MVCINCV4._1.Models.TABLE2 
+<style type="text/css">
+    .input-xs {
+        height: 22px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
 
-@{
-    ViewBag.Title = "EDIT STOCK ITEM";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
-}
-@section scripts
-{
+    .focus {
+        border: 2px solid red;
+        background-color: #FEFED5;
+    }
+
+    .custom-date-style {
+        background-color: red !important;
+    }
+</style>
     <script type="text/javascript">
         $(function () {
             $("#txtPtno").autocomplete({
@@ -164,170 +175,171 @@
         });
 
 </script>
-}
-<style type="text/css">
-    .focus {
-        border: 2px solid red;
-        background-color: #FEFED5;
-    }
-</style>
-
-
-    @Scripts.Render("~/bundles/jqueryval")
-
-    @using (Html.BeginForm())
-    {
-    @Html.AntiForgeryToken()
-
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.RID1)
-    <fieldset>
-        <table class="table table-bordered table-hover table-responsive" style="font-size : smaller">
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.RID)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.RID, new { @class = "form-control", @id = "txtRID", @placeholder = "RECORD NO" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.STOTAL)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.STOTAL, new { @class = "form-control", @id = "txtSTOT", @placeholder = "SELL PRICE TOTAL" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.PART_NO)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.PART_NO, new { @class = "form-control", @id = "txtPtno", @placeholder = "PART NO" })
-                    @Html.ValidationMessageFor(model => model.PART_NO, "", new { @class = "text-danger" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.TVAL)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.TVAL, new { @class = "form-control", @id = "txtTVAL", @placeholder = "TAX VALUE" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.PARTI)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.PARTI, new { @class = "form-control", @id = "txtParti", @placeholder = "PART NAME" })
-                    @Html.ValidationMessageFor(model => model.PARTI, "", new { @class = "text-danger" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.TYPE)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.TYPE, new { @class = "form-control", @id = "txtTYPE", @placeholder = "ITEM TYPE" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.MRP)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.MRP, new { @class = "form-control", @id = "txtMRP", @placeholder = "MRP" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.UNIT)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.UNIT, new { @class = "form-control", @id = "txtUNIT", @placeholder = "UNIT" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.TAX)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.TAX, new { @class = "form-control", @id = "txtTAX", @placeholder = "TAX RATE" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.RACKNO)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.RACKNO, new { @class = "form-control", @id = "txtRCNO", @placeholder = "RACK NO" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.SPRICE)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.SPRICE, new { @class = "form-control", @id = "txtSPRICE", @placeholder = "SELL PRICE" })
-                </td>
-
-                <td>
-                    @Html.LabelFor(model => model.EOR)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.EOR, new { @class = "form-control", @id = "txtEOR", @placeholder = "ITEM E.O.R" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.PPRICE)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.PPRICE, new { @class = "form-control", @id = "txtPPRICE", @placeholder = "PURCHASE PRICE" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.grop)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.grop, new { @class = "form-control", @id = "txtGROP", @placeholder = "ITEM GROUP" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.QTY)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.QTY, new { @class = "form-control", @id = "txtQTY", @placeholder = "QUANTITY" })
-                    @Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.DPCODE)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.DPCODE, new { @class = "form-control", @id = "txtDPCODE", @placeholder = "DEALER CODE" })
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.TOTAL)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control", @id = "txtTOTAL", @placeholder = "ITEM TOTAL" })
-                </td>
-                <td>
-                    @Html.LabelFor(model => model.USER1)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.USER1, new { @class = "form-control", @id = "txtUSER", @placeholder = "USER NAME" })
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    @Html.HiddenFor(model => model.lmodi, new { @id = "txtLMODI" })
-                    @Html.HiddenFor(model => model.SSTA, new { @id = "txtSSTA" })
-                    @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
-                </td>
-            </tr>
-        </table>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-    }
-
     <div>
-        @Html.ActionLink("Back to List", "List")
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">STOCK ITEM DETAILS</h4>
+        </div>
+        @Scripts.Render("~/bundles/jqueryval")
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.RID1)
+            <fieldset>
+                <table class="table table-bordered table-hover table-responsive" style="font-size : smaller; margin-right:1%; border-color:red">
+                    <tr>
+                        <td colspan="2">
+                            <h5>DETAILS OF STOCK ITEM: &nbsp; @Html.DisplayFor(model => model.PARTI)</h5>
+                        </td>
+                        <td>
+                            <input type="submit" value="Update" class="btn btn-primary form-control" />
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "delete_conf", new { id = Model.RID1 }, new { @class = "btn btn-danger form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.RID)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.RID, new { @class = "form-control input-xs", @id = "txtRID", @placeholder = "RECORD NO" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.STOTAL)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.STOTAL, new { @class = "form-control input-xs", @id = "txtSTOT", @placeholder = "SELL PRICE TOTAL" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.PART_NO)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.PART_NO, new { @class = "form-control input-xs", @id = "txtPtno", @placeholder = "PART NO" })
+                            @Html.ValidationMessageFor(model => model.PART_NO, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.TVAL)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TVAL, new { @class = "form-control input-xs", @id = "txtTVAL", @placeholder = "TAX VALUE" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.PARTI)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.PARTI, new { @class = "form-control input-xs", @id = "txtParti", @placeholder = "PART NAME" })
+                            @Html.ValidationMessageFor(model => model.PARTI, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.TYPE)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TYPE, new { @class = "form-control input-xs", @id = "txtTYPE", @placeholder = "ITEM TYPE" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.MRP)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.MRP, new { @class = "form-control input-xs", @id = "txtMRP", @placeholder = "MRP" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.UNIT)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.UNIT, new { @class = "form-control input-xs", @id = "txtUNIT", @placeholder = "UNIT" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.TAX)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TAX, new { @class = "form-control input-xs", @id = "txtTAX", @placeholder = "TAX RATE" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.RACKNO)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.RACKNO, new { @class = "form-control input-xs", @id = "txtRCNO", @placeholder = "RACK NO" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.SPRICE)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.SPRICE, new { @class = "form-control input-xs", @id = "txtSPRICE", @placeholder = "SELL PRICE" })
+                        </td>
+
+                        <td>
+                            @Html.LabelFor(model => model.EOR)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.EOR, new { @class = "form-control input-xs", @id = "txtEOR", @placeholder = "ITEM E.O.R" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.PPRICE)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.PPRICE, new { @class = "form-control input-xs", @id = "txtPPRICE", @placeholder = "PURCHASE PRICE" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.grop)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.grop, new { @class = "form-control input-xs", @id = "txtGROP", @placeholder = "ITEM GROUP" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.QTY)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.QTY, new { @class = "form-control input-xs", @id = "txtQTY", @placeholder = "QUANTITY" })
+                            @Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.DPCODE)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DPCODE, new { @class = "form-control input-xs", @id = "txtDPCODE", @placeholder = "DEALER CODE" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.TOTAL)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL", @placeholder = "ITEM TOTAL" })
+                        </td>
+                        <td>
+                            @Html.LabelFor(model => model.USER1)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.USER1, new { @class = "form-control input-xs", @id = "txtUSER", @placeholder = "USER NAME" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            @Html.HiddenFor(model => model.lmodi, new { @id = "txtLMODI" })
+                            @Html.HiddenFor(model => model.SSTA, new { @id = "txtSSTA" })
+                            @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        }
     </div>
 

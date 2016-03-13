@@ -579,6 +579,7 @@ namespace MVCINCV4._1.Controllers
         {
             return View(dc.PMR.ToList());
         }
+        [Authorize]
         public JsonResult List_POP()
         {
             var dbResult = dc.MAINPOPU.ToList();
