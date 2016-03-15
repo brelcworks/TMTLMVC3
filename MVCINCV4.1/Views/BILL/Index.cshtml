@@ -1,0 +1,236 @@
+﻿@model IEnumerable<MVCINCV4._1.Models.BILL1>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts
+{
+ <script>
+     $(function () {
+         $(document).ready(function () {
+             var source =
+            {
+                datatype: "json",
+                datafields: [
+                { name: 'BID', type: 'string' },
+                { name: 'BNO', type: 'string' },
+                { name: 'BDATE', type: 'date' },
+                { name: 'CUST', type: 'string' },
+                { name: 'SNAME', type: 'string' },
+                { name: 'GTOT', type: 'string' },
+                { name: 'TVAL', type: 'string' },
+                { name: 'ROUND', type: 'string' },
+                { name: 'BAMT', type: 'string' },
+                { name: 'MODE', type: 'string' },
+                    ],
+                url: '/BILL/List_BILL'
+            };
+             var editrow = -1;
+             var dataAdapter = new $.jqx.dataAdapter(source);
+             var height1 = $(window).height() - 170;
+             // initialize jqxGrid
+             $("#grid").jqxGrid({
+                 width: '99%',
+                 height: height1,
+                 source: dataAdapter,
+                 sortable: true,
+                 filterable: true,
+                 altrows: true,
+                 theme: 'ui-redmond',
+                 editable: true,
+                 showtoolbar: true,
+                 columns: [
+                     { text: "RECORD NO", datafield: "BID", hidden: true },
+                        { text: "BILL NO", datafield: "BNO", minwidth: 80 },
+                        { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 110 },
+                        { text: "CUSTOMER", datafield: "CUST" },
+                        { text: "SITE NAME", datafield: "SNAME" },
+                        { text: "GROSS TOTAL", datafield: "GTOT" },
+                        { text: "TAX VALUE", datafield: "TVAL" },
+                        { text: "ROUND OFF", datafield: "ROUND", minwidth: 60 },
+                        { text: "NET TOTAL", datafield: "BAMT" },
+                        { text: "BILL MODE", datafield: "MODE", width: 60 }
+                 ],
+                 rendertoolbar: function (toolbar) {
+                     var me = this;
+                     var container = $("<div style='margin: 5px;'></div>");
+                     var input = $("<input id='searchField' type='text'/>");
+                     var btn1 = $("<a href='/BILL/Create'>New BILL</a>");
+                     container.append(input);
+                     container.append(btn1);
+                     toolbar.append(container);
+                     btn1.jqxButton({ template: "success" });
+                     $("#searchField").jqxInput({ placeHolder: "SEARCH BILL", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
+                 }
+             });
+         });
+     });
+ </script>
+}
+<h6>LIST OF INVOICES</h6>
+<div id="grid"></div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BDATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CUST)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SNAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GTOT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TOTAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PAYMENT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SECTOR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADDRESS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ROUND)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NTOT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TVAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USER1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CBILL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BAPAY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BST)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DPCODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LMODI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BID1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AEDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BAMT)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BDATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GTOT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TOTAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PAYMENT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SECTOR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ADDRESS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ROUND)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NTOT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TVAL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.USER1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CBILL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BAPAY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DPCODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LMODI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BID1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AEDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BAMT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.BID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.BID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.BID })
+            </td>
+        </tr>
+    }
+
+    </table>*@

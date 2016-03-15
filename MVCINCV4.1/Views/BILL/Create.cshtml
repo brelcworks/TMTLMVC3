@@ -1,0 +1,214 @@
+﻿@model MVCINCV4._1.Models.SALE
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@section scripts
+{
+    <script>
+     $(function () {
+         $(document).ready(function () {
+             var source =
+            {
+                datatype: "json",
+                datafields: [
+                { name: 'BID', type: 'string' },
+                { name: 'BNO', type: 'string' },
+                { name: 'BDATE', type: 'date' },
+                { name: 'GTOT', type: 'string' },
+                { name: 'TVAL', type: 'string' },
+                { name: 'ROUND', type: 'string' },
+                { name: 'BAMT', type: 'string' },
+                { name: 'MODE', type: 'string' },
+                    ],
+                url: '/BILL/List_BILL'
+            };
+             var editrow = -1;
+             var dataAdapter = new $.jqx.dataAdapter(source);
+             // initialize jqxGrid
+             $("#grid").jqxGrid({
+                 width: '99%',
+                 height: 200,
+                 source: dataAdapter,
+                 sortable: true,
+                 filterable: true,
+                 altrows: true,
+                 theme: 'ui-redmond',
+                 editable: true,
+                 showtoolbar: true,
+                 columns: [
+                     { text: "RECORD NO", datafield: "BID", hidden: true },
+                        { text: "BILL NO", datafield: "BNO", minwidth: 80 },
+                        { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 110 },
+                        { text: "GROSS TOTAL", datafield: "GTOT" },
+                        { text: "TAX VALUE", datafield: "TVAL" },
+                        { text: "ROUND OFF", datafield: "ROUND", minwidth: 60 },
+                        { text: "NET TOTAL", datafield: "BAMT" },
+                        { text: "BILL MODE", datafield: "MODE", width: 60 }
+                 ]
+             });
+
+             var source1 =
+            {
+                datatype: "json",
+                data: {"bno": "MB 002/15-16" },
+                datafields: [
+                { name: 'BILLID', type: 'string' },
+                { name: 'PART_NO', type: 'string' },
+                { name: 'PARTI', type: 'string' },
+                { name: 'QTY', type: 'string' },
+                { name: 'MRP', type: 'string' },
+                { name: 'SPRICE', type: 'string' },
+                { name: 'TAX', type: 'string' },
+                { name: 'TOTAL', type: 'string' },
+                ],
+                url: '/BILL/List_BILL_ITM'
+            };
+             var editrow1 = -1;
+             var dataAdapter1 = new $.jqx.dataAdapter(source1);
+             // initialize jqxGrid
+             $("#grid1").jqxGrid({
+                 width: '99%',
+                 height: 200,
+                 source: dataAdapter1,
+                 sortable: true,
+                 filterable: true,
+                 altrows: true,
+                 theme: 'ui-redmond',
+                 editable: true,
+                 showtoolbar: true,
+                 columns: [
+                     { text: "RECORD NO", datafield: "BILLID", hidden: true },
+                        { text: "PART NO", datafield: "PART_NO", minwidth: 80 },
+                        { text: "PART NAME", datafield: "PARTI", minwidth: 110 },
+                        { text: "QTY", datafield: "QTY" },
+                        { text: "MRP", datafield: "MRP" },
+                        { text: "SELL PRICE", datafield: "SPRICE", minwidth: 60 },
+                        { text: "TAX RATE", datafield: "TAX" },
+                        { text: "AMOUNT", datafield: "TOTAL", width: 60 }
+                 ]
+             });
+         });
+     });
+    </script>
+}
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>NEW BILL &nbsp; &nbsp; 
+                <input type="submit" value="Create" />
+        </legend>
+        <table class="table table-hover table-bordered table-responsive" style="font-size:x-small;">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.BNO)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.BNO)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.GTOT)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.GTOT)
+                </td>
+                <td rowspan="7" width="60%"><div id="grid"></div></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.BDATE)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.BDATE)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.TVAL)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.TVAL)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.CUST)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.CUST)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.ROUND)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.ROUND)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.SNAME)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.SNAME)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.NTOT)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.NTOT)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.VNO)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.VNO)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.MODE)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.MODE)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.TOTAL)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.TOTAL)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.ADDRESS)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    @Html.HiddenFor(model => model.BILL1.PAYMENT)
+                    @Html.HiddenFor(model => model.BILL1.SECTOR)
+                    @Html.HiddenFor(model => model.BILL1.USER1)
+                    @Html.HiddenFor(model => model.BILL1.CBILL)
+                    @Html.HiddenFor(model => model.BILL1.BAPAY)
+                    @Html.HiddenFor(model => model.BILL1.BST)
+                    @Html.HiddenFor(model => model.BILL1.SSTA)
+                    @Html.HiddenFor(model => model.BILL1.DPCODE)
+                    @Html.HiddenFor(model => model.BILL1.LMODI)
+                    @Html.HiddenFor(model => model.BILL1.BID1)
+                    @Html.HiddenFor(model => model.BILL1.AEDT)
+                    @Html.HiddenFor(model => model.BILL1.BAMT)
+                </td>
+            </tr>
+        </table>
+        <div id="grid1"></div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -6,6 +6,7 @@
 }
 @section scripts
 {
+@Scripts.Render("~/bundles/jqueryval")
 <script>
     $(function () {
         $(".dtl").click(function () {
@@ -161,8 +162,8 @@
                     showtoolbar: true,
                     columns: [
                         { text: "RECORD NO", datafield: "RID", hidden: true },
-                        { text: "SITE ID", datafield: "SID" },
-                        { text: "SITE NAME", datafield: "SNAME", minwidth:110 },
+                        { text: "SITE ID", datafield: "SID", minwidth: 80 },
+                        { text: "SITE NAME", datafield: "SNAME", minwidth: 110 },
                         { text: "CUSTOMER", datafield: "CNAME" },
                         { text: "ENGINE NO", datafield: "ENS" },
                         { text: "RATING", datafield: "RAT_PH" },
@@ -243,10 +244,10 @@
                     rendertoolbar: function (toolbar) {
                         var me = this;
                         var container = $("<div style='margin: 5px;'></div>");
-                        var input = $("<input id='searchField' type='text' style='float: left;' />");
-                        var btn1 = $("<a href='/Pop/Create' style='float: left; margin-left:5px; position: relative; top: -4px;'>Add New Site</a>");
-                        var btn2 = $("<a href='/Pop/ExportData' style='float: left; margin-left:5px; position: relative; top: -4px;'>Export Data</a>");
-                        var btn3 = $("<a href='/Pop/List_rm1' style='float: left; margin-left:5px; position: relative; top: -4px;'>Manage Issues</a>");
+                        var input = $("<input id='searchField' type='text'/>");
+                        var btn1 = $("<a href='/Pop/Create'>Add New Site</a>");
+                        var btn2 = $("<a href='/Pop/ExportData'>Export Data</a>");
+                        var btn3 = $("<a href='/Pop/List_rm1'>Manage Issues</a>");
                         container.append(input);
                         container.append(btn1);
                         container.append(btn2);
@@ -264,7 +265,7 @@
                         btn1.jqxButton({ template: "success" });
                         btn2.jqxButton({ template: "warning" });
                         btn3.jqxButton({ template: "primary" });
-                        $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
+                        $("#searchField").jqxInput({ placeHolder: "SEARCH SITE", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
                         var oldVal = "";
                         input.on('keydown', function (event) {
                             if (input.val().length >= 2) {

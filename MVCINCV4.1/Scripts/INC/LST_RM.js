@@ -44,7 +44,7 @@
                     { text: "DT. OF ISSUE", datafield: "DOS", cellsformat: 'dd-MM-yyyy HH:mm' },
                     { text: "DT. OF CLOSURE", datafield: "CDATI", cellsformat: 'dd-MM-yyyy HH:mm' },
                     { text: "ENGINE NO", datafield: "ENGINE_No" },
-                    { text: "HMR", datafield: "HMR" },
+                    { text: "HMR", datafield: "HMR", minwidth:50 },
                     { text: "ISSUE STATUS", datafield: "STA" },
                     {
                         text: 'Details', datafield: 'Details', columntype: 'button', width: 80, sortable: false, filterable: false, cellsrenderer: function () {
@@ -94,7 +94,7 @@
                     tbl.append(tr);
                     toolbar.append(tbl);
                     btn1.jqxButton({ template: "success" });
-                    $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
+                    $("#searchField").jqxInput({ placeHolder: "SEARCH SITE", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
                     var oldVal = "";
                     input.on('keydown', function (event) {
                         if (input.val().length >= 2) {
@@ -115,7 +115,7 @@
                 },
                 renderstatusbar: function (sbar) {
                     sbar.append($('#dv1'));
-                    $('#btnEx').jqxButton({ template: "info" });
+                    $('#btnEx').jqxButton({ template: "warning" });
                     $('#btnBCK').jqxButton({ template: "danger" });
                     $("#dtFrm").jqxInput({ placeHolder: "From Date", height: 25, width: 200, minLength: 1 });
                     $("#dtTo").jqxInput({ placeHolder: "To Date", height: 25, width: 200, minLength: 1 });

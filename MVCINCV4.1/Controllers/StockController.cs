@@ -1,13 +1,16 @@
-﻿using MVCINCV4._1.Models;
+﻿using ClosedXML.Excel;
+using MVCINCV4._1.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Services;
 using System.Web.Security;
 using System.Web.Services;
+using System.Web.UI.WebControls;
 
 namespace MVCINCV4._1.Controllers
 {
@@ -220,6 +223,62 @@ namespace MVCINCV4._1.Controllers
         {
             var dbResult = dc.STOCK.ToList();
             return Json(dbResult, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        public ActionResult ExportData()
+        {
+            GridView gv = new GridView();
+            gv.DataSource = dc.STOCK.ToList();
+            gv.DataBind();
+            var wb = new XLWorkbook();
+            var ws = wb.Worksheets.Add("STOCK");
+            ws.Cell(1, 1).Value = "SL. NO.";
+            ws.Cell(1, 2).Value = "PART NAME";
+            ws.Cell(1, 3).Value = "PART NO";
+            ws.Cell(1, 4).Value = "QTY";
+            ws.Cell(1, 5).Value = "MRP";
+            ws.Cell(1, 6).Value = "SELL PRICE";
+            ws.Cell(1, 7).Value = "UNIT";
+            ws.Cell(1, 8).Value = "RACK NO";
+            ws.Cell(1, 9).Value = "MRP TOTAL";
+            ws.Cell(1, 10).Value = "SELL PRICE TOTAL";
+            for (int I = 0; I < gv.Rows.Count; I++)
+            {
+                ws.Cell(I + 2, 1).Value = Convert.ToInt32(I.ToString()) + 1;
+                ws.Cell(I + 2, 2).Value = gv.Rows[I].Cells[4].Text;
+                ws.Cell(I + 2, 3).Value = gv.Rows[I].Cells[3].Text;
+                ws.Cell(I + 2, 4).Value = gv.Rows[I].Cells[6].Text;
+                ws.Cell(I + 2, 5).Value = gv.Rows[I].Cells[5].Text;
+                ws.Cell(I + 2, 6).Value = gv.Rows[I].Cells[14].Text;
+                ws.Cell(I + 2, 7).Value = gv.Rows[I].Cells[13].Text;
+                ws.Cell(I + 2, 8).Value = gv.Rows[I].Cells[8].Text;
+                ws.Cell(I + 2, 9).Value = gv.Rows[I].Cells[7].Text;
+                ws.Cell(I + 2, 10).Value = gv.Rows[I].Cells[11].Text;
+            }
+            ws.Range("I2", "J" + ws.RangeUsed().RowCount()).Style.NumberFormat.SetFormat("#.##");
+            ws.Range("e2", "f" + ws.RangeUsed().RowCount()).Style.NumberFormat.SetFormat("#.##");
+            ws.Columns().AdjustToContents();
+            ws.SheetView.FreezeRows(1);
+            ClosedXML.Excel.IXLRange range = ws.RangeUsed();
+            string RCNT = "J" + range.RowCount();
+            ws.Range("a1", RCNT).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+            ws.Range("a1", RCNT).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+            ws.Range("a1", RCNT).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+            ws.Range("a1", RCNT).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+            ws.Range("a1", "J1").Style.Fill.BackgroundColor = XLColor.Turquoise;
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment;filename=STOCK.xlsx");
+            using (MemoryStream MyMemoryStream = new MemoryStream())
+            {
+                wb.SaveAs(MyMemoryStream);
+                MyMemoryStream.WriteTo(Response.OutputStream);
+                Response.Flush();
+                Response.End();
+            }
+            return RedirectToAction("List");
         }
     }
 }

@@ -84,8 +84,10 @@
                 var container = $("<div style='margin: 5px;'></div>");
                 var input = $("<input id='searchField' type='text' style='float: left;' />");
                 var btn1 = $("<input type='button' value='Add New Item' style='margin-left:5px'/>");
+                var btn2 = $("<a href='/Stock/ExportData'>Export Data</a>");
                 container.append(input);
                 container.append(btn1);
+                container.append(btn2);
                 var tbl = $("<table></table>");
                 var tr = $("<tr></tr>");
                 var td2 = $("<td></td>");
@@ -97,6 +99,7 @@
                 tbl.append(tr);
                 toolbar.append(tbl);
                 btn1.jqxButton({ template: "success" });
+                btn2.jqxButton({ template: "danger" });
                 $("#searchField").jqxInput({ placeHolder: "SEARCH ITEM", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
                 var oldVal = "";
                 input.on('keydown', function (event) {

@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BILLController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\PopController.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\PMRMODEL.cs" />
     <Compile Include="Models\PURCHSE.cs" />
     <Compile Include="Models\PURCHSE1.cs" />
+    <Compile Include="Models\SALE.cs" />
     <Compile Include="Models\SHEET1.cs" />
     <Compile Include="Models\TABLE2.cs" />
     <Compile Include="Models\user2.cs" />
@@ -824,6 +826,8 @@
     <Content Include="Views\Pop\List_rm1.cshtml" />
     <Content Include="Views\Stock\List_Pr1.cshtml" />
     <Content Include="Views\Pop\edt_Pmr.cshtml" />
+    <Content Include="Views\BILL\Index.cshtml" />
+    <Content Include="Views\BILL\Create.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
