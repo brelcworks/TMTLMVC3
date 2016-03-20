@@ -1,4 +1,5 @@
-﻿$(".anchorDetail1").click(function () {
+﻿ <add name="DBCTX" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\MVCINCDB.mdf;Integrated Security=True" providerName="System.Data.SqlClient" />
+$(".anchorDetail1").click(function () {
             debugger;
             var $buttonClicked = $(this);
             var ens = $buttonClicked.attr('data-id');

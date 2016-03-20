@@ -1,6 +1,7 @@
 ﻿using MVCINCV4._1.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,9 +17,9 @@ namespace MVCINCV4._1.Controllers
             return View(dc.BILL1.ToList());
         }
         [Authorize]
-        public JsonResult List_BILL()
+        public JsonResult List_BILL(string bno)
         {
-            var dbResult = dc.BILL1.ToList();
+            var dbResult = dc.BILL1.Where(a => a.BNO.Equals(bno)).ToList();
             return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
         [Authorize]
@@ -42,5 +43,41 @@ namespace MVCINCV4._1.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult Save()
+        {
+            return View();
+        }  
+
+        [HttpPost]
+        public ActionResult Save(BILL bill)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (DBCTX aid = new DBCTX())
+                    {
+                        aid.BILL.Add(bill);
+                        message = "Successfully Saved!";
+                    }
+                }
+                catch (Exception ex) { message = "Error! Please try again."; }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior =JsonRequestBehavior.AllowGet};
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(bill);
+            }
+        }  
     }
 }

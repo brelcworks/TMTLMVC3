@@ -4,14 +4,42 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+<style type="text/css">
+    .input-xs {
+        height: 22px;
+        padding: 2px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+
+    .focus {
+        border: 2px solid red;
+        background-color: #FEFED5;
+    }
+
+    .custom-date-style {
+        background-color: red !important;
+    }
+</style>
 @section scripts
 {
     <script>
-     $(function () {
+        $(function () {
+            var source;
+            var source1;
          $(document).ready(function () {
-             var source =
+             $('INPUT[type="text"]').focus(function () {
+                 $(this).addClass("focus");
+             });
+
+             $('INPUT[type="text"]').blur(function () {
+                 $(this).removeClass("focus");
+             });
+             source =
             {
                 datatype: "json",
+                data: { "bno": $('#txtBNO').val() },
                 datafields: [
                 { name: 'BID', type: 'string' },
                 { name: 'BNO', type: 'string' },
@@ -39,20 +67,53 @@
                  showtoolbar: true,
                  columns: [
                      { text: "RECORD NO", datafield: "BID", hidden: true },
-                        { text: "BILL NO", datafield: "BNO", minwidth: 80 },
-                        { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 110 },
-                        { text: "GROSS TOTAL", datafield: "GTOT" },
+                        { text: "BILL NO", datafield: "BNO", minwidth: 100 },
+                        { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 70 },
+                        { text: "GROSS TOTAL", datafield: "GTOT", minwidth:50 },
                         { text: "TAX VALUE", datafield: "TVAL" },
                         { text: "ROUND OFF", datafield: "ROUND", minwidth: 60 },
                         { text: "NET TOTAL", datafield: "BAMT" },
-                        { text: "BILL MODE", datafield: "MODE", width: 60 }
-                 ]
+                        { text: "BILL MODE", datafield: "MODE", minwidth: 40 }
+                 ],
+                 rendertoolbar: function (toolbar) {
+                     var me = this;
+                     var container = $("<div style='margin: 5px;'></div>");
+                     var input = $("<input id='searchField' type='text'/>");
+                     var btn1 = $("<input id='BTN1' type='button' value='Refresh'/>");
+                     container.append(input);
+                     container.append(btn1);
+                     container.append($("#btnNBILL"));
+                     toolbar.append(container);
+                     btn1.jqxButton({ template: "success" });
+                     $("#searchField").jqxInput({ placeHolder: "SEARCH SITE", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
+                     var oldVal = "";
+                     btn1.on('click', function (e) {
+                         source.data = { "bno": $('#txtBNO').val() };
+                         $('#grid').jqxGrid('updatebounddata');
+                     });
+                     input.on('keydown', function (event) {
+                         if (input.val().length >= 2) {
+                             if (me.timer) {
+                                 clearTimeout(me.timer);
+                             }
+                             if (oldVal != input.val()) {
+                                 me.timer = setTimeout(function () {
+                                     addFiter(input.val());
+                                 }, 1000);
+                                 oldVal = input.val();
+                             }
+                         }
+                         else {
+                             $("#grid").jqxGrid('clearfilters');
+                         }
+                     });
+                 }
              });
 
-             var source1 =
+             source1 =
             {
                 datatype: "json",
-                data: {"bno": "MB 002/15-16" },
+                data: {"bno": $("txtBNO").val() },
                 datafields: [
                 { name: 'BILLID', type: 'string' },
                 { name: 'PART_NO', type: 'string' },
@@ -70,7 +131,7 @@
              // initialize jqxGrid
              $("#grid1").jqxGrid({
                  width: '99%',
-                 height: 200,
+                 height: 350,
                  source: dataAdapter1,
                  sortable: true,
                  filterable: true,
@@ -86,9 +147,106 @@
                         { text: "MRP", datafield: "MRP" },
                         { text: "SELL PRICE", datafield: "SPRICE", minwidth: 60 },
                         { text: "TAX RATE", datafield: "TAX" },
-                        { text: "AMOUNT", datafield: "TOTAL", width: 60 }
-                 ]
+                        { text: "AMOUNT", datafield: "TOTAL", minwidth: 60 }
+                 ],
+                 rendertoolbar: function (toolbar) {
+                     var me = this;
+                     var container = $("<div style='margin: 5px;'></div>");
+                     var btn1 = $("<input id='BTN2' type='button' value='Refresh'/>");
+                     var btn2 = $("<input id='BTN3' type='button' value='Add New Item'/>");
+                     container.append(btn1);
+                     container.append(btn2);
+                     toolbar.append(container);
+                     btn1.jqxButton({ template: "success" });
+                     btn2.jqxButton({ template: "warning" });
+                     var oldVal = "";
+                     btn1.on('click', function (e) {
+                         source1.data = { "bno": $('#txtBNO').val() };
+                         $('#grid1').jqxGrid('updatebounddata');
+                     });
+                     btn2.on('click', function () {
+                         var offset = $("#grid1").offset();
+                         $("#popupWindow").jqxWindow();
+                         $("#popupWindow").jqxWindow('open');
+                     });
+                 }
              });
+             $("#popupWindow").jqxWindow({
+                 width: '100%', height: '50%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel"), modalOpacity: 0.01
+             });
+
+             $("#popupWindow").on('open', function () {
+                 $("#txtPTNO").jqxInput('selectAll');
+                 $("#txtBNO1").val($("#txtBNO").val());
+             });
+
+             $("#Cancel").jqxButton({ template: "warning" });
+             $("#Save").jqxButton({ template: "success" });
+             $("#btnNBILL").jqxButton({ template: "warning" });
+             $("#Save").click(function () {   
+                 var dataObject = {
+                     BILL_NO: $("#txtBNO1").val(),
+                     PART_NO: $("#txtPTNO").val(),  
+                     PARTI: $("#txtPTNAME").val(),
+                     MRP: $("#txtMRP").val(),
+                     QTY: $("#txtQTY").val(),
+                     SPRICE: $("#txtSPRICE").val(),
+                     TOTAL: $("#txtTOT").val(),
+                     TAX: $("#txtTRATE").val(),
+                     TVAL: $("#txtTVAL").val(),
+                     UNIT: $("#txtUNIT").val(),
+                     BDATE: $("#txtBDATE").val(),
+                     SSAT: "NEW",
+                     CMP: "EICHER",
+                     MODE: $("#txtMODE").val(),
+                     BID: new Date($.now()),
+                     LMODI: new Date($.now()),
+                     DPCODE:"A1587"
+                 };  
+                 $.ajax({  
+                        url: "@Url.Action("Save","BILL")",  
+                        type: "POST",  
+                        data: dataObject,  
+                        dataType: "json",  
+                        success: function (data) {  
+                            if (data.toString() != "Successfully Saved!") {  
+                            alert("FAILED");
+                            }   
+                        },  
+                        error: function () {  
+                            alert("ERROR");
+                        }  
+                   });
+                 $("#grid1").jqxGrid("addrow", null, dataObject, "first");
+                 $("#popupWindow").jqxWindow('hide');
+             });
+         });
+         $('#txtBNO').keypress(function (e) {
+             if (e.keyCode == 13) {
+                 e.preventDefault();
+                 $('#txtBAMT').val($('#txtNTOT').val());
+                 $('#txtDPCODE').val("A1587");
+                 $('#txtLMODI').val(new Date($.now()));
+                 $('#txtBID1').val(new Date($.now()));
+                 $('#txtAEDT').val("NEW");
+                 $('#txtSSTA').val("NEW");
+                 $('#txtBDATE').focus();
+                 source.data = { "bno": $('#txtBNO').val() };
+                 $('#grid').jqxGrid('updatebounddata');
+             }
+         });
+         $("#txtPTNO").autocomplete({
+             source: function (request, response) {
+                 $.ajax({
+                     url: '/Stock/GetPtno',
+                     type: "POST",
+                     dataType: "json",
+                     data: { term: request.term },
+                     success: function (data) {
+                         response(data);
+                     }
+                 });
+             }
          });
      });
     </script>
@@ -98,22 +256,20 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>NEW BILL &nbsp; &nbsp; 
-                <input type="submit" value="Create" />
-        </legend>
+
         <table class="table table-hover table-bordered table-responsive" style="font-size:x-small;">
             <tr>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.BNO)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.BNO)
+                    @Html.TextBoxFor(model => model.BILL1.BNO, new { @class = "form-control input-xs", @id = "txtBNO" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.GTOT)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.GTOT)
+                    @Html.TextBoxFor(model => model.BILL1.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT" })
                 </td>
                 <td rowspan="7" width="60%"><div id="grid"></div></td>
             </tr>
@@ -122,13 +278,13 @@
                     @Html.DisplayNameFor(model => model.BILL1.BDATE)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.BDATE)
+                    @Html.TextBoxFor(model => model.BILL1.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE", @type = "Date", @value = "01-01-2016" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.TVAL)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.TVAL)
+                    @Html.TextBoxFor(model => model.BILL1.TVAL, new { @class = "form-control input-xs", @id = "txtTVAL" })
                 </td>
             </tr>
             <tr>
@@ -136,13 +292,13 @@
                     @Html.DisplayNameFor(model => model.BILL1.CUST)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.CUST)
+                    @Html.TextBoxFor(model => model.BILL1.CUST, new { @class = "form-control input-xs", @id = "txtCUST" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.ROUND)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.ROUND)
+                    @Html.TextBoxFor(model => model.BILL1.ROUND, new { @class = "form-control input-xs", @id = "txtROUND" })
                 </td>
             </tr>
             <tr>
@@ -150,13 +306,13 @@
                     @Html.DisplayNameFor(model => model.BILL1.SNAME)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.SNAME)
+                    @Html.TextBoxFor(model => model.BILL1.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.NTOT)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.NTOT)
+                    @Html.TextBoxFor(model => model.BILL1.NTOT, new { @class = "form-control input-xs", @id = "txtNTOT" })
                 </td>
             </tr>
             <tr>
@@ -164,13 +320,13 @@
                     @Html.DisplayNameFor(model => model.BILL1.VNO)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.VNO)
+                    @Html.TextBoxFor(model => model.BILL1.VNO, new { @class = "form-control input-xs", @id = "txtVNO" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.MODE)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.MODE)
+                    @Html.TextBoxFor(model => model.BILL1.MODE, new { @class = "form-control input-xs", @id = "txtMODE" })
                 </td>
             </tr>
             <tr>
@@ -178,37 +334,82 @@
                     @Html.DisplayNameFor(model => model.BILL1.TOTAL)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.TOTAL)
+                    @Html.TextBoxFor(model => model.BILL1.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.ADDRESS)
+                    @Html.TextBoxFor(model => model.BILL1.ADDRESS, new { @class = "form-control input-xs", @id = "txtADDRESS" })
                 </td>
             </tr>
             <tr>
                 <td colspan="5">
-                    @Html.HiddenFor(model => model.BILL1.PAYMENT)
-                    @Html.HiddenFor(model => model.BILL1.SECTOR)
-                    @Html.HiddenFor(model => model.BILL1.USER1)
-                    @Html.HiddenFor(model => model.BILL1.CBILL)
-                    @Html.HiddenFor(model => model.BILL1.BAPAY)
-                    @Html.HiddenFor(model => model.BILL1.BST)
-                    @Html.HiddenFor(model => model.BILL1.SSTA)
-                    @Html.HiddenFor(model => model.BILL1.DPCODE)
-                    @Html.HiddenFor(model => model.BILL1.LMODI)
-                    @Html.HiddenFor(model => model.BILL1.BID1)
-                    @Html.HiddenFor(model => model.BILL1.AEDT)
-                    @Html.HiddenFor(model => model.BILL1.BAMT)
+                    @Html.HiddenFor(model => model.BILL1.PAYMENT, new { @id = "txtPAYMENT" })
+                    @Html.HiddenFor(model => model.BILL1.SECTOR, new { @id = "txtSECTOR" })
+                    @Html.HiddenFor(model => model.BILL1.USER1, new { @id = "txtUSER1" })
+                    @Html.HiddenFor(model => model.BILL1.CBILL, new { @id = "txtCBILL" })
+                    @Html.HiddenFor(model => model.BILL1.BAPAY, new { @id = "txtBAPAY" })
+                    @Html.HiddenFor(model => model.BILL1.BST, new { @id = "txtBST" })
+                    @Html.HiddenFor(model => model.BILL1.SSTA, new { @id = "txtSSTA" })
+                    @Html.HiddenFor(model => model.BILL1.DPCODE, new { @id = "txtDPCODE" })
+                    @Html.HiddenFor(model => model.BILL1.LMODI, new { @id = "txtLMODI" })
+                    @Html.HiddenFor(model => model.BILL1.BID1, new { @id = "txtBID1" })
+                    @Html.HiddenFor(model => model.BILL1.AEDT, new { @id = "txtAEDT" })
+                    @Html.HiddenFor(model => model.BILL1.BAMT, new { @id = "txtBAMT" })
                 </td>
             </tr>
         </table>
         <div id="grid1"></div>
+        <input type="submit" value="Create" id="btnNBILL" class="btn btn-primary btn-xs" />
     </fieldset>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+</div>
+<div id="popupWindow">
+    <div>ADD NEW ITEM</div>
+    <div style="overflow: hidden;">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <td><label for="txtBNO1">BILL NO:</label></td>
+                <td align="left" colspan="3"><input id="txtBNO1" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td><label for="txtPTNO">PART NO:</label></td>
+                <td align="left"><input id="txtPTNO" class="form-control input-xs" /></td>
+                <td><label for="txtQTY">QUANTITY:</label></td>
+                <td align="left"><input id="txtQTY" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td><label for="txtPTNAME">PART NAME:</label></td>
+                <td align="left"><input id="txtPTNAME" class="form-control input-xs" /></td>
+                <td><label for="txtTVAL">TAX VALUE:</label></td>
+                <td align="left"><input id="txtTVAL" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td><label for="txtMRP">MRP:</label></td>
+                <td align="left"><input id="txtMRP" class="form-control input-xs" /></td>
+                <td><label for="txtTOT">ITEM TOTAL:</label></td>
+                <td align="left"><input id="txtTOT" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td><label for="txtSPRICE">SELL PRICE:</label></td>
+                <td align="left"><input id="txtSPRICE" class="form-control input-xs" /></td>
+                <td><label for="txtSTC">IN STOCK:</label></td>
+                <td align="left"><input id="txtSTC" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td><label for="txtTRATE">TAX RATE:</label></td>
+                <td align="left"><input id="txtTRATE" class="form-control input-xs" /></td>
+                <td><label for="txtUNIT">UNIT:</label></td>
+                <td align="left"><input id="txtUNIT" class="form-control input-xs" /></td>
+            </tr>
+            <tr>
+                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
