@@ -36,79 +36,7 @@
              $('INPUT[type="text"]').blur(function () {
                  $(this).removeClass("focus");
              });
-             source =
-            {
-                datatype: "json",
-                data: { "bno": $('#txtBNO').val() },
-                datafields: [
-                { name: 'BID', type: 'string' },
-                { name: 'BNO', type: 'string' },
-                { name: 'BDATE', type: 'date' },
-                { name: 'GTOT', type: 'string' },
-                { name: 'TVAL', type: 'string' },
-                { name: 'ROUND', type: 'string' },
-                { name: 'BAMT', type: 'string' },
-                { name: 'MODE', type: 'string' },
-                    ],
-                url: '/BILL/List_BILL'
-            };
-             var editrow = -1;
-             var dataAdapter = new $.jqx.dataAdapter(source);
-             // initialize jqxGrid
-             $("#grid").jqxGrid({
-                 width: '99%',
-                 height: 200,
-                 source: dataAdapter,
-                 sortable: true,
-                 filterable: true,
-                 altrows: true,
-                 theme: 'ui-redmond',
-                 editable: true,
-                 showtoolbar: true,
-                 columns: [
-                     { text: "RECORD NO", datafield: "BID", hidden: true },
-                        { text: "BILL NO", datafield: "BNO", minwidth: 100 },
-                        { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 70 },
-                        { text: "GROSS TOTAL", datafield: "GTOT", minwidth:50 },
-                        { text: "TAX VALUE", datafield: "TVAL" },
-                        { text: "ROUND OFF", datafield: "ROUND", minwidth: 60 },
-                        { text: "NET TOTAL", datafield: "BAMT" },
-                        { text: "BILL MODE", datafield: "MODE", minwidth: 40 }
-                 ],
-                 rendertoolbar: function (toolbar) {
-                     var me = this;
-                     var container = $("<div style='margin: 5px;'></div>");
-                     var input = $("<input id='searchField' type='text'/>");
-                     var btn1 = $("<input id='BTN1' type='button' value='Refresh'/>");
-                     container.append(input);
-                     container.append(btn1);
-                     container.append($("#btnNBILL"));
-                     toolbar.append(container);
-                     btn1.jqxButton({ template: "success" });
-                     $("#searchField").jqxInput({ placeHolder: "SEARCH SITE", height: 23, width: 200, minLength: 1, theme: 'energyblue' });
-                     var oldVal = "";
-                     btn1.on('click', function (e) {
-                         source.data = { "bno": $('#txtBNO').val() };
-                         $('#grid').jqxGrid('updatebounddata');
-                     });
-                     input.on('keydown', function (event) {
-                         if (input.val().length >= 2) {
-                             if (me.timer) {
-                                 clearTimeout(me.timer);
-                             }
-                             if (oldVal != input.val()) {
-                                 me.timer = setTimeout(function () {
-                                     addFiter(input.val());
-                                 }, 1000);
-                                 oldVal = input.val();
-                             }
-                         }
-                         else {
-                             $("#grid").jqxGrid('clearfilters');
-                         }
-                     });
-                 }
-             });
+             
 
              source1 =
             {
@@ -231,8 +159,7 @@
                  $('#txtAEDT').val("NEW");
                  $('#txtSSTA').val("NEW");
                  $('#txtBDATE').focus();
-                 source.data = { "bno": $('#txtBNO').val() };
-                 $('#grid').jqxGrid('updatebounddata');
+                 
              }
          });
          $("#txtPTNO").autocomplete({
@@ -271,7 +198,7 @@
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT" })
                 </td>
-                <td rowspan="7" width="60%"><div id="grid"></div></td>
+                
             </tr>
             <tr>
                 <td>

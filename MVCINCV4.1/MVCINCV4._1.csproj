@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -732,6 +733,7 @@
     <Content Include="jqwidgets\styles\jqx.ui-sunny.css" />
     <Content Include="jqwidgets\styles\jqx.web.css" />
     <Content Include="jqwidgets\styles\jqx.windowsphone.css" />
+    <Content Include="JUNK\bill crt.txt" />
     <Content Include="JUNK\CRT.txt" />
     <Content Include="JUNK\EDT.txt" />
     <Content Include="JUNK\LOGINVIEW.txt" />
