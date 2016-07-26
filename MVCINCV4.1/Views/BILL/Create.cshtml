@@ -193,12 +193,17 @@
                     @Html.TextBoxFor(model => model.BILL1.BNO, new { @class = "form-control input-xs", @id = "txtBNO" })
                 </td>
                 <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
                     @Html.DisplayNameFor(model => model.BILL1.GTOT)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT" })
                 </td>
-                
             </tr>
             <tr>
                 <td>
@@ -207,6 +212,8 @@
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE", @type = "Date", @value = "01-01-2016" })
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.TVAL)
                 </td>
@@ -218,9 +225,13 @@
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.CUST)
                 </td>
-                <td>
+                <td class="form-inline">
                     @Html.TextBoxFor(model => model.BILL1.CUST, new { @class = "form-control input-xs", @id = "txtCUST" })
+                    @Html.DisplayNameFor(model => model.BILL1.SNAME)
+                    @Html.TextBoxFor(model => model.BILL1.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.ROUND)
                 </td>
@@ -230,11 +241,13 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.BILL1.SNAME)
+                    @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BILL1.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
+                    @Html.TextBoxFor(model => model.BILL1.ADDRESS, new { @class = "form-control input-xs", @id = "txtADDRESS" })
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.NTOT)
                 </td>
@@ -249,6 +262,8 @@
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.VNO, new { @class = "form-control input-xs", @id = "txtVNO" })
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.MODE)
                 </td>
@@ -263,15 +278,14 @@
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL" })
                 </td>
+                <td></td>
+                <td></td>
                 <td>
-                    @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
                 </td>
-                <td>
-                    @Html.TextBoxFor(model => model.BILL1.ADDRESS, new { @class = "form-control input-xs", @id = "txtADDRESS" })
-                </td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="5">
+                <td colspan="6">
                     @Html.HiddenFor(model => model.BILL1.PAYMENT, new { @id = "txtPAYMENT" })
                     @Html.HiddenFor(model => model.BILL1.SECTOR, new { @id = "txtSECTOR" })
                     @Html.HiddenFor(model => model.BILL1.USER1, new { @id = "txtUSER1" })

@@ -46,9 +46,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.PARTI).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
-
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        
         public JsonResult GetPtno(string term)
         {
             List<string> itms;
