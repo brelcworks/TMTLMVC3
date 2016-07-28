@@ -17,13 +17,49 @@
         background-color: red !important;
     }
 </style>
+<script>
+    $(function () {
+        $("#txtSTYPE").autocomplete({
+            source: '@Url.Action("stype")'
+        });
+        $("#txtTECHNICIAN").autocomplete({
+            source: '@Url.Action("tech")'
+        });
+        $('#txtSTYPE').keypress(function (e) {
+            if (e.keyCode == 13) {
+                alert("Hello");
+                e.preventDefault();
+            }
+        });
+        $('#txtDOS').datetimepicker({
+            format: 'd-M-Y H:i',
+            step: 1,
+            theme: 'dark'
+        });
+
+        $('#txtCDATI').datetimepicker({
+            format: 'd-M-Y H:i',
+            step: 1,
+            theme: 'dark'
+        });
+        $(document).ready(function () {
+            $('INPUT[type="text"]').focus(function () {
+                $(this).addClass("focus");
+            });
+
+            $('INPUT[type="text"]').blur(function () {
+                $(this).removeClass("focus");
+            });
+        });
+    });
+</script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h4 class="modal-title" id="myModalLabel">DETAILS OF ISSUE</h4>
 </div> 
 <fieldset>
     <h4>ISSUE DETAILS FOR SITE NAME: &nbsp; &nbsp; @Html.DisplayFor(model => model.SNAME) | &nbsp; SITE ID: &nbsp; &nbsp; @Html.DisplayFor(model => model.SID) &nbsp; &nbsp; @Html.ActionLink("Update", "edt_Pmr", new { id = Model.RECID1, ens = Model.ENGINE_No })</h4>
-    <table class="table table-bordered table-hover table-responsive">
+    <table class="table table-bordered table-hover table-responsive ui-front">
         <tr>
             <td>
                 <dl class="dl-horizontal">
@@ -170,19 +206,19 @@
                         @Html.LabelFor(model => model.STYPE)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.STYPE, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.STYPE, new { @class = "form-control input-xs", @id = "txtSTYPE" })
                     </dd>
                     <dt>
                         @Html.LabelFor(model => model.DOS)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.DOS, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.DOS, new { @class = "form-control input-xs", @id = "txtDOS" })
                     </dd>
                     <dt>
                         @Html.LabelFor(model => model.CDATI)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.CDATI, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.CDATI, new { @class = "form-control input-xs", @id = "txtCDATI" })
                     </dd>
                     <dt>
                         @Html.LabelFor(model => model.CCATE)
@@ -269,7 +305,7 @@
                         @Html.LabelFor(model => model.Technician)
                     </dt>
                     <dd>
-                        @Html.TextBoxFor(model => model.Technician, new { @class = "form-control input-xs" })
+                        @Html.TextBoxFor(model => model.Technician, new { @class = "form-control input-xs", @id = "txtTECHNICIAN" })
                     </dd>
 
                     <dt>

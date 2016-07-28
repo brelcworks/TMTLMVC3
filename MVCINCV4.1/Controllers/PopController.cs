@@ -103,8 +103,7 @@ namespace MVCINCV4._1.Controllers
         }
 
         
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        
         public JsonResult stype(string term)
         {
             List<string> itms;
@@ -113,8 +112,6 @@ namespace MVCINCV4._1.Controllers
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
 
-        [WebMethod]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public JsonResult tech(string term)
         {
             List<string> itms;

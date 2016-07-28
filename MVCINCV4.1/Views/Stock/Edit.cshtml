@@ -27,64 +27,65 @@
             });
 
             $("#txtParti").keypress(function (e) {
-                if (e.keyCode == 13) {
-                    $('#txtMRP').focus()
-                    $.ajax({
-                        type: "GET",
-                        url: "@Url.Action("gdata1","Stock")",
-                        data: { aData: $("#txtParti").val() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            $.each(data, function (i, val) {
-                                $('#txtPtno').val(val.PART_NO)
-                                $('#txtUNIT').val(val.unit)
-                                $('#txtMRP').val(val.MRP)
-                                $('#txtGROP').val(val.GROP)
-                                $('#txtTYPE').val(val.CATE)
-                                $('#txtTAX').val(val.TRATE)
-                                $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
-                                $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
-                                $("#txtSPRICE").number(true, 2);
-                                $('#txtTVAL').number(true, 2);
-                            });
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
+            if (e.keyCode == 13) {
+                $('#txtMRP').focus()
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("gdata1","Stock")",
+                    data: { aData: $("#txtParti").val() },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        $('#txtPtno').val(val.PART_NO)
+                        $('#txtUNIT').val(val.unit)
+                        $('#txtMRP').val(val.MRP)
+                        $('#txtGROP').val(val.GROP)
+                        $('#txtTYPE').val(val.CATE)
+                        $('#txtTAX').val(val.TRATE)
+                        var spr = parseFloat($('#txtTAX').val()) + 100
+                        $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / spr * 100)
+                        $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
+                        $("#txtSPRICE").number(true, 2);
+                        $('#txtTVAL').number(true, 2);
                     });
-                    e.preventDefault();
+                },
+                error: function OnErrorCall(response) {
+                    alert(response.status + " " + response.statusText);
                 }
             });
+                e.preventDefault();
+            }
+        });
 
-            $("#txtPtno").keypress(function (e) {
-                if (e.keyCode == 13) {
-                    $('#txtMRP').focus()
-                    $.ajax({
-                        type: "GET",
-                        url: "@Url.Action("gdata2","Stock")",
-                        data: { aData: $("#txtPtno").val() },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            $.each(data, function (i, val) {
-                                $('#txtParti').val(val.PARTI)
-                                $('#txtUNIT').val(val.unit)
-                                $('#txtMRP').val(val.MRP)
-                                $('#txtGROP').val(val.GROP)
-                                $('#txtTYPE').val(val.CATE)
-                                $('#txtTAX').val(val.TRATE)
-                                var tax = parseFloat($('#txtTAX').val()) + 100
-                                var spr = parseFloat($('#txtMRP').val()) / tax * 100
-                                $('#txtSPRICE').val(spr.toFixed(2))
-                                var tval = parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100
-                                $('#txtTVAL').val(tval.toFixed(2))
-                            });
-                        },
-                        error: function OnErrorCall(response) {
-                            alert(response.status + " " + response.statusText);
-                        }
+        $("#txtPtno").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $('#txtMRP').focus()
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("gdata2","Stock")",
+                    data: { aData: $("#txtPtno").val() },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        $('#txtParti').val(val.PARTI)
+                        $('#txtUNIT').val(val.unit)
+                        $('#txtMRP').val(val.MRP)
+                        $('#txtGROP').val(val.GROP)
+                        $('#txtTYPE').val(val.CATE)
+                        $('#txtTAX').val(val.TRATE)
+                        var tax = parseFloat($('#txtTAX').val()) + 100
+                        var spr = parseFloat($('#txtMRP').val()) / tax * 100
+                        $('#txtSPRICE').val(spr.toFixed(2))
+                        var tval = parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100
+                        $('#txtTVAL').val(tval.toFixed(2))
                     });
+                },
+                error: function OnErrorCall(response) {
+                    alert(response.status + " " + response.statusText);
+                }
+            });
                     e.preventDefault();
                 }
             });
@@ -198,7 +199,7 @@
                             <input type="submit" value="Update" class="btn btn-primary form-control" />
                         </td>
                         <td>
-                            @Html.ActionLink("Delete", "dlt", new { id = Model.RID1 }, new { @class = "btn btn-danger form-control" })
+                            @Html.ActionLink("Delete", "delete_conf", new { id = Model.RID1 }, new { @class = "btn btn-danger form-control" })
                         </td>
                     </tr>
                     <tr>

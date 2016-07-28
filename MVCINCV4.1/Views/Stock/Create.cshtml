@@ -31,26 +31,46 @@
 
         $("#txtParti").keypress(function (e) {
             if (e.keyCode == 13) {
-                $('#txtMRP').focus()
                 $.ajax({
                     type: "GET",
-                    url: "@Url.Action("gdata1","Stock")",
+                    url: "@Url.Action("dpl1","Stock")",
                     data: { aData: $("#txtParti").val() },
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        $.each(data, function (i, val) {
-                            $('#txtPtno').val(val.PART_NO)
-                            $('#txtUNIT').val(val.unit)
-                            $('#txtMRP').val(val.MRP)
-                            $('#txtGROP').val(val.GROP)
-                            $('#txtTYPE').val(val.CATE)
-                            $('#txtTAX').val(val.TRATE)
-                            $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / parseFloat($('#txtTAX').val()) * 100)
-                            $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
-                            $("#txtSPRICE").number(true, 2);
-                            $('#txtTVAL').number(true, 2);
+                        if (data=="0")
+                        {
+                            $('#txtMRP').focus()
+                            $.ajax({
+                                type: "GET",
+                                url: "@Url.Action("gdata1","Stock")",
+                                data: { aData: $("#txtParti").val() },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                $.each(data, function (i, val) {
+                                    $('#txtPtno').val(val.PART_NO)
+                                    $('#txtUNIT').val(val.unit)
+                                    $('#txtMRP').val(val.MRP)
+                                    $('#txtGROP').val(val.GROP)
+                                    $('#txtTYPE').val(val.CATE)
+                                    $('#txtTAX').val(val.TRATE)
+                                    var spr = parseFloat($('#txtTAX').val()) + 100
+                                    $('#txtSPRICE').val(parseFloat($('#txtMRP').val()) / spr * 100)
+                                    $('#txtTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
+                                    $("#txtSPRICE").number(true, 2);
+                                    $('#txtTVAL').number(true, 2);
+                                });
+                            },
+                            error: function OnErrorCall(response) {
+                                alert(response.status + " " + response.statusText);
+                            }
                         });
+                        }
+                        else
+                        {
+                            alert("Duplicate Entry! Please Review")
+                        }
                     },
                     error: function OnErrorCall(response) {
                         alert(response.status + " " + response.statusText);
@@ -62,11 +82,20 @@
 
         $("#txtPtno").keypress(function (e) {
             if (e.keyCode == 13) {
-                $('#txtMRP').focus()
                 $.ajax({
                     type: "GET",
-                    url: "@Url.Action("gdata2","Stock")",
-                        data: { aData: $("#txtPtno").val() },
+                    url: "@Url.Action("dpl","Stock")",
+                    data: { aData: $("#txtPtno").val() },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data=="0")
+                    {
+                        $('#txtMRP').focus()
+                        $.ajax({
+                            type: "GET",
+                            url: "@Url.Action("gdata2","Stock")",
+                            data: { aData: $("#txtPtno").val() },
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
@@ -88,6 +117,16 @@
                             alert(response.status + " " + response.statusText);
                         }
                     });
+                    }
+                    else
+                    {
+                        alert("Duplicate Entry! Please Review")
+                    }
+                },
+                error: function OnErrorCall(response) {
+                    alert(response.status + " " + response.statusText);
+                }
+                });
                     e.preventDefault();
                 }
             });
@@ -178,14 +217,9 @@
 
             $("#btnCreate").click(function (e) {
                 InitializeDialog($("#departmentdialog"));
-
                 $("#departmentdialog").dialog("open");
                 e.preventDefault();
             });
-            $("#btnTet").click(function (e) {
-                alert("ok")
-            });
-
 
 
         //Method to Initialize the DialogBox
@@ -223,7 +257,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">ADD NEW STOCK ITEM</h4>
     </div>
-    <input type="button" id="btnTet" class="btn btn-primary btn-xs" />
     @Scripts.Render("~/bundles/jqueryval")
     @using (Html.BeginForm())
     {
@@ -378,7 +411,7 @@
             </p>
         </fieldset>
     }
-    <div id="departmentdialog" title="Add New Item"
+    <div id="departmentdialog" title="Add New Item" class="ui-front"
          style="overflow: hidden;background-color:lightblue;
 border-bottom-width:5px"></div>
 </div>

@@ -81,7 +81,7 @@ namespace MVCINCV4._1.Controllers
             return View(dc.STOCK.Find(id));
         }
 
-        [HttpPost, ActionName("Delete")]
+       
         public ActionResult delete_conf(int id)
         {
             TABLE2 tc = dc.STOCK.Find(id);
@@ -108,6 +108,31 @@ namespace MVCINCV4._1.Controllers
                 STLIST = FC.SHEET1.Where(A => A.PART_NO.Equals(aData)).ToList();
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public int dpl(string aData)
+        {
+           int msg;
+            List<TABLE2> STLIST1 = new List<TABLE2>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST1 = FC.STOCK.Where(a => a.PART_NO.Equals(aData)).ToList();
+                var cn = STLIST1.Count();
+                msg = cn;
+            }
+            return msg;
+        }
+        public int dpl1(string aData)
+        {
+            int msg;
+            List<TABLE2> STLIST1 = new List<TABLE2>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST1 = FC.STOCK.Where(a => a.PARTI.Equals(aData)).ToList();
+                var cn = STLIST1.Count();
+                msg = cn;
+            }
+            return msg;
         }
 
         [Authorize]
