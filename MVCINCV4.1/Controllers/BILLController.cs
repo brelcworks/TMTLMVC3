@@ -47,7 +47,41 @@ namespace MVCINCV4._1.Controllers
         public ActionResult Save()
         {
             return View();
-        }  
+        }
+        public JsonResult GetPtno(string term)
+        {
+            List<string> itms;
+            itms = dc.STOCK.Where(x => x.PART_NO.StartsWith(term))
+                .Select(y => y.PART_NO).ToList();
+            return Json(itms, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetParti(string term)
+        {
+            List<string> itms;
+            itms = dc.STOCK.Where(x => x.PARTI.StartsWith(term))
+                .Select(y => y.PARTI).ToList();
+            return Json(itms, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult gdata2(string aData)
+        {
+            List<TABLE2> STLIST = new List<TABLE2>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.STOCK.Where(A => A.PART_NO.Equals(aData)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        public JsonResult gdata1(string aData)
+        {
+            List<TABLE2> STLIST = new List<TABLE2>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.STOCK.Where(A => A.PARTI.Equals(aData)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         [HttpPost]
         public ActionResult Save(BILL bill)

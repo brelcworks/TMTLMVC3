@@ -28,7 +28,14 @@
         $(function () {
             var source;
             var source1;
-         $(document).ready(function () {
+            $(document).ready(function () {
+                $('#txtQTY').keyup(function (e) {
+                    var tot = parseFloat($('#txtQTY').val()) * parseFloat($('#txtSPRICE').val())
+                    $('#txtTOT').val(tot.toFixed(2))
+                    var tval = parseFloat($('#txtTOT').val()) * parseFloat($('#txtTRATE').val()) / 100
+                    $('#txtTVAL1').val(tval.toFixed(2))
+                    e.preventDefault();
+                });
              $('INPUT[type="text"]').focus(function () {
                  $(this).addClass("focus");
              });
@@ -59,7 +66,7 @@
              // initialize jqxGrid
              $("#grid1").jqxGrid({
                  width: '99%',
-                 height: 350,
+                 height: 380,
                  source: dataAdapter1,
                  sortable: true,
                  filterable: true,
@@ -144,7 +151,7 @@
                         error: function () {  
                             alert("ERROR");
                         }  
-                   });
+                 });
                  $("#grid1").jqxGrid("addrow", null, dataObject, "first");
                  $("#popupWindow").jqxWindow('hide');
              });
@@ -163,18 +170,103 @@
              }
          });
          $("#txtPTNO").autocomplete({
-             source: function (request, response) {
-                 $.ajax({
-                     url: '/Stock/GetPtno',
-                     type: "POST",
-                     dataType: "json",
-                     data: { term: request.term },
-                     success: function (data) {
-                         response(data);
-                     }
-                 });
-             }
+             source: '@Url.Action("GetPtno")'
          });
+            $("#txtPTNAME").autocomplete({
+                source: '@Url.Action("GetParti")'
+            });
+            $("#txtPTNO").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtQTY').focus()
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("gdata2","BILL")",
+                        data: { aData: $("#txtPTNO").val() },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            $('#txtPTNAME').val(val.PARTI)
+                            $('#txtUNIT').val(val.UNIT)
+                            $('#txtMRP').val(val.MRP)
+                            $('#txtSPRICE').val(val.SPRICE)
+                            $('#txtTRATE').val(val.TAX)
+                            $('#txtSTC').val(val.QTY)
+                        });
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                });
+                    e.preventDefault();
+                }
+            });
+            $("#txtPTNAME").keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#txtQTY').focus()
+                    $.ajax({
+                        type: "GET",
+                        url: "@Url.Action("gdata1","BILL")",
+                        data: { aData: $("#txtPTNAME").val() },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            $('#txtPTNO').val(val.PART_NO)
+                            $('#txtUNIT').val(val.UNIT)
+                            $('#txtMRP').val(val.MRP)
+                            $('#txtSPRICE').val(val.SPRICE)
+                            $('#txtTRATE').val(val.TAX)
+                            $('#txtSTC').val(val.QTY)
+                        });
+                    },
+                    error: function OnErrorCall(response) {
+                        alert(response.status + " " + response.statusText);
+                    }
+                });
+                e.preventDefault();
+            }
+            });
+            $('#txtQTY').keypress(function (e) {
+                if (e.keyCode == 13)
+                {
+                    var dataObject = {
+                        BILL_NO: $("#txtBNO1").val(),
+                        PART_NO: $("#txtPTNO").val(),  
+                        PARTI: $("#txtPTNAME").val(),
+                        MRP: $("#txtMRP").val(),
+                        QTY: $("#txtQTY").val(),
+                        SPRICE: $("#txtSPRICE").val(),
+                        TOTAL: $("#txtTOT").val(),
+                        TAX: $("#txtTRATE").val(),
+                        TVAL: $("#txtTVAL").val(),
+                        UNIT: $("#txtUNIT").val(),
+                        BDATE: $("#txtBDATE").val(),
+                        SSAT: "NEW",
+                        CMP: "EICHER",
+                        MODE: $("#txtMODE").val(),
+                        BID: new Date($.now()),
+                        LMODI: new Date($.now()),
+                        DPCODE:"A1587"
+                    };  
+                    $.ajax({  
+                        url: "@Url.Action("Save","BILL")",  
+                        type: "POST",  
+                    data: dataObject,  
+                    dataType: "json",  
+                    success: function (data) {  
+                        if (data.toString() != "Successfully Saved!") {  
+                            alert("FAILED");
+                        }   
+                    },  
+                    error: function () {  
+                        alert("ERROR");
+                    }
+                });
+                $("#grid1").jqxGrid("addrow", null, dataObject, "first");
+                $("#popupWindow").jqxWindow('hide');
+                }
+            });
      });
     </script>
 }
@@ -193,10 +285,10 @@
                     @Html.TextBoxFor(model => model.BILL1.BNO, new { @class = "form-control input-xs", @id = "txtBNO" })
                 </td>
                 <td>
-
+                    @Html.DisplayNameFor(model => model.BILL1.BDATE)
                 </td>
                 <td>
-
+                    @Html.TextBoxFor(model => model.BILL1.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE", @type = "Date", @value = "01-01-2016" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.GTOT)
@@ -204,16 +296,6 @@
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT" })
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.BILL1.BDATE)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.BILL1.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE", @type = "Date", @value = "01-01-2016" })
-                </td>
-                <td></td>
-                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.TVAL)
                 </td>
@@ -225,29 +307,17 @@
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.CUST)
                 </td>
-                <td class="form-inline">
+                <td>
                     @Html.TextBoxFor(model => model.BILL1.CUST, new { @class = "form-control input-xs", @id = "txtCUST" })
-                    @Html.DisplayNameFor(model => model.BILL1.SNAME)
-                    @Html.TextBoxFor(model => model.BILL1.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })
                 </td>
-                <td></td>
-                <td></td>
+                <td>@Html.DisplayNameFor(model => model.BILL1.SNAME)</td>
+                <td>@Html.TextBoxFor(model => model.BILL1.SNAME, new { @class = "form-control input-xs", @id = "txtSNAME" })</td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.ROUND)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.ROUND, new { @class = "form-control input-xs", @id = "txtROUND" })
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.BILL1.ADDRESS, new { @class = "form-control input-xs", @id = "txtADDRESS" })
-                </td>
-                <td></td>
-                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.NTOT)
                 </td>
@@ -257,35 +327,32 @@
             </tr>
             <tr>
                 <td>
+                    @Html.DisplayNameFor(model => model.BILL1.ADDRESS)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BILL1.ADDRESS, new { @class = "form-control input-xs", @id = "txtADDRESS" })
+                </td>
+                <td>
                     @Html.DisplayNameFor(model => model.BILL1.VNO)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.VNO, new { @class = "form-control input-xs", @id = "txtVNO" })
                 </td>
-                <td></td>
-                <td></td>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.MODE)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.MODE, new { @class = "form-control input-xs", @id = "txtMODE" })
                 </td>
-            </tr>
-            <tr>
                 <td>
                     @Html.DisplayNameFor(model => model.BILL1.TOTAL)
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BILL1.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL" })
                 </td>
-                <td></td>
-                <td></td>
-                <td>
-                </td>
-                <td></td>
             </tr>
             <tr>
-                <td colspan="6">
+                <td colspan="8">
                     @Html.HiddenFor(model => model.BILL1.PAYMENT, new { @id = "txtPAYMENT" })
                     @Html.HiddenFor(model => model.BILL1.SECTOR, new { @id = "txtSECTOR" })
                     @Html.HiddenFor(model => model.BILL1.USER1, new { @id = "txtUSER1" })
@@ -312,40 +379,40 @@
 <div id="popupWindow">
     <div>ADD NEW ITEM</div>
     <div style="overflow: hidden;">
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered ui-front">
             <tr>
                 <td><label for="txtBNO1">BILL NO:</label></td>
-                <td align="left" colspan="3"><input id="txtBNO1" class="form-control input-xs" /></td>
+                <td align="left" colspan="3"><input id="txtBNO1" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td><label for="txtPTNO">PART NO:</label></td>
-                <td align="left"><input id="txtPTNO" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtPTNO" type="text" class="form-control input-xs" /></td>
                 <td><label for="txtQTY">QUANTITY:</label></td>
-                <td align="left"><input id="txtQTY" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtQTY" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td><label for="txtPTNAME">PART NAME:</label></td>
-                <td align="left"><input id="txtPTNAME" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtPTNAME" type="text" class="form-control input-xs" /></td>
                 <td><label for="txtTVAL">TAX VALUE:</label></td>
-                <td align="left"><input id="txtTVAL" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtTVAL1" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td><label for="txtMRP">MRP:</label></td>
-                <td align="left"><input id="txtMRP" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtMRP" type="text" class="form-control input-xs" /></td>
                 <td><label for="txtTOT">ITEM TOTAL:</label></td>
-                <td align="left"><input id="txtTOT" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtTOT" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td><label for="txtSPRICE">SELL PRICE:</label></td>
-                <td align="left"><input id="txtSPRICE" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtSPRICE" type="text" class="form-control input-xs" /></td>
                 <td><label for="txtSTC">IN STOCK:</label></td>
-                <td align="left"><input id="txtSTC" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtSTC" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td><label for="txtTRATE">TAX RATE:</label></td>
-                <td align="left"><input id="txtTRATE" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtTRATE" type="text" class="form-control input-xs" /></td>
                 <td><label for="txtUNIT">UNIT:</label></td>
-                <td align="left"><input id="txtUNIT" class="form-control input-xs" /></td>
+                <td align="left"><input id="txtUNIT" type="text" class="form-control input-xs" /></td>
             </tr>
             <tr>
                 <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
