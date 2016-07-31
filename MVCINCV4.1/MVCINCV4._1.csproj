@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Models\BILL.cs" />
     <Compile Include="Models\BILL1.cs" />
+    <Compile Include="Models\BILLMODEL.cs" />
     <Compile Include="Models\CUST.cs" />
     <Compile Include="Models\CUSTOMER.cs" />
     <Compile Include="Models\DBCTX.cs" />
@@ -735,6 +736,8 @@
     <Content Include="jqwidgets\styles\jqx.web.css" />
     <Content Include="jqwidgets\styles\jqx.windowsphone.css" />
     <Content Include="JUNK\7.jpg" />
+    <Content Include="JUNK\BILL CNT.txt" />
+    <Content Include="JUNK\BILL CRT 1.txt" />
     <Content Include="JUNK\bill crt.txt" />
     <Content Include="JUNK\bliss-dg-set-12-5-500kva.jpg" />
     <Content Include="JUNK\CRT.txt" />

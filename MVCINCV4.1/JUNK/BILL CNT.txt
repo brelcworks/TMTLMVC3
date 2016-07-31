@@ -14,16 +14,12 @@ namespace MVCINCV4._1.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return PartialView(dc.BILL1.ToList());
+            return View(dc.BILL1.ToList());
         }
-        public JsonResult List_BILL()
+        [Authorize]
+        public JsonResult List_BILL(string bno)
         {
-            var dbResult = dc.BILL1.ToList();
-            return Json(dbResult, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult List_BILL_ITM(string bno)
-        {
-            var dbResult = dc.BILL.Where(a => a.BILL_NO.Equals(bno)).ToList();
+            var dbResult = dc.BILL1.Where(a => a.BNO.Equals(bno)).ToList();
             return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
         [Authorize]
@@ -31,7 +27,12 @@ namespace MVCINCV4._1.Controllers
         {
             return View();
         }
-
+        [Authorize]
+        public JsonResult List_BILL_ITM(string bno)
+        {
+            var dbResult = dc.BILL.Where(a=> a.BILL_NO.Equals(bno)).ToList();
+            return Json(dbResult, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(BILL1 e)
         {
@@ -42,6 +43,7 @@ namespace MVCINCV4._1.Controllers
             }
             return RedirectToAction("Index");
         }
+       
         public JsonResult dtls(string id)
         {
             List<BILL> STLIST = new List<BILL>();
@@ -71,20 +73,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.PARTI).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult cstat(string term)
-        {
-            List<string> itms;
-            itms = dc.BILL1.Where(x => x.CUST.StartsWith(term))
-                .Select(y => y.CUST).ToList();
-            return Json(itms, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult snmat(string term)
-        {
-            List<string> itms;
-            itms = dc.BILL1.Where(x => x.SNAME.StartsWith(term))
-                .Select(y => y.SNAME).ToList();
-            return Json(itms, JsonRequestBehavior.AllowGet);
-        }
+
         public JsonResult gdata2(string aData)
         {
             List<TABLE2> STLIST = new List<TABLE2>();
@@ -115,7 +104,6 @@ namespace MVCINCV4._1.Controllers
                     using (DBCTX aid = new DBCTX())
                     {
                         aid.BILL.Add(bill);
-                        aid.SaveChanges();
                         message = "Successfully Saved!";
                     }
                 }
@@ -127,7 +115,7 @@ namespace MVCINCV4._1.Controllers
             }
             if (Request.IsAjaxRequest())
             {
-                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return new JsonResult { Data = message, JsonRequestBehavior =JsonRequestBehavior.AllowGet};
             }
             else
             {
@@ -144,9 +132,8 @@ namespace MVCINCV4._1.Controllers
             {
                 try
                 {
-                    dc.Entry(TBL).State = EntityState.Modified;
-                    dc.SaveChanges();
-                    message = "Successfully Saved!";
+                        dc.Entry(TBL).State = EntityState.Modified;
+                        message = "Successfully Saved!";
                 }
                 catch (Exception ex) { message = "Error! Please try again."; }
             }

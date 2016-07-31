@@ -77,3 +77,27 @@
                  $('#grid').jqxGrid('updatebounddata');
 
 				 <td rowspan="7" width="60%"><div id="grid"></div></td>
+
+
+				 <input type="hidden" id="STRID1"/>
+                    <input type="hidden" id="STRID" />
+                    <input type="hidden" id="STTYPE" />
+                    <input type="hidden" id="STPART_NO" />
+                    <input type="hidden" id="STPARTI" />
+                    <input type="hidden" id="STMRP" />
+                    <input type="hidden" id="STQTY" />
+                    <input type="hidden" id="STTOTAL" />
+                    <input type="hidden" id="STRACKNO" />
+                    <input type="hidden" id="STTAX" />
+                    <input type="hidden" id="STTVAL" />
+                    <input type="hidden" id="STSTOTAL" />
+                    <input type="hidden" id="STPPRICE" />
+                    <input type="hidden" id="STUNIT" />
+                    <input type="hidden" id="STSPRICE" />
+                    <input type="hidden" id="STSSTA" />
+                    <input type="hidden" id="STEOR" />
+                    <input type="hidden" id="STDPCODE" />
+                    <input type="hidden" id="STLMODI" />
+                    <input type="hidden" id="STGROP" />
+                    <input type="hidden" id="STAEDT" />
+                    <input type="hidden" id="STUSER1" />
