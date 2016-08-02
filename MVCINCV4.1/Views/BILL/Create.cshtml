@@ -49,13 +49,13 @@
                     @Html.DisplayNameFor(model => model.GTOT)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.GTOT, new { @class = "form-control input-xs", @id = "txtGTOT", @readonly = "readonly" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.TVAL)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.TVAL, new { @class = "form-control input-xs", @id = "txtTVAL", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.TVAL, new { @class = "form-control input-xs", @id = "txtTVAL" })
                 </td>
             </tr>
             <tr>
@@ -71,13 +71,13 @@
                     @Html.DisplayNameFor(model => model.ROUND)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.ROUND, new { @class = "form-control input-xs", @id = "txtROUND", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.ROUND, new { @class = "form-control input-xs", @id = "txtROUND" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.NTOT)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.NTOT, new { @class = "form-control input-xs", @id = "txtNTOT", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.NTOT, new { @class = "form-control input-xs", @id = "txtNTOT" })
                 </td>
             </tr>
             <tr>
@@ -103,7 +103,7 @@
                     @Html.DisplayNameFor(model => model.TOTAL)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL", disabled = "disabled" })
+                    @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control input-xs", @id = "txtTOTAL" })
                 </td>
             </tr>
             <tr>
@@ -190,6 +190,7 @@
                     <input type="hidden" id="STGROP" />
                     <input type="hidden" id="STAEDT" />
                     <input type="hidden" id="STUSER1" />
+                    <input type="hidden" id="txtSTOT" />
                 </td>
             </tr>
             <tr>
@@ -279,7 +280,6 @@
         <input id="Cancel2" type="button" value="Cancel" />
     </div>
 </div>
-<
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
@@ -291,8 +291,10 @@
                     $(document).ready(function () {
                         $('#searchField').focus();
                         $('#txtQTY').keyup(function (e) {
-                            var tot = parseFloat($('#txtQTY').val()) * parseFloat($('#txtSPRICE').val())
+                            var tot = parseFloat($('#txtQTY').val()) * parseFloat($('#txtMRP').val())
                             $('#txtTOT').val(tot.toFixed(2))
+                            var tot1 = parseFloat($('#txtQTY').val()) * parseFloat($('#txtSPRICE').val())
+                            $('#txtSTOT').val(tot1.toFixed(2))
                             var tval = parseFloat($('#txtTOT').val()) * parseFloat($('#txtTRATE').val()) / 100
                             $('#txtTVAL1').val(tval.toFixed(2))
                             $('#STQTY').val(parseFloat($('#qinc').val()) - parseFloat($('#txtQTY').val()))
@@ -313,6 +315,8 @@
                 { name: 'BID', type: 'string' },
                 { name: 'BNO', type: 'string' },
                 { name: 'BDATE', type: 'date' },
+                { name: 'CUST', type: 'string' },
+                { name: 'SNAME', type: 'string' },
                 { name: 'GTOT', type: 'string' },
                 { name: 'TVAL', type: 'string' },
                 { name: 'ROUND', type: 'string' },
@@ -323,6 +327,7 @@
             };
                         var editrow = -1;
                         var dataAdapter = new $.jqx.dataAdapter(source);
+                        var minw = parseFloat($(window).width()) / 9;
                         // initialize jqxGrid
                         $("#grid").jqxGrid({
                             width: '98%',
@@ -336,13 +341,15 @@
                             showtoolbar: true,
                             columns: [
                                 { text: "RECORD NO", datafield: "BID", hidden: true },
-                                   { text: "BILL NO", datafield: "BNO", minwidth: 100 },
-                                   { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy', minwidth: 70 },
-                                   { text: "GROSS TOTAL", datafield: "GTOT", minwidth: 50 },
+                                   { text: "BILL NO", datafield: "BNO"},
+                                   { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy' },
+                                   { text: "CUSTOMER", datafield: "CUST" },
+                                   { text: "SITE NAME", datafield: "SNAME" },
+                                   { text: "GROSS TOTAL", datafield: "GTOT" },
                                    { text: "TAX VALUE", datafield: "TVAL" },
-                                   { text: "ROUND OFF", datafield: "ROUND", minwidth: 60 },
+                                   { text: "ROUND OFF", datafield: "ROUND" },
                                    { text: "NET TOTAL", datafield: "BAMT" },
-                                   { text: "BILL MODE", datafield: "MODE", minwidth: 40 }
+                                   { text: "BILL MODE", datafield: "MODE"}
                             ]
                         });
 
@@ -376,6 +383,8 @@
                             altrows: true,
                             theme: 'ui-redmond',
                             editable: true,
+                            showstatusbar: true,
+                            showaggregates: true,
                             showtoolbar: true,
                             columns: [
                                 {
@@ -417,7 +426,9 @@
                                    { text: "MRP", datafield: "MRP" },
                                    { text: "SELL PRICE", datafield: "SPRICE", minwidth: 60 },
                                    { text: "TAX RATE", datafield: "TAX" },
-                                   { text: "AMOUNT", datafield: "TOTAL", minwidth: 60 }
+                                   {
+                                       text: "AMOUNT", datafield: "STOT", minwidth: 60, aggregates: ['sum']
+                                   }
                             ],
                             rendertoolbar: function (toolbar) {
                                 var me = this;
@@ -443,10 +454,15 @@
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 13) {
-                                        var offset = $("#grid1").offset();
-                                        $("#popupWindow").jqxWindow();
-                                        $("#popupWindow").jqxWindow('open');
-                                        $('#txtPTNO').focus();
+                                        if (!$('#txtBNO').val()) {
+                                            alert("Please Add Bill No First!");
+                                        }
+                                        else {
+                                            var offset = $("#grid1").offset();
+                                            $("#popupWindow").jqxWindow();
+                                            $("#popupWindow").jqxWindow('open');
+                                            $('#txtPTNO').focus();
+                                        }
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 78 && event.altKey) {
@@ -464,10 +480,17 @@
                                     $('#grid1').jqxGrid('updatebounddata');
                                 });
                                 btn2.on('click', function () {
-                                    var offset = $("#grid1").offset();
-                                    $("#popupWindow").jqxWindow();
-                                    $("#popupWindow").jqxWindow('open');
-                                    $('#txtPTNO').focus();
+                                    if (!$('#txtBNO').val())
+                                    {
+                                        alert("Please Add Bill No First!");
+                                    }
+                                    else
+                                    {
+                                        var offset = $("#grid1").offset();
+                                        $("#popupWindow").jqxWindow();
+                                        $("#popupWindow").jqxWindow('open');
+                                        $('#txtPTNO').focus();
+                                    }
                                 });
                                 btn3.on('click', function (e) {
                                     $("#VIEWBILL").jqxWindow();
@@ -484,7 +507,7 @@
                         });
 
                         $("#VIEWBILL").jqxWindow({
-                            minWidth: '1200px',minHeight: '600px', width: '100%', height: '100%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel2"), modalOpacity: 0.01
+                             minHeight: '95%', minWidth: '95%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel2"), modalOpacity: 0.01
                         });
 
                         $("#popupWindow").on('open', function () {
@@ -517,12 +540,18 @@
                                 TVAL: $("#txtTVAL").val(),
                                 UNIT: $("#txtUNIT").val(),
                                 BDATE: $("#txtBDATE").val(),
-                                SSAT: "NEW",
+                                SSTA: "NEW",
                                 CMP: "EICHER",
                                 MODE: $("#txtMODE").val(),
                                 BID: new Date($.now()),
                                 LMODI: new Date($.now()),
-                                DPCODE: "A1587"
+                                DPCODE: "A1587",
+                                DNAME: $('#txtSNAME').val(),
+                                CUST: $('#txtCUST').val(),
+                                STOT: $('#txtSTOT').val(),
+                                TVAL: $('#txtTVAL1').val(),
+                                USER1: '@HttpContext.Current.User.Identity.Name.ToString()',
+                                AEDT: "NEW"
                             };
                             $.ajax({
                                 url: "@Url.Action("Save","BILL")",
@@ -680,12 +709,18 @@
                                 TVAL: $("#txtTVAL").val(),
                                 UNIT: $("#txtUNIT").val(),
                                 BDATE: $("#txtBDATE").val(),
-                                SSAT: "NEW",
+                                SSTA: "NEW",
                                 CMP: "EICHER",
                                 MODE: $("#txtMODE").val(),
                                 BID: new Date($.now()),
                                 LMODI: new Date($.now()),
-                                DPCODE: "A1587"
+                                DPCODE: "A1587",
+                                DNAME: $('#txtSNAME').val(),
+                                CUST: $('#txtCUST').val(),
+                                STOT: $('#txtSTOT').val(),
+                                TVAL: $('#txtTVAL1').val(),
+                                USER1: '@HttpContext.Current.User.Identity.Name.ToString()',
+                                AEDT: "NEW"
                             };
                             $.ajax({
                                 url: "@Url.Action("Save","BILL")",
@@ -705,7 +740,7 @@
                             var dataObject1 = {
                                 RID1: $('#STRID1').val(),
                                 RID: $('#STRID').val(),
-                                STYPE: $('#STTYPE').val(),
+                                TYPE: $('#STTYPE').val(),
                                 PART_NO: $('#STPART_NO').val(),
                                 PARTI: $('#STPARTI').val(),
                                 MRP: $('#STMRP').val(),
@@ -741,6 +776,7 @@
                                 }
                             });
                             $("#grid1").jqxGrid("addrow", null, dataObject, "first");
+
                             $('#txtTOT').val(null)
                             $('#txtPTNO').val(null)
                             $('#txtPTNAME').val(null)
@@ -775,6 +811,15 @@
                             $('#STAEDT').val(null)
                             $('#STUSER1').val(null)
                             changessave = false;
+                            var totgt = $('#grid1').jqxGrid('getcolumnaggregateddata', 'STOT', ['sum', 'avg'], true);
+                            var totgt1 = totgt.sum;
+                            $('#txtGTOT').val(totgt1.toFixed(2));
+                            var tval1 = parseFloat($('#txtGTOT').val()) * 14.5 / 100
+                            $('#txtTVAL').val(tval1.toFixed(2));
+                            $('#txtNTOT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
+                            var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
+                            $('#txtROUND').val(rnd.toFixed(2));
+                            $('#txtBAMT').val($('#txtNTOT').val());
                             $("#popupWindow").jqxWindow('hide');
                             $('#searchField').focus();
                             e.preventDefault();
@@ -788,7 +833,23 @@
                     });
                     $('#txtCUST').keypress(function (e) {
                         if (e.keyCode == 13) {
-                            $('#txtSNAME').focus();
+                            $.ajax({
+                                type: "GET",
+                                url: "@Url.Action("getct","BILL")",
+                                data: { aData: $("#txtCUST").val() },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                $.each(data, function (i, val) {
+                                    $('#txtADDRESS').val(val.ADDRESS);
+                                    $('#txtVNO').val(val.VNO);
+                                    $('#txtSNAME').focus();
+                                });
+                            },
+                            error: function OnErrorCall(response) {
+                                alert(response.status + " " + response.statusText);
+                            }
+                        });
                             e.preventDefault();
                         }
                     });
@@ -817,7 +878,18 @@
                         }
                     });
                     $('#btnNBILL').click(function (e) {
-                        changessave = true;
+                        if (changessave == true)
+                        {
+                            alert("Nothing to Save! Please Add Record First");
+                            e.preventDefault();
+                        }
+                        else
+                        {
+                            changessave = true;
+                            source1.data = { "bno": $('#txtBNO').val() };
+                            $('#grid1').jqxGrid('updatebounddata');
+                            $('#grid').jqxGrid('updatebounddata');
+                        }
                     });
                 });
 

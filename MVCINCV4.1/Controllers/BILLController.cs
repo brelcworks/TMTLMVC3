@@ -40,7 +40,7 @@ namespace MVCINCV4._1.Controllers
                 dc.BILL1.Add(e);
                 dc.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
         }
         public JsonResult dtls(string id)
         {
@@ -100,6 +100,15 @@ namespace MVCINCV4._1.Controllers
             using (DBCTX FC = new DBCTX())
             {
                 STLIST = FC.STOCK.Where(A => A.PARTI.Equals(aData)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        public JsonResult getct(string aData)
+        {
+            List<BILL1> STLIST = new List<BILL1>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.BILL1.Where(A => A.CUST.Equals(aData)).ToList();
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
