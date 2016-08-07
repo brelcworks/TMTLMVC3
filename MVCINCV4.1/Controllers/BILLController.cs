@@ -51,7 +51,15 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
+        public JsonResult dtls1(string id)
+        {
+            List<BILL1> STLIST = new List<BILL1>();
+            using (DBCTX FC = new DBCTX())
+            {
+                STLIST = FC.BILL1.Where(A => A.BNO.Equals(id)).ToList();
+            }
+            return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
         public ActionResult Save()
         {
             return View();
@@ -112,6 +120,11 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        public JsonResult getlrec()
+        {
+            var max = dc.BILL1.OrderByDescending(p => p.BID).FirstOrDefault().BID;
+            return new JsonResult { Data = max, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         [HttpPost]
         public ActionResult Save(BILL bill)
@@ -147,6 +160,64 @@ namespace MVCINCV4._1.Controllers
 
         [HttpPost]
         public ActionResult STUPD(TABLE2 TBL)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    dc.Entry(TBL).State = EntityState.Modified;
+                    dc.SaveChanges();
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex) { message = "Error! Please try again."; }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(TBL);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BILLUPD(BILL TBL)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    dc.Entry(TBL).State = EntityState.Modified;
+                    dc.SaveChanges();
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex) { message = "Error! Please try again."; }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(TBL);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult INVUPD(BILL1 TBL)
         {
             string message = "";
             if (ModelState.IsValid)
