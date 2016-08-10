@@ -43,7 +43,8 @@
                     @Html.DisplayNameFor(model => model.BDATE)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE"})
+                    @Html.TextBoxFor(model => model.BDATE, new { @class = "form-control input-xs ui-front", @id = "txtBDATE" })
+                    @Html.ValidationMessageFor(model => model.BDATE)
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.GTOT)
@@ -292,6 +293,7 @@
             <script>
                 var changessave = true;
                 var EMODE = true;
+                var EMODE1 = true;
                 var NMODE = true;
                 $(function () {
                     var source;
@@ -417,6 +419,7 @@
                                                        $('#txtAEDT').val(val.AEDT)
                                                        $('#txtBAMT').val(val.BAMT)
                                                        $("#VIEWBILL").jqxWindow('hide');
+                                                       EMODE1 = false;
                                                        source1.data = { "bno": $('#txtBNO').val() };
                                                        $('#grid1').jqxGrid('updatebounddata');
                                                    });
@@ -589,6 +592,10 @@
                                         {
                                             $('#UPDBILL').click();
                                         }
+                                        else
+                                       {
+                                           alert("Nothing to Save!");
+                                       }
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 13) {
@@ -616,7 +623,7 @@
                                                 $('#txtBNO').val("MB " + gtbno  + "/16-17");
                                             },
                                             error: function OnErrorCall(response) {
-                                                alert(response.status + " " + response.statusText);
+                                                alert(response.status + " " + response.responseText);
                                             }
                                         });
                                         $('#txtBNO').focus();
@@ -889,7 +896,6 @@
                                 }
                             });
                             $("#grid1").jqxGrid("addrow", null, dataObject, "first");
-
                             $('#txtTOT').val(null)
                             $('#txtPTNO').val(null)
                             $('#txtPTNAME').val(null)
@@ -933,7 +939,19 @@
                             var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
                             $('#txtROUND').val(rnd.toFixed(2));
                             $('#txtBAMT').val($('#txtNTOT').val());
-                            NMODE = false;
+                            if(!EMODE1)
+                            {
+                                EMODE = false;
+                                $('#UPDBILL').show();
+                                $('#NBILL').prop('disabled', true);
+                                $('#btnNBILL').prop('disabled', true);
+                            }
+                            else
+                            {
+                                $('#UPDBILL').hide();
+                                NMODE = false;
+                                EMODE1 = true;
+                            }
                             $("#popupWindow").jqxWindow('hide');
                             $('#searchField').focus();
                             e.preventDefault();
@@ -1053,6 +1071,7 @@
                                         $('#txtADDRESS').val(val.ADDRESS);
                                         $('#txtVNO').val(val.VNO);
                                         $('#txtSNAME').focus();
+                                        $('#txtMODE').val("CREDIT");
                                     });
                                 },
                                 error: function OnErrorCall(response) {
@@ -1169,6 +1188,7 @@
                         }
                         else
                         {
+                            cls();
                             $.ajax({
                                 type: "GET",
                                 url: "@Url.Action("getlrec", "BILL")",
@@ -1179,7 +1199,7 @@
                                     $('#txtBNO').val("MB " + gtbno  + "/16-17");
                                 },
                                 error: function OnErrorCall(response) {
-                                    alert(response.status + " " + response.statusText);
+                                    alert(response.status + " " + response.responseText);
                                 }
                             });
                             $('#txtBNO').focus();
@@ -1230,38 +1250,7 @@
                                 else
                                 {
                                     changessave = true;
-                                    $('#txtBNO').val(null);
-                                    EMODE = true;
-                                    $('#NBILL').prop('disabled', false);
-                                    $('#btnNBILL').prop('disabled', false);
-                                    $('#UPDBILL').hide();
-                                    $("#txtBNO").val(null);
-                                    $("#txtBDATE").val(null);
-                                    $("#txtCUST").val(null);
-                                    $('#txtSNAME').val(null);
-                                    $('#txtGTOT').val(null);
-                                    $('#txtNTOT').val(null);
-                                    $('#txtVNO').val(null);
-                                    $('#txtROUND').val(null);
-                                    $('#txtADDRESS').val(null);
-                                    $('#txtMODE').val(null);
-                                    $('#txtTVAL').val(null);
-                                    $('#txtBID').val(null);
-                                    $('#txtPAYMENT').val(null);
-                                    $('#txtSECTOR').val(null);
-                                    $('#txtUSER1').val(null);
-                                    $('#txtCBILL').val(null);
-                                    $('#txtBAPAY').val(null);
-                                    $('#txtBST').val(null);
-                                    $('#txtSSTA').val(null);
-                                    $('#txtDPCODE').val(null);
-                                    $('#txtLMODI').val(null);
-                                    $('#txtBID1').val(null);
-                                    $('#txtAEDT').val(null);
-                                    $('#txtBAMT').val(null);
-                                    source1.data = { "bno": $('#txtBNO').val() };
-                                    $('#grid1').jqxGrid('updatebounddata');
-                                    $('#grid').jqxGrid('updatebounddata');
+                                    cls();
                                 }
                             },
                             error: function (response) {
@@ -1270,6 +1259,43 @@
                         });
                         }
                     });
+                    function cls() {
+                        $('#txtBNO').val(null);
+                        EMODE = true;
+                        NMODE = true;
+                        EMODE1 = true;
+                        $('#NBILL').prop('disabled', false);
+                        $('#btnNBILL').prop('disabled', false);
+                        $('#UPDBILL').hide();
+                        $("#txtBNO").val(null);
+                        $("#txtBDATE").val(null);
+                        $("#txtCUST").val(null);
+                        $('#txtSNAME').val(null);
+                        $('#txtGTOT').val(null);
+                        $('#txtNTOT').val(null);
+                        $('#txtVNO').val(null);
+                        $('#txtROUND').val(null);
+                        $('#txtADDRESS').val(null);
+                        $('#txtMODE').val(null);
+                        $('#txtTVAL').val(null);
+                        $('#txtBID').val(null);
+                        $('#txtPAYMENT').val(null);
+                        $('#txtSECTOR').val(null);
+                        $('#txtUSER1').val(null);
+                        $('#txtCBILL').val(null);
+                        $('#txtBAPAY').val(null);
+                        $('#txtBST').val(null);
+                        $('#txtSSTA').val(null);
+                        $('#txtDPCODE').val(null);
+                        $('#txtLMODI').val(null);
+                        $('#txtBID1').val(null);
+                        $('#txtAEDT').val(null);
+                        $('#txtBAMT').val(null);
+                        source1.data = { "bno": $('#txtBNO').val() };
+                        $('#grid1').jqxGrid('updatebounddata');
+                        $('#grid').jqxGrid('updatebounddata');
+                    }
+                    $('#txtBDATE').datepicker({ dateFormat: 'dd-M-yy' });
                 });
 
                 jQuery(window).bind('beforeunload', function () {

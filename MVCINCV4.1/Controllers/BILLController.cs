@@ -122,8 +122,15 @@ namespace MVCINCV4._1.Controllers
         }
         public JsonResult getlrec()
         {
-            var max = dc.BILL1.OrderByDescending(p => p.BID).FirstOrDefault().BID;
-            return new JsonResult { Data = max, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            try
+            {
+                var max = dc.BILL1.OrderByDescending(p => p.BID).FirstOrDefault().BID;
+                return new JsonResult { Data = max, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult { Data = ex, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
         }
 
         [HttpPost]

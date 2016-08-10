@@ -19,20 +19,32 @@ namespace MVCINCV4._1.Models
     {
         [Key]
         public int BID { get; set; }
-        public Nullable<System.DateTime> BDATE { get; set; }
+        [Display(Name = "BILL DATE")]
+        [Required]
+        [RegularExpression(@"^((31(?! (Feb|Apr|Jun|Sep|Nov)))|((30|29)(?! Feb))|(29(?= Feb (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])-(Jan|Feb|Mar|May|Apr|Jul|Jun|Aug|Oct|Sep|Nov|Dec)-((1[6-9]|[2-9]\d)\d{2})$", ErrorMessage = "Invalid Date")]
+        public System.DateTime BDATE { get; set; }
+        [Display(Name = "BILL NO")]
         public string BNO { get; set; }
+        [Display(Name = "CUSTOMER")]
         public string CUST { get; set; }
+        [Display(Name = "SITE NAME")]
         public string SNAME { get; set; }
+        [Display(Name = "GRAND TOTAL")]
         public Nullable<decimal> GTOT { get; set; }
         public Nullable<decimal> TOTAL { get; set; }
         public Nullable<decimal> PAYMENT { get; set; }
         public string SECTOR { get; set; }
         public string ADDRESS { get; set; }
+        [Display(Name = "ROUND OFF")]
         public Nullable<decimal> ROUND { get; set; }
+        [Display(Name = "NET TOTAL")]
         public Nullable<decimal> NTOT { get; set; }
+        [Display(Name = "TAX VALUE")]
         public Nullable<decimal> TVAL { get; set; }
         public string USER1 { get; set; }
+        [Display(Name = "BILL MODE")]
         public string MODE { get; set; }
+        [Display(Name = "VAT NO")]
         public string VNO { get; set; }
         public Nullable<decimal> CBILL { get; set; }
         public Nullable<decimal> BAPAY { get; set; }
