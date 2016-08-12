@@ -16,11 +16,13 @@ namespace MVCINCV4._1.Controllers
         {
             return PartialView(dc.BILL1.ToList());
         }
+        [Authorize]
         public JsonResult List_BILL()
         {
             var dbResult = dc.BILL1.ToList();
             return Json(dbResult, JsonRequestBehavior.AllowGet);
         }
+        [Authorize]
         public JsonResult List_BILL_ITM(string bno)
         {
             var dbResult = dc.BILL.Where(a => a.BILL_NO.Equals(bno)).ToList();
@@ -31,7 +33,7 @@ namespace MVCINCV4._1.Controllers
         {
             return View();
         }
-
+        [Authorize]
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(BILL1 e)
         {
@@ -42,6 +44,7 @@ namespace MVCINCV4._1.Controllers
             }
             return RedirectToAction("Create");
         }
+        [Authorize]
         public JsonResult dtls(string id)
         {
             List<BILL> STLIST = new List<BILL>();
@@ -51,6 +54,7 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [Authorize]
         public JsonResult dtls1(string id)
         {
             List<BILL1> STLIST = new List<BILL1>();
@@ -60,10 +64,12 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [Authorize]
         public ActionResult Save()
         {
             return View();
         }
+        [Authorize]
         public JsonResult GetPtno(string term)
         {
             List<string> itms;
@@ -71,7 +77,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.PART_NO).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
-
+        [Authorize]
         public JsonResult GetParti(string term)
         {
             List<string> itms;
@@ -79,6 +85,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.PARTI).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
+        [Authorize]
         public JsonResult cstat(string term)
         {
             List<string> itms;
@@ -86,6 +93,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.CUST).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
+        [Authorize]
         public JsonResult snmat(string term)
         {
             List<string> itms;
@@ -93,6 +101,7 @@ namespace MVCINCV4._1.Controllers
                 .Select(y => y.SNAME).ToList();
             return Json(itms, JsonRequestBehavior.AllowGet);
         }
+        [Authorize]
         public JsonResult gdata2(string aData)
         {
             List<TABLE2> STLIST = new List<TABLE2>();
@@ -102,6 +111,7 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [Authorize]
         public JsonResult gdata1(string aData)
         {
             List<TABLE2> STLIST = new List<TABLE2>();
@@ -111,6 +121,7 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [Authorize]
         public JsonResult getct(string aData)
         {
             List<BILL1> STLIST = new List<BILL1>();
@@ -120,6 +131,20 @@ namespace MVCINCV4._1.Controllers
             }
             return new JsonResult { Data = STLIST, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [Authorize]
+        public JsonResult gtbtot(string aData)
+        {
+            int tot = 0;
+            int sum = (from d in dc.BILL1
+                       where d.CUST == aData
+                       select (int?)d.NTOT.Value).Sum() ?? 0;
+            int sum1 = (from d in dc.BILL1
+                       where d.CUST == aData
+                       select (int?)d.PAYMENT.Value).Sum() ?? 0;
+            tot = sum - sum1;
+            return new JsonResult { Data = tot, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [Authorize]
         public JsonResult getlrec()
         {
             try
@@ -129,10 +154,10 @@ namespace MVCINCV4._1.Controllers
             }
             catch (Exception ex)
             {
-                return new JsonResult { Data = ex, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return new JsonResult { Data = ex.ToString(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult Save(BILL bill)
         {
@@ -164,7 +189,7 @@ namespace MVCINCV4._1.Controllers
                 return View(bill);
             }
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult STUPD(TABLE2 TBL)
         {
@@ -193,7 +218,7 @@ namespace MVCINCV4._1.Controllers
                 return View(TBL);
             }
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult BILLUPD(BILL TBL)
         {
@@ -222,7 +247,7 @@ namespace MVCINCV4._1.Controllers
                 return View(TBL);
             }
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult INVUPD(BILL1 TBL)
         {
@@ -235,11 +260,7 @@ namespace MVCINCV4._1.Controllers
                     dc.SaveChanges();
                     message = "Successfully Saved!";
                 }
-                catch (Exception ex) { message = "Error! Please try again."; }
-            }
-            else
-            {
-                message = "Please provide required fields value.";
+                catch (Exception ex) { message = ex.ToString(); }
             }
             if (Request.IsAjaxRequest())
             {
@@ -250,6 +271,24 @@ namespace MVCINCV4._1.Controllers
                 ViewBag.Message = message;
                 return View(TBL);
             }
+        }
+        [Authorize]
+        [HttpPost]
+        public JsonResult DELITEM_BILL(int id)
+        {
+            string message = "";
+                try
+                {
+                    BILL tc = dc.BILL.Find(id);
+                    dc.BILL.Remove(tc);
+                    dc.SaveChanges();
+                    message = "Successfully Saved!";
+                }
+                catch (Exception ex)
+                {
+                    message = ex.ToString();
+                }
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };  
         }
     }
 }

@@ -21,7 +21,6 @@ namespace MVCINCV4._1.Models
         public int BID { get; set; }
         [Display(Name = "BILL DATE")]
         [Required]
-        [RegularExpression(@"^((31(?! (Feb|Apr|Jun|Sep|Nov)))|((30|29)(?! Feb))|(29(?= Feb (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])-(Jan|Feb|Mar|May|Apr|Jul|Jun|Aug|Oct|Sep|Nov|Dec)-((1[6-9]|[2-9]\d)\d{2})$", ErrorMessage = "Invalid Date")]
         public System.DateTime BDATE { get; set; }
         [Display(Name = "BILL NO")]
         public string BNO { get; set; }

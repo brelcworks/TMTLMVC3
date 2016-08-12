@@ -44,7 +44,6 @@
                 </td>
                 <td>
                     @Html.TextBoxFor(model => model.BDATE, new { @class = "form-control input-xs ui-front", @id = "txtBDATE" })
-                    @Html.ValidationMessageFor(model => model.BDATE)
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.GTOT)
@@ -274,7 +273,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save1" value="Save" /><input id="Cancel1" type="button" value="Cancel" /></td>
+                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save1" value="Save" /><input id="Cancel1" style="margin-right: 5px;" type="button" value="Cancel" /><input id="btnDEL" style="margin-right: 5px;" type="button" value="Delete" /><input id="btnDEL1" type="button" value="Delete" /></td>
             </tr>
         </table>
     </div>
@@ -295,10 +294,12 @@
                 var EMODE = true;
                 var EMODE1 = true;
                 var NMODE = true;
+                var isdel = true;
                 $(function () {
                     var source;
                     var source1;
                     $(document).ready(function () {
+                        $("#btnDEL1").hide();
                         $("#UPDBILL").hide();
                         $('#searchField').focus();
                         $('#txtQTY').keyup(function (e) {
@@ -680,15 +681,145 @@
                             $("#txtBNO11").val($("#txtBNO").val());
                         });
 
+                        $("#popupWindow1").on('close', function (e) {
+                            if (!isdel)
+                            {
+                                $("#btnDEL1").click();
+                                alert("DataBase Updated!");
+                            }
+                        });
+                        $("#popupWindow1").on('cancel', function (e) {
+                            if (!isdel) {
+                                $("#btnDEL1").click();
+                                alert("DataBase Updated!");
+                            }
+                        });
+
                         $("#Cancel").jqxButton({ template: "warning" });
                         $("#Save").jqxButton({ template: "success" });
                         $("#Cancel1").jqxButton({ template: "warning" });
+                        $("#btnDEL").jqxButton({ template: "danger" });
+                        $("#btnDEL1").jqxButton({ template: "info" });
                         $("#Save1").jqxButton({ template: "success" });
                         $("#btnNBILL").jqxButton({ template: "primary" });
                         $("#Cancel2").jqxButton({ template: "warning" });
                         $("#Save").click(function () {
                             $('#txtQTY').keypress();
                         });
+                        $("#btnDEL").click(function () {
+                            $.ajax({
+                                url: "@Url.Action("DELITEM_BILL", "BILL")",
+                                type: "POST",
+                                data: { "id": $('#BILLID-TXT').val() },
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                    }
+                                    else {
+                                        isdel = false;
+                                        changessave = false;
+                                        alert("Record Deleted! Please Close the Window to Update the DataBase");
+                                        $('#REFBILL').click();
+                                    }
+                                },
+                                error: function () {
+                                    alert("ERROR");
+                                }
+                            });
+                            var curqty = parseFloat($('#STQTY1').val()) + parseFloat($('#txtQTY1').val())
+                            var carmrp = parseFloat($('#STMRP1').val()) * curqty
+                            var carstot = parseFloat($('#STSPRICE1').val()) * curqty
+                            var dataObject3 = {
+                                RID1: $('#STRID11').val(),
+                                RID: $('#STRID1').val(),
+                                TYPE: $('#STTYPE1').val(),
+                                PART_NO: $('#STPART_NO1').val(),
+                                PARTI: $('#STPARTI1').val(),
+                                MRP: $('#STMRP1').val(),
+                                QTY: curqty,
+                                TOTAL: carmrp,
+                                RACKNO: $('#STRACKNO1').val(),
+                                TAX: $('#STTAX1').val(),
+                                TVAL: $('#STTVAL1').val(),
+                                STOTAL: carstot,
+                                PPRICE: $('#STPPRICE1').val(),
+                                UNIT: $('#STUNIT1').val(),
+                                SPRICE: $('#STSPRICE1').val(),
+                                SSTA: $('#STSSTA1').val(),
+                                EOR: $('#STEOR1').val(),
+                                DPCODE: $('#STDPCODE1').val(),
+                                lmodi: $('#STLMODI1').val(),
+                                grop: $('#STGROP1').val(),
+                                AEDT: $('#STAEDT1').val(),
+                                USER1: $('#STUSER11').val()
+                            }
+                            $.ajax({
+                                url: "@Url.Action("STUPD", "BILL")",
+                                type: "POST",
+                            data: dataObject3,
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.toString() != "Successfully Saved!") {
+                                    alert(data.toString());
+                                }
+                            },
+                            error: function (response) {
+                                alert(response.status + " " + response.responseText);
+                            }
+                        });
+                        });
+                    });
+                    $("#btnDEL1").click(function () {
+                        var totgt = $('#grid1').jqxGrid('getcolumnaggregateddata', 'STOT', ['sum', 'avg'], true);
+                        var totgt1 = totgt.sum;
+                        $('#txtGTOT').val(totgt1.toFixed(2));
+                        var tval1 = parseFloat($('#txtGTOT').val()) * 14.5 / 100
+                        $('#txtTVAL').val(tval1.toFixed(2));
+                        $('#txtNTOT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
+                        var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
+                        $('#txtROUND').val(rnd.toFixed(2));
+                        $('#txtBAMT').val($('#txtNTOT').val());
+                        $('#txtTOT1').val(null)
+                        $('#txtPTNO1').val(null)
+                        $('#txtPTNAME1').val(null)
+                        $('#txtUNIT1').val(null)
+                        $('#txtMRP1').val(null)
+                        $('#txtSPRICE1').val(null)
+                        $('#txtTRATE1').val(null)
+                        $('#txtSTC1').val(null)
+                        $('#txtQTY1').val(null)
+                        $('#txtTVAL11').val(null)
+                        $('#STRID11').val(null)
+                        $('#STRID1').val(null)
+                        $('#STTYPE1').val(null)
+                        $('#STPART_NO1').val(null)
+                        $('#STPARTI1').val(null)
+                        $('#STMRP1').val(null)
+                        $('#STQTY1').val()
+                        $('#qinc1').val(null)
+                        $('#STTOTAL1').val(null)
+                        $('#STRACKNO1').val(null)
+                        $('#STTAX1').val(null)
+                        $('#STTVAL1').val(null)
+                        $('#STSTOTAL1').val(null)
+                        $('#STPPRICE1').val(null)
+                        $('#STUNIT1').val(null)
+                        $('#STSPRICE1').val(null)
+                        $('#STSSTA1').val(null)
+                        $('#STEOR1').val(null)
+                        $('#STDPCODE1').val(null)
+                        $('#STLMODI1').val(null)
+                        $('#STGROP1').val(null)
+                        $('#STAEDT1').val(null)
+                        $('#STUSER11').val(null)
+                        $('#UPDBILL').show();
+                        $('#NBILL').prop('disabled', true);
+                        $('#btnNBILL').prop('disabled', true);
+                        EMODE = false;
+                        isdel = true;
+                        $("#popupWindow1").jqxWindow('hide');
+                        $('#searchField').focus();
                     });
                     $('#txtBNO').keypress(function (e) {
                         if (e.keyCode == 13) {
@@ -896,7 +1027,7 @@
                                 }
                             });
                             $("#grid1").jqxGrid("addrow", null, dataObject, "first");
-                            $('#txtTOT').val(null)
+                            $('#txtSTOT').val(null)
                             $('#txtPTNO').val(null)
                             $('#txtPTNAME').val(null)
                             $('#txtUNIT').val(null)
@@ -939,6 +1070,7 @@
                             var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
                             $('#txtROUND').val(rnd.toFixed(2));
                             $('#txtBAMT').val($('#txtNTOT').val());
+                            $('#txtTOTAL').val(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val()));
                             if(!EMODE1)
                             {
                                 EMODE = false;
@@ -952,6 +1084,7 @@
                                 NMODE = false;
                                 EMODE1 = true;
                             }
+                            $('#txtTOT').val(null)
                             $("#popupWindow").jqxWindow('hide');
                             $('#searchField').focus();
                             e.preventDefault();
@@ -1078,6 +1211,20 @@
                                     alert(response.status + " " + response.statusText);
                                 }
                             });
+
+                            $.ajax({
+                                type: "GET",
+                                url: "@Url.Action("gtbtot", "BILL")",
+                                data: { aData: $("#txtCUST").val() },
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    $('#txtTOTAL').val(data);
+                            },
+                            error: function OnErrorCall(response) {
+                                alert(response.status + " " + response.statusText);
+                            }
+                        });
                             e.preventDefault();
                         }
                     });
@@ -1211,6 +1358,7 @@
                         {
                             alert("Nothin to Update! Please Review");
                         }
+                        else
                         {
                             var datarec = {
                                 BNO: $("#txtBNO").val(),
@@ -1245,7 +1393,7 @@
                             dataType: "json",
                             success: function (data) {
                                 if (data.toString() != "Successfully Saved!") {
-                                    alert("FAILED");
+                                    alert(data.toString());
                                 }
                                 else
                                 {
@@ -1267,7 +1415,6 @@
                         $('#NBILL').prop('disabled', false);
                         $('#btnNBILL').prop('disabled', false);
                         $('#UPDBILL').hide();
-                        $("#txtBNO").val(null);
                         $("#txtBDATE").val(null);
                         $("#txtCUST").val(null);
                         $('#txtSNAME').val(null);
