@@ -191,6 +191,70 @@ namespace MVCINCV4._1.Controllers
         }
         [Authorize]
         [HttpPost]
+        public ActionResult Save_ITM(TABLE2 bill)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (DBCTX aid = new DBCTX())
+                    {
+                        aid.STOCK.Add(bill);
+                        aid.SaveChanges();
+                        message = "Successfully Saved!";
+                    }
+                }
+                catch (Exception ex) { ex.ToString(); }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(bill);
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Save_ITM1(SHEET1 bill)
+        {
+            string message = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (DBCTX aid = new DBCTX())
+                    {
+                        aid.SHEET1.Add(bill);
+                        aid.SaveChanges();
+                        message = "Successfully Saved!";
+                    }
+                }
+                catch (Exception ex) { ex.ToString(); }
+            }
+            else
+            {
+                message = "Please provide required fields value.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(bill);
+            }
+        }
+        [Authorize]
+        [HttpPost]
         public ActionResult STUPD(TABLE2 TBL)
         {
             string message = "";

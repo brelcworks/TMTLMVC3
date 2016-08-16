@@ -31,7 +31,7 @@
     <fieldset>
         <div id="grid1"></div>
         <hr />
-        <table class="table table-hover table-bordered table-responsive" style="font-size:x-small;">
+        <table class="table table-hover table-bordered table-responsive ui-front" style="font-size:x-small;">
             <tr>
                 <td>
                     @Html.DisplayNameFor(model => model.BNO)
@@ -43,7 +43,7 @@
                     @Html.DisplayNameFor(model => model.BDATE)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.BDATE, new { @class = "form-control input-xs ui-front", @id = "txtBDATE" })
+                    @Html.TextBoxFor(model => model.BDATE, new { @class = "form-control input-xs", @id = "txtBDATE" })
                 </td>
                 <td>
                     @Html.DisplayNameFor(model => model.GTOT)
@@ -77,7 +77,7 @@
                     @Html.DisplayNameFor(model => model.NTOT)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.NTOT, new { @class = "form-control input-xs", @id = "txtNTOT", @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.BAMT, new { @class = "form-control input-xs", @id = "txtBAMT", @readonly = "readonly" })
                 </td>
             </tr>
             <tr>
@@ -119,7 +119,7 @@
                     @Html.HiddenFor(model => model.LMODI, new { @id = "txtLMODI" })
                     @Html.HiddenFor(model => model.BID1, new { @id = "txtBID1" })
                     @Html.HiddenFor(model => model.AEDT, new { @id = "txtAEDT" })
-                    @Html.HiddenFor(model => model.BAMT, new { @id = "txtBAMT" })
+                    @Html.HiddenFor(model => model.BAMT, new { @id = "txtNTOT" })
                     @Html.HiddenFor(model => model.BID, new { @id = "txtBID" })
                 </td>
             </tr>
@@ -127,7 +127,7 @@
         <input type="submit" value="Save Bill" id="btnNBILL" style='margin-left:5px' />
     </fieldset>
 }
-<input id="NBILL" value="New Bill" type="button" style='margin-left: 5px;'/>
+<input id="NBILL" value="New Bill" type="button" style='margin-left: 5px;' />
 <input id="REFBILL" value="Refresh" type="button" style='margin-left: 5px;' />
 <input id="UPDBILL" value="Update Bill" type="button" style='margin-left: 5px;' />
 <div id="popupWindow">
@@ -197,7 +197,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" /></td>
+                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save" value="Save" /><input id="Cancel" type="button" value="Cancel" style="margin-right: 5px;" /><input id="adnstc" type="button" value="Add New Stock" /></td>
             </tr>
         </table>
     </div>
@@ -273,7 +273,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save1" value="Save" /><input id="Cancel1" style="margin-right: 5px;" type="button" value="Cancel" /><input id="btnDEL" style="margin-right: 5px;" type="button" value="Delete" /><input id="btnDEL1" type="button" value="Delete" /></td>
+                <td style="padding-top: 10px;" align="right" colspan="4"><input style="margin-right: 5px;" type="button" id="Save1" value="Save" /><input id="Cancel1" style="margin-right: 5px;" type="button" value="Cancel" /><input id="btnDEL" style="margin-right: 5px;" type="button" value="Delete" /><input id="btnDEL1" type="button" value="Delete" style="margin-right: 5px;" /><input id="adnstc1" type="button" value="Add New Stock" /></td>
             </tr>
         </table>
     </div>
@@ -285,6 +285,208 @@
     <div style="overflow: hidden;font-size:x-small">
         <div id="grid"></div>
         <input id="Cancel2" type="button" value="Cancel" />
+    </div>
+</div>
+
+<div id="ADD_ITM_DIV">
+    <div>ADD NEW STOCK</div>
+    <div style="overflow: hidden;">
+        <table class="table table-bordered table-hover table-responsive ui-front adn" style="font-size : smaller">
+            <tr>
+                <td>
+                    <label for="RID">RECORD NO</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adRID" name="RID" placeholder="RECORD NO" type="text" value="" />
+                </td>
+                <td>
+                    <label for="STOTAL">SELL PRICE TOTAL</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adSTOT" name="STOTAL" placeholder="SELL PRICE TOTAL" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="PART_NO">PART NO</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adPtno" name="PART_NO" placeholder="PART NO" type="text" value="" />
+                </td>
+                <td>
+                    <label for="TVAL">TAX VALUE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adTVAL" name="TVAL" placeholder="TAX VALUE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="PARTI">PART NAME</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adParti" name="PARTI" placeholder="PART NAME" type="text" value="" />
+                </td>
+                <td>
+                    <label for="TYPE">ITEM TYPE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adTYPE" name="TYPE" placeholder="ITEM TYPE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="MRP">MRP</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adMRP" name="MRP" placeholder="MRP" type="text" value="" />
+                </td>
+                <td>
+                    <label for="UNIT">UNIT</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adUNIT" name="UNIT" placeholder="UNIT" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="TAX">TAX RATE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adTAX" name="TAX" placeholder="TAX RATE" type="text" value="" />
+                </td>
+                <td>
+                    <label for="RACKNO">RACK NO</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adRCNO" name="RACKNO" placeholder="RACK NO" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="SPRICE">SELL PRICE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adSPRICE" name="SPRICE" placeholder="SELL PRICE" type="text" value="" />
+                </td>
+
+                <td>
+                    <label for="EOR">EOR</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adEOR" name="EOR" placeholder="ITEM E.O.R" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="PPRICE">PURCAHSE PRICE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adPPRICE" name="PPRICE" placeholder="PURCHASE PRICE" type="text" value="" />
+                </td>
+                <td>
+                    <label for="grop">ITEM GROUP</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adGROP" name="grop" placeholder="ITEM GROUP" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="QTY">QTY</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" data-val="true" data-val-required="Please Fill The Record!" id="adQTY" name="QTY" placeholder="QUANTITY" type="text" value="" />
+                </td>
+                <td>
+                    <label for="DPCODE">DEALER CODE</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adDPCODE" name="DPCODE" placeholder="DEALER CODE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="TOTAL">ITEM TOTAL</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adTOTAL" name="TOTAL" placeholder="ITEM TOTAL" type="text" value="" />
+                </td>
+                <td>
+                    <label for="USER1">USER NAME</label>
+                </td>
+                <td>
+                    <input class="form-control input-xs" id="adUSER" name="USER1" placeholder="USER NAME" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input id="cls3" type="button" class="btn btn-warning btn-xs" value="Cancel" />
+                    <input id="sv1" type="button" class="btn btn-primary btn-xs ui-icon-plus" value="Save" />
+                    <input id="adnstc2" type="button" value="Add New Item" class="btn btn-warning btn-xs" />
+                    <input id="adLMODI" name="lmodi" type="hidden" value="" />
+                    <input id="adSSTA" name="SSTA" type="hidden" value="" />
+                    <input id="adAEDT" name="AEDT" type="hidden" value="" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="ADD_ITM_DIV_PR">
+    <div>ADD NEW STOCK ITEM</div>
+    <div style="overflow: hidden;">
+        <table class="table table-bordered table-hover table-responsive adn1" style="font-size : smaller">
+            <tr>
+                <td><label for="PRPART_NO">PART NO</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRPART_NO" name="PART_NO" type="text" value="" />
+                </td>
+                <td><label for="PRCATE">ITEM TYPE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRCATE" name="CATE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRPARTI">PART NAME</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRPARTI" name="PARTI" type="text" value="" />
+                </td>
+                <td><label for="PRGROP">ITEM GROUP</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRGROP" name="GROP" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRMRP">MRP</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRMRP" name="MRP" type="text" value="" />
+                </td>
+                <td><label for="PRunit">UNIT</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRunit" name="unit" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRTRATE">TAX RATE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRTRATE" name="TRATE" type="text" value="" />
+                </td>
+                <td><label for="PRDPCODE">DEALER CODE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRDPCODE" name="DPCODE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input id="cls4" type="button" class="btn btn-warning btn-xs" value="Cancel" />
+                    <input id="sv2" type="button" class="btn btn-primary btn-xs ui-icon-plus" value="Save" />
+                    <input id="PRlmodi" name="lmodi" type="hidden" value="" />
+                    <input id="PRrid1" name="rid1" type="hidden" value="" />
+                    <input id="PRAEDT" name="AEDT" type="hidden" value="" />
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
         @section Scripts {
@@ -366,7 +568,7 @@
                             showtoolbar: true,
                             columns: [
                                 { text: "RECORD NO", datafield: "BID", hidden: true },
-                                   { text: "BILL NO", datafield: "BNO"},
+                                   { text: "BILL NO", datafield: "BNO" },
                                    { text: "BILL DATE", datafield: "BDATE", cellsformat: 'dd-MM-yyyy' },
                                    { text: "CUSTOMER", datafield: "CUST" },
                                    { text: "SITE NAME", datafield: "SNAME" },
@@ -408,10 +610,10 @@
                                                        $('#txtTVAL').val(val.TVAL)
                                                        $('#txtBID').val(val.BID)
                                                        $('#txtPAYMENT').val(val.PAYMENT)
-                                                       $('#txtSECTOR').val(val.SECTOR) 
-                                                       $('#txtUSER1').val(val.USER1)  
-                                                       $('#txtCBILL').val(val.CBILL) 
-                                                       $('#txtBAPAY').val(val.BAPAY) 
+                                                       $('#txtSECTOR').val(val.SECTOR)
+                                                       $('#txtUSER1').val(val.USER1)
+                                                       $('#txtCBILL').val(val.CBILL)
+                                                       $('#txtBAPAY').val(val.BAPAY)
                                                        $('#txtBST').val(val.BST)
                                                        $('#txtSSTA').val(val.SSTA)
                                                        $('#txtDPCODE').val(val.DPCODE)
@@ -585,18 +787,15 @@
                                 var oldVal = "";
                                 input.on('keydown', function (event) {
                                     if (event.keyCode == 83 && event.ctrlKey) {
-                                        if (NMODE == false)
-                                        {
+                                        if (NMODE == false) {
                                             $('#btnNBILL').click();
                                         }
-                                       else if(EMODE == false)
-                                        {
+                                        else if (EMODE == false) {
                                             $('#UPDBILL').click();
                                         }
-                                        else
-                                       {
-                                           alert("Nothing to Save!");
-                                       }
+                                        else {
+                                            alert("Nothing to Save!");
+                                        }
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 13) {
@@ -612,28 +811,26 @@
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 78 && event.altKey) {
-                                        if (EMODE == true)
-                                        {
+                                        if (EMODE == true) {
                                             $.ajax({
                                                 type: "GET",
                                                 url: "@Url.Action("getlrec", "BILL")",
                                                 contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function (data) {
-                                                var gtbno = parseFloat(data) + 1;
-                                                $('#txtBNO').val("MB " + gtbno  + "/16-17");
-                                            },
-                                            error: function OnErrorCall(response) {
-                                                alert(response.status + " " + response.responseText);
-                                            }
-                                        });
-                                        $('#txtBNO').focus();
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    var gtbno = parseFloat(data) + 1;
+                                                    $('#txtBNO').val("MB " + gtbno + "/16-17");
+                                                },
+                                                error: function OnErrorCall(response) {
+                                                    alert(response.status + " " + response.responseText);
+                                                }
+                                            });
+                                            $('#txtBNO').focus();
                                         }
                                         event.preventDefault();
                                     }
                                     else if (event.keyCode == 86 && event.altKey) {
-                                        if (EMODE == true)
-                                        {
+                                        if (EMODE == true) {
                                             $("#VIEWBILL").jqxWindow();
                                             $("#VIEWBILL").jqxWindow('open');
                                         }
@@ -641,12 +838,10 @@
                                     }
                                 });
                                 btn2.on('click', function () {
-                                    if (!$('#txtBNO').val())
-                                    {
+                                    if (!$('#txtBNO').val()) {
                                         alert("Please Add Bill No First!");
                                     }
-                                    else
-                                    {
+                                    else {
                                         var offset = $("#grid1").offset();
                                         $("#popupWindow").jqxWindow();
                                         $("#popupWindow").jqxWindow('open');
@@ -670,10 +865,24 @@
                         $("#VIEWBILL").jqxWindow({
                             minHeight: '95%', minWidth: '95%', theme: 'ui-redmond', isModal: true, autoOpen: false, cancelButton: $("#Cancel2"), modalOpacity: 0.01
                         });
+                        $("#ADD_ITM_DIV").jqxWindow({
+                            maxHeight: '70%', minWidth: '95%', theme: 'ui-start', isModal: true, autoOpen: false, cancelButton: $("#cls3"), modalOpacity: 0.01
+                        });
+                        $("#ADD_ITM_DIV_PR").jqxWindow({
+                            maxHeight: '70%', minWidth: '80%', theme: 'orange', isModal: true, autoOpen: false, cancelButton: $("#cls4"), modalOpacity: 0.01
+                        });
 
                         $("#popupWindow").on('open', function () {
                             $("#txtPTNO").jqxInput('selectAll');
                             $("#txtBNO1").val($("#txtBNO").val());
+                        });
+                        $("#ADD_ITM_DIV").on('open', function () {
+                            $("#adRID").jqxInput('selectAll');
+                            $("#adPtno").focus();
+                        });
+                        $("#ADD_ITM_DIV_PR").on('open', function () {
+                            $("#PRPART_NO").jqxInput('selectAll');
+                            $("#PRPART_NO").focus();
                         });
 
                         $("#popupWindow1").on('open', function () {
@@ -682,8 +891,7 @@
                         });
 
                         $("#popupWindow1").on('close', function (e) {
-                            if (!isdel)
-                            {
+                            if (!isdel) {
                                 $("#btnDEL1").click();
                                 alert("DataBase Updated!");
                             }
@@ -697,6 +905,9 @@
 
                         $("#Cancel").jqxButton({ template: "warning" });
                         $("#Save").jqxButton({ template: "success" });
+                        $("#adnstc").jqxButton({ template: "primary" });
+                        $("#adnstc1").jqxButton({ template: "primary" });
+                        $("#adnstc2").jqxButton({ template: "danger" });
                         $("#Cancel1").jqxButton({ template: "warning" });
                         $("#btnDEL").jqxButton({ template: "danger" });
                         $("#btnDEL1").jqxButton({ template: "info" });
@@ -757,29 +968,115 @@
                             $.ajax({
                                 url: "@Url.Action("STUPD", "BILL")",
                                 type: "POST",
+                                data: dataObject3,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                    }
+                                },
+                                error: function (response) {
+                                    alert(response.status + " " + response.responseText);
+                                }
+                            });
+                        });
+                    });
+                    $("#sv1").click(function () {
+                        var dataObject3 = {
+                            RID: $('#adRID').val(),
+                            TYPE: $('#adTYPE').val(),
+                            PART_NO: $('#adPtno').val(),
+                            PARTI: $('#adParti').val(),
+                            MRP: $('#adMRP').val(),
+                            QTY: $('#adQTY').val(),
+                            TOTAL: $('#adTOTAL').val(),
+                            RACKNO: $('#adRCNO').val(),
+                            TAX: $('#adTAX').val(),
+                            TVAL: $('#adTVAL').val(),
+                            STOTAL: $('#adSTOT').val(),
+                            PPRICE: $('#adPPRICE').val(),
+                            UNIT: $('#adUNIT').val(),
+                            SPRICE: $('#adSPRICE').val(),
+                            SSTA: $('#adSSTA').val(),
+                            EOR: $('#adEOR').val(),
+                            DPCODE: $('#adDPCODE').val(),
+                            lmodi: $('#adLMODI').val(),
+                            grop: $('#adGROP').val(),
+                            AEDT: $('#adAEDT').val(),
+                            USER1: $('#adUSER').val()
+                        }
+                        $.ajax({
+                            url: "@Url.Action("Save_ITM", "BILL")",
+                            type: "POST",
                             data: dataObject3,
                             dataType: "json",
                             success: function (data) {
                                 if (data.toString() != "Successfully Saved!") {
                                     alert(data.toString());
                                 }
+                                else {
+                                    $(".adn input[type='text']").val("");
+                                    $("#ADD_ITM_DIV").jqxWindow('hide');
+                                    alert("Record Added");
+                                }
                             },
                             error: function (response) {
                                 alert(response.status + " " + response.responseText);
                             }
                         });
-                        });
                     });
+
+                    $("#sv2").click(function () {
+                        var dataObject3 = {
+                            PART_NO: $('#PRPART_NO').val(),
+                            PARTI: $('#PRPARTI').val(),
+                            MRP: $('#PRMRP').val(),
+                            CATE: $('#PRCATE').val(),
+                            TRATE: $('#PRTRATE').val(),
+                            rid1: $('#PRrid1').val(),
+                            unit: $('#PRunit').val(),
+                            DPCODE: $('#PRDPCODE').val(),
+                            lmodi: $('#PRlmodi').val(),
+                            GROP: $('#PRGROP').val(),
+                            AEDT: $('#PRAEDT').val()
+                        }
+                        $.ajax({
+                            url: "@Url.Action("Save_ITM1", "BILL")",
+                            type: "POST",
+                        data: dataObject3,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.toString() != "Successfully Saved!") {
+                                alert(data.toString());
+                            }
+                            else {
+                                $(".adn1 input[type='text']").val("");
+                                $("#ADD_ITM_DIV_PR").jqxWindow('hide');
+                                alert("Record Added");
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.status + " " + response.responseText);
+                        }
+                    });
+                });
                     $("#btnDEL1").click(function () {
                         var totgt = $('#grid1').jqxGrid('getcolumnaggregateddata', 'STOT', ['sum', 'avg'], true);
                         var totgt1 = totgt.sum;
                         $('#txtGTOT').val(totgt1.toFixed(2));
                         var tval1 = parseFloat($('#txtGTOT').val()) * 14.5 / 100
                         $('#txtTVAL').val(tval1.toFixed(2));
-                        $('#txtNTOT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
-                        var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
+                        $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
+                        var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
                         $('#txtROUND').val(rnd.toFixed(2));
-                        $('#txtBAMT').val($('#txtNTOT').val());
+                        var mde = $('#txtMODE').val();
+                        if (mde == "CREDIT") {
+                            $('#txtNTOT').val($('#txtBAMT').val());
+                            $('#txtTOTAL').val(parseFloat($('#txtTOT1').val()) + parseFloat($('#txtTOTAL').val()));
+                        }
+                        else {
+                            $('#txtCBILL').val($('#txtBAMT').val());
+                        }
                         $('#txtTOT1').val(null)
                         $('#txtPTNO1').val(null)
                         $('#txtPTNAME1').val(null)
@@ -821,10 +1118,19 @@
                         $("#popupWindow1").jqxWindow('hide');
                         $('#searchField').focus();
                     });
+                    $("#adnstc").click(function () {
+                        $("#ADD_ITM_DIV").jqxWindow('show');
+                    });
+                    $("#adnstc1").click(function () {
+                        $("#ADD_ITM_DIV").jqxWindow('show');
+                    });
+                    $("#adnstc2").click(function () {
+                        $("#ADD_ITM_DIV_PR").jqxWindow('show');
+                    });
                     $('#txtBNO').keypress(function (e) {
                         if (e.keyCode == 13) {
                             e.preventDefault();
-                            $('#txtBAMT').val($('#txtNTOT').val());
+                            $('#txtNTOT').val($('#txtBAMT').val());
                             $('#txtDPCODE').val("A1587");
                             $('#txtLMODI').val(new Date($.now()));
                             $('#txtBID1').val(new Date($.now()));
@@ -835,6 +1141,191 @@
 
                         }
                     });
+                    $("#adPtno").autocomplete({
+                        source: '@Url.Action("GetPtno","Stock")'
+                    });
+
+                    $("#adParti").autocomplete({
+                        source: '@Url.Action("GetParti", "Stock")'
+                    });
+
+                    $("#adParti").keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $.ajax({
+                                type: "GET",
+                                url: "@Url.Action("dpl1","Stock")",
+                                data: { aData: $("#adParti").val() },
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data == "0") {
+                                        $('#adMRP').focus()
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "@Url.Action("gdata1","Stock")",
+                                            data: { aData: $("#adParti").val() },
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $.each(data, function (i, val) {
+                                                    $('#adPtno').val(val.PART_NO)
+                                                    $('#adUNIT').val(val.unit)
+                                                    $('#adMRP').val(val.MRP)
+                                                    $('#adGROP').val(val.GROP)
+                                                    $('#adTYPE').val(val.CATE)
+                                                    $('#adTAX').val(val.TRATE)
+                                                    var spr = parseFloat($('#adTAX').val()) + 100
+                                                    $('#adSPRICE').val(parseFloat($('#txtMRP').val()) / spr * 100)
+                                                    $('#adTVAL').val(parseFloat($('#txtSPRICE').val()) * parseFloat($('#txtTAX').val()) / 100)
+                                                    $("#adSPRICE").number(true, 2);
+                                                    $('#adTVAL').number(true, 2);
+                                                });
+                                            },
+                                            error: function OnErrorCall(response) {
+                                                alert(response.status + " " + response.statusText);
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        alert("Duplicate Entry! Please Review")
+                                    }
+                                },
+                                error: function OnErrorCall(response) {
+                                    alert(response.status + " " + response.statusText);
+                                }
+                            });
+                            e.preventDefault();
+                        }
+                    });
+
+                    $("#adPtno").keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $.ajax({
+                                type: "GET",
+                                url: "@Url.Action("dpl","Stock")",
+                                data: { aData: $("#adPtno").val() },
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data == "0") {
+                                        $('#adMRP').focus()
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "@Url.Action("gdata2","Stock")",
+                                            data: { aData: $("#adPtno").val() },
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $.each(data, function (i, val) {
+                                                    $('#adParti').val(val.PARTI)
+                                                    $('#adUNIT').val(val.unit)
+                                                    $('#adMRP').val(val.MRP)
+                                                    $('#adGROP').val(val.GROP)
+                                                    $('#adTYPE').val(val.CATE)
+                                                    $('#adTAX').val(val.TRATE)
+                                                    var tax = parseFloat($('#adTAX').val()) + 100
+                                                    var spr = parseFloat($('#adMRP').val()) / tax * 100
+                                                    $('#adSPRICE').val(spr.toFixed(2))
+                                                    var tval = parseFloat($('#adSPRICE').val()) * parseFloat($('#adTAX').val()) / 100
+                                                    $('#adTVAL').val(tval.toFixed(2))
+                                                });
+                                            },
+                                            error: function OnErrorCall(response) {
+                                                alert(response.status + " " + response.statusText);
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        alert("Duplicate Entry! Please Review")
+                                    }
+                                },
+                                error: function OnErrorCall(response) {
+                                    alert(response.status + " " + response.statusText);
+                                }
+                            });
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adPPRICE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adLMODI').val(new Date($.now()))
+                            $('#adSSTA').val("NEW")
+                            $('#adAEDT').val("NEW")
+                            $('#adRID').val(new Date($.now()))
+                            $('#adUSER').val('@HttpContext.Current.User.Identity.Name.ToString()')
+                            $('#adQTY').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adQTY').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            var tot = parseFloat($('#adMRP').val()) * parseFloat($('#adQTY').val())
+                            var tot1 = parseFloat($('#adSPRICE').val()) * parseFloat($('#adQTY').val())
+                            $('#adTOTAL').val(tot.toFixed(2))
+                            $('#adSTOT').val(tot1.toFixed(2))
+                            $('#adTVAL').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adRCNO').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adDPCODE').val("A1587")
+                            $('#adEOR').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adMRP').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adTAX').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adTAX').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adSPRICE').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adSPRICE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adPPRICE').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adTVAL').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adTYPE').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#adEOR').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $("#sv1").click();
+                            e.preventDefault();
+                        }
+                    });
+                    $('#adTYPE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adUNIT').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+                    $('#adUNIT').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#adRCNO').focus()
+                            e.preventDefault();
+                        }
+                    });
+
+
                     $("#txtPTNO").autocomplete({
                         source: '@Url.Action("GetPtno")'
                     });
@@ -1066,20 +1557,24 @@
                             $('#txtGTOT').val(totgt1.toFixed(2));
                             var tval1 = parseFloat($('#txtGTOT').val()) * 14.5 / 100
                             $('#txtTVAL').val(tval1.toFixed(2));
-                            $('#txtNTOT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
-                            var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
+                            $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
+                            var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
                             $('#txtROUND').val(rnd.toFixed(2));
-                            $('#txtBAMT').val($('#txtNTOT').val());
-                            $('#txtTOTAL').val(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val()));
-                            if(!EMODE1)
-                            {
+                            var mde = $('#txtMODE').val();
+                            if (mde == "CREDIT") {
+                                $('#txtNTOT').val($('#txtBAMT').val());
+                                $('#txtTOTAL').val(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val()));
+                            }
+                            else {
+                                $('#txtCBILL').val($('#txtBAMT').val());
+                            }
+                            if (!EMODE1) {
                                 EMODE = false;
                                 $('#UPDBILL').show();
                                 $('#NBILL').prop('disabled', true);
                                 $('#btnNBILL').prop('disabled', true);
                             }
-                            else
-                            {
+                            else {
                                 $('#UPDBILL').hide();
                                 NMODE = false;
                                 EMODE1 = true;
@@ -1128,8 +1623,7 @@
                                     if (data.toString() != "Successfully Saved!") {
                                         alert("FAILED");
                                     }
-                                    else
-                                    {
+                                    else {
                                         changessave = false;
                                         $('#REFBILL').click();
                                     }
@@ -1172,8 +1666,7 @@
                                     if (data.toString() != "Successfully Saved!") {
                                         alert("FAILED");
                                     }
-                                    else
-                                    {
+                                    else {
                                         changessave = false;
                                     }
                                 },
@@ -1220,11 +1713,11 @@
                                 dataType: "json",
                                 success: function (data) {
                                     $('#txtTOTAL').val(data);
-                            },
-                            error: function OnErrorCall(response) {
-                                alert(response.status + " " + response.statusText);
-                            }
-                        });
+                                },
+                                error: function OnErrorCall(response) {
+                                    alert(response.status + " " + response.statusText);
+                                }
+                            });
                             e.preventDefault();
                         }
                     });
@@ -1258,10 +1751,17 @@
                         $('#txtGTOT').val(totgt1.toFixed(2));
                         var tval1 = parseFloat($('#txtGTOT').val()) * 14.5 / 100
                         $('#txtTVAL').val(tval1.toFixed(2));
-                        $('#txtNTOT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
-                        var rnd = parseFloat($('#txtNTOT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
+                        $('#txtBAMT').val(Math.round((parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()))).toFixed(2));
+                        var rnd = parseFloat($('#txtBAMT').val()) - (parseFloat($('#txtGTOT').val()) + parseFloat($('#txtTVAL').val()));
                         $('#txtROUND').val(rnd.toFixed(2));
-                        $('#txtBAMT').val($('#txtNTOT').val());
+                        var mde = $('#txtMODE').val();
+                        if (mde == "CREDIT") {
+                            $('#txtNTOT').val($('#txtBAMT').val());
+                        }
+                        else {
+                            $('#txtCBILL').val($('#txtBAMT').val());
+                        }
+                        $('#txtTOTAL').val(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val()));
                         $('#txtTOT1').val(null)
                         $('#txtPTNO1').val(null)
                         $('#txtPTNAME1').val(null)
@@ -1304,13 +1804,11 @@
                         e.preventDefault();
                     });
                     $('#btnNBILL').click(function (e) {
-                        if (NMODE == true)
-                        {
+                        if (NMODE == true) {
                             alert("Nothing to Save! Please Add Record First");
                             e.preventDefault();
                         }
-                        else
-                        {
+                        else {
                             if (changessave == true) {
                                 alert("Nothing to Save! Please Add Record First");
                                 e.preventDefault();
@@ -1329,12 +1827,10 @@
                         $('#grid1').jqxGrid('updatebounddata');
                     });
                     $('#NBILL').click(function (e) {
-                        if (!changessave)
-                        {
+                        if (!changessave) {
                             alert("Alert New Bill On Going! Please Save the Existing Before Create New Bill");
                         }
-                        else
-                        {
+                        else {
                             cls();
                             $.ajax({
                                 type: "GET",
@@ -1343,7 +1839,7 @@
                                 dataType: "json",
                                 success: function (data) {
                                     var gtbno = parseFloat(data) + 1;
-                                    $('#txtBNO').val("MB " + gtbno  + "/16-17");
+                                    $('#txtBNO').val("MB " + gtbno + "/16-17");
                                 },
                                 error: function OnErrorCall(response) {
                                     alert(response.status + " " + response.responseText);
@@ -1354,15 +1850,13 @@
                         }
                     });
                     $('#UPDBILL').click(function () {
-                        if (EMODE == true)
-                        {
+                        if (EMODE == true) {
                             alert("Nothin to Update! Please Review");
                         }
-                        else
-                        {
+                        else {
                             var datarec = {
                                 BNO: $("#txtBNO").val(),
-                                BDATE:  $("#txtBDATE").val(),
+                                BDATE: $("#txtBDATE").val(),
                                 CUST: $("#txtCUST").val(),
                                 SNAME: $('#txtSNAME').val(),
                                 GTOT: $('#txtGTOT').val(),
@@ -1374,10 +1868,10 @@
                                 TVAL: $('#txtTVAL').val(),
                                 BID: $('#txtBID').val(),
                                 PAYMENT: $('#txtPAYMENT').val(),
-                                SECTOR: $('#txtSECTOR').val(), 
-                                USER1: $('#txtUSER1').val(),  
-                                CBILL: $('#txtCBILL').val(), 
-                                BAPAY: $('#txtBAPAY').val(), 
+                                SECTOR: $('#txtSECTOR').val(),
+                                USER1: $('#txtUSER1').val(),
+                                CBILL: $('#txtCBILL').val(),
+                                BAPAY: $('#txtBAPAY').val(),
                                 BST: $('#txtBST').val(),
                                 SSTA: $('#txtSSTA').val(),
                                 DPCODE: $('#txtDPCODE').val(),
@@ -1389,22 +1883,21 @@
                             $.ajax({
                                 url: "@Url.Action("INVUPD", "BILL")",
                                 type: "POST",
-                            data: datarec,
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.toString() != "Successfully Saved!") {
-                                    alert(data.toString());
+                                data: datarec,
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.toString() != "Successfully Saved!") {
+                                        alert(data.toString());
+                                    }
+                                    else {
+                                        changessave = true;
+                                        cls();
+                                    }
+                                },
+                                error: function (response) {
+                                    alert(response.status + " " + response.responseText);
                                 }
-                                else
-                                {
-                                    changessave = true;
-                                    cls();
-                                }
-                            },
-                            error: function (response) {
-                                alert(response.status + " " + response.responseText);
-                            }
-                        });
+                            });
                         }
                     });
                     function cls() {
