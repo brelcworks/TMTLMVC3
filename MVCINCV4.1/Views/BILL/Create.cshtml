@@ -269,6 +269,7 @@
                     <input type="hidden" id="STAEDT1" />
                     <input type="hidden" id="STUSER11" />
                     <input type="hidden" id="txtSTOT1" />
+                    <input type="hidden" id="txtTOT2" />
                     <input type="hidden" id="OSTC" />
                 </td>
             </tr>
@@ -622,6 +623,19 @@
                                                        $('#txtAEDT').val(val.AEDT)
                                                        $('#txtBAMT').val(val.BAMT)
                                                        $("#VIEWBILL").jqxWindow('hide');
+                                                       $.ajax({
+                                                           type: "GET",
+                                                           url: "@Url.Action("gtbtot", "BILL")",
+                                                           data: { aData: $("#txtCUST").val() },
+                                                       contentType: "application/json; charset=utf-8",
+                                                       dataType: "json",
+                                                       success: function (data) {
+                                                           $('#txtTOTAL').val(data);
+                                                       },
+                                                       error: function OnErrorCall(response) {
+                                                           alert(response.status + " " + response.statusText);
+                                                       }
+                                                   });
                                                        EMODE1 = false;
                                                        source1.data = { "bno": $('#txtBNO').val() };
                                                        $('#grid1').jqxGrid('updatebounddata');
@@ -697,6 +711,7 @@
                                                     $('#txtTVAL11').val(val.TVAL)
                                                     $('#txtTRATE1').val(val.TAX)
                                                     $('#txtTOT1').val(val.TOTAL)
+                                                    $('#txtTOT2').val(val.TOTAL)
                                                     $('#txtUNIT1').val(val.UNIT)
                                                     $('#txtSTOT1').val(val.STOT)
                                                     $('#OSTC').val(val.QTY)
@@ -1026,7 +1041,61 @@
                         });
                     });
 
+                    $('#PRPART_NO').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRPARTI').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRPARTI').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRMRP').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRMRP').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRTRATE').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRTRATE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRCATE').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRCATE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRGROP').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRGROP').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRunit').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRunit').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#PRDPCODE').focus()
+                            e.preventDefault();
+                        }
+                    });
+                    $('#PRDPCODE').keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            $('#sv2').click();
+                            e.preventDefault();
+                        }
+                    });
+
                     $("#sv2").click(function () {
+                        if ($('#PRrid1').val(null)) {
+                            $('#PRrid1').val(new Date($.now()));
+                            $('#PRlmodi').val(new Date($.now()));
+                            $('#PRAEDT').val("NEW");
+                        }
                         var dataObject3 = {
                             PART_NO: $('#PRPART_NO').val(),
                             PARTI: $('#PRPARTI').val(),
@@ -1757,11 +1826,12 @@
                         var mde = $('#txtMODE').val();
                         if (mde == "CREDIT") {
                             $('#txtNTOT').val($('#txtBAMT').val());
+                            var baldif = parseFloat($('#txtTOT1').val()) - parseFloat($('#txtTOT2').val());
+                            $('#txtTOTAL').val(parseFloat(baldif) + parseFloat($('#txtTOTAL').val()));
                         }
                         else {
                             $('#txtCBILL').val($('#txtBAMT').val());
-                        }
-                        $('#txtTOTAL').val(parseFloat($('#txtTOT').val()) + parseFloat($('#txtTOTAL').val()));
+                            }
                         $('#txtTOT1').val(null)
                         $('#txtPTNO1').val(null)
                         $('#txtPTNAME1').val(null)
@@ -1931,6 +2001,7 @@
                         $('#txtBID1').val(null);
                         $('#txtAEDT').val(null);
                         $('#txtBAMT').val(null);
+                        $('#txtTOTAL').val(null);
                         source1.data = { "bno": $('#txtBNO').val() };
                         $('#grid1').jqxGrid('updatebounddata');
                         $('#grid').jqxGrid('updatebounddata');

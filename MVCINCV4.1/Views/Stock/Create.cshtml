@@ -173,6 +173,55 @@
                 }
             });
 
+            $('#PRPART_NO').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRPARTI').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRPARTI').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRMRP').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRMRP').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRTRATE').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRTRATE').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRCATE').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRCATE').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRGROP').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRGROP').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRunit').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRunit').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#PRDPCODE').focus()
+                    e.preventDefault();
+                }
+            });
+            $('#PRDPCODE').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#sv2').click();
+                    e.preventDefault();
+                }
+            });
+
             $('#txtMRP').keypress(function (e) {
                 if (e.keyCode == 13) {
                     $('#txtTAX').focus()
@@ -216,10 +265,59 @@
             });
 
             $("#btnCreate").click(function (e) {
-                InitializeDialog($("#departmentdialog"));
-                $("#departmentdialog").dialog("open");
+                $("#ADD_ITM_DIV_PR").jqxWindow('show');
                 e.preventDefault();
             });
+
+            $("#ADD_ITM_DIV_PR").jqxWindow({
+                maxHeight: '70%', minWidth: '80%', theme: 'orange', isModal: true, autoOpen: false, cancelButton: $("#cls4"), modalOpacity: 0.01
+            });
+
+            $("#ADD_ITM_DIV_PR").on('open', function () {
+                $("#PRPART_NO").jqxInput('selectAll');
+                $("#PRPART_NO").focus();
+            });
+
+            $("#sv2").click(function () {
+                if ($('#PRrid1').val(null))
+                {
+                    $('#PRrid1').val(new Date($.now()));
+                    $('#PRlmodi').val(new Date($.now()));
+                    $('#PRAEDT').val("NEW");
+                }
+                var dataObject3 = {
+                    PART_NO: $('#PRPART_NO').val(),
+                    PARTI: $('#PRPARTI').val(),
+                    MRP: $('#PRMRP').val(),
+                    CATE: $('#PRCATE').val(),
+                    TRATE: $('#PRTRATE').val(),
+                    rid1: $('#PRrid1').val(),
+                    unit: $('#PRunit').val(),
+                    DPCODE: $('#PRDPCODE').val(),
+                    lmodi: $('#PRlmodi').val(),
+                    GROP: $('#PRGROP').val(),
+                    AEDT: $('#PRAEDT').val()
+                }
+                $.ajax({
+                    url: "@Url.Action("Save_ITM1", "BILL")",
+                    type: "POST",
+                data: dataObject3,
+                dataType: "json",
+                success: function (data) {
+                    if (data.toString() != "Successfully Saved!") {
+                        alert(data.toString());
+                    }
+                    else {
+                        $(".adn1 input[type='text']").val("");
+                        $("#ADD_ITM_DIV_PR").jqxWindow('hide');
+                        alert("Record Added");
+                    }
+                },
+                error: function (response) {
+                    alert(response.status + " " + response.responseText);
+                }
+            });
+        });
 
 
         //Method to Initialize the DialogBox
@@ -414,4 +512,61 @@
     <div id="departmentdialog" title="Add New Item" class="ui-front"
          style="overflow: hidden;background-color:lightblue;
 border-bottom-width:5px"></div>
+</div>
+
+<div id="ADD_ITM_DIV_PR">
+    <div>ADD NEW STOCK ITEM</div>
+    <div style="overflow: hidden;">
+        <table class="table table-bordered table-hover table-responsive adn1" style="font-size : smaller">
+            <tr>
+                <td><label for="PRPART_NO">PART NO</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRPART_NO" name="PART_NO" type="text" value="" />
+                </td>
+                <td><label for="PRCATE">ITEM TYPE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRCATE" name="CATE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRPARTI">PART NAME</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRPARTI" name="PARTI" type="text" value="" />
+                </td>
+                <td><label for="PRGROP">ITEM GROUP</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRGROP" name="GROP" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRMRP">MRP</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRMRP" name="MRP" type="text" value="" />
+                </td>
+                <td><label for="PRunit">UNIT</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRunit" name="unit" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="PRTRATE">TAX RATE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRTRATE" name="TRATE" type="text" value="" />
+                </td>
+                <td><label for="PRDPCODE">DEALER CODE</label></td>
+                <td>
+                    <input class="text-box single-line form-control" id="PRDPCODE" name="DPCODE" type="text" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input id="cls4" type="button" class="btn btn-warning btn-xs" value="Cancel" />
+                    <input id="sv2" type="button" class="btn btn-primary btn-xs ui-icon-plus" value="Save" />
+                    <input id="PRlmodi" name="lmodi" type="hidden" value="" />
+                    <input id="PRrid1" name="rid1" type="hidden" value="" />
+                    <input id="PRAEDT" name="AEDT" type="hidden" value="" />
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
