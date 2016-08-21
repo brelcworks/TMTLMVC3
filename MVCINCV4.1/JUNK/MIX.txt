@@ -676,3 +676,33 @@ alert('Do nothing');
             <span class="icon-next"></span>
         </a>
     </header>
+
+
+
+	$('#btnNBILL').click(function (e) {
+                        if (EMODE == false)
+                        {
+                            alert("Update in Proccess!");
+                            e.preventDefault();
+                        }
+                        else
+                        {
+                            if (NMODE == true) {
+                                alert("Nothing to Save! Please Add Record First");
+                                e.preventDefault();
+                            }
+                            else {
+                                if (changessave == true) {
+                                    alert("Nothing to Save! Please Add Record First");
+                                    e.preventDefault();
+                                }
+                                else {
+                                    changessave = true;
+                                    NMODE = true;
+                                    source1.data = { "bno": $('#txtBNO').val() };
+                                    $('#grid1').jqxGrid('updatebounddata');
+                                    $('#grid').jqxGrid('updatebounddata');
+                                }
+                            }
+                        }
+                    });

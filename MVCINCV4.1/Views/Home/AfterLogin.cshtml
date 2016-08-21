@@ -6,6 +6,20 @@
 <fieldset>
     <h4>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h4>
 </fieldset>
+
+<script>
+    $(function () {
+        var db = openDatabase('MVC', '1.0', 'Test DB', 2 * 1024 * 1024);
+        $(document).ready(function () {
+            db.transaction(function (tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS MAIN (id INTEGER PRIMARY KEY AUTOINCREMENT, FNAME, ACTIME)');
+                var fm = '@HttpContext.Current.User.Identity.Name.ToString()';
+                var at = new Date($.now());
+                tx.executeSql('INSERT INTO MAIN (FNAME, ACTIME) VALUES (?, ?);', [fm, at]);
+            });
+        });
+    });
+</script>
    
 
 
