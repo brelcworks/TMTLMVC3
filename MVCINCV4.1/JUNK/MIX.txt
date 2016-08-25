@@ -706,3 +706,5 @@ alert('Do nothing');
                             }
                         }
                     });
+
+					<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/themes/start/jquery-ui.css">

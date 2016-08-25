@@ -23,10 +23,13 @@
                     { key: false, name: 'unit', index: 'unit', editable: true }
                 ],
                 pager: jQuery('#pager'),
+                rowNum: 1000000,
                 height: '100%',
                 viewrecords: true,
                 caption: 'PRICE LIST',
                 emptyrecords: 'BLANK',
+                loadonce: true,
+                autowidth: true,
                 jsonReader: {
                     root: 'rows',
                     page: 'page',

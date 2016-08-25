@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<MVCINCV4._1.Models.BILL>
 
 @{
-    ViewBag.Title = "List_sls1";
+    ViewBag.Title = "SALES REPORT";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<table id="grid"></table>
+<table id="grid" style="width:95%"></table>
 <div id="pager"></div>
 
 <script>
@@ -13,12 +13,12 @@
         $('#grid').jqGrid({
             url: '/BILL/List_sls/',
             datatype: 'json',
-            mtype: 'GET',
+            type: 'GET',
             colNames: ['BILLID', 'BILL NO', 'BILL DATE', 'CUSTOMER', 'SITE NAME', 'PART NO', 'PART NAME', 'MRP', 'SELL PRICE', 'QTY', 'UNIT', 'NET TOTAL', 'GRAND TOTAL', 'TAX VALUE'],
             colModel: [
                 { key: true, hidden: true, name: 'BILLID', index: 'BILLID', editable: true },
                 { key: false, name: 'BILL_NO', index: 'BILL_NO', editable: true },
-                { key: false, name: 'BDATE', index: 'BDATE', editable: true },
+                { key: false, name: 'BDATE', index: 'BDATE', editable: true, formatter: 'date', formatoptions: { newformat: 'd-M-Y'} },
                 { key: false, name: 'CUST', index: 'CUST', editable: true },
                 { key: false, name: 'DNAME', index: 'DNAME', editable: true },
                 { key: false, name: 'PART_NO', index: 'PART_NO', editable: true },
@@ -33,10 +33,13 @@
             ],
             pager: jQuery('#pager'),
             height: '100%',
-            width: '100%',
             viewrecords: true,
             caption: 'SALES REPORT',
+            sortname: 'BILLID',
+            sortorder: "desc",
             emptyrecords: 'BLANK',
+            loadonce: true,
+            autowidth: true,
             jsonReader: {
                 root: 'rows',
                 page: 'page',
@@ -45,6 +48,6 @@
                 repeatitems: false,
                 id: '0'
             },
-        }).navGrid('#pager', { edit: false, add: false, del: false, refresh: true, search: true, view: false });
+        }).navGrid('#pager', { edit: false, add: false, del: false, refresh: true, search: true, view: true });
     });
 </script>

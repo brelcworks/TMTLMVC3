@@ -306,7 +306,7 @@ namespace MVCINCV4._1.Controllers
                     dc.SaveChanges();
                     message = "Successfully Saved!";
                 }
-                catch (Exception ex) { message = "Error! Please try again."; }
+                catch (Exception ex) { message = ex.ToString(); }
             }
             else
             {
@@ -335,7 +335,7 @@ namespace MVCINCV4._1.Controllers
                     dc.SaveChanges();
                     message = "Successfully Saved!";
                 }
-                catch (Exception ex) { message = "Error! Please try again."; }
+                catch (Exception ex) { message = ex.ToString(); }
             }
             else
             {
@@ -414,11 +414,49 @@ namespace MVCINCV4._1.Controllers
                 Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Test Sheet" };
                 sheets.Append(sheet);
                 workbookPart.Workbook.Save();
+                List<BILL> employees = dc.BILL.ToList();
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+                Row row = new Row();
+
+                row.Append(
+                    ConstructCell("Id", CellValues.String),
+                    ConstructCell("BILL NO", CellValues.String),
+                    ConstructCell("CUSTOMER", CellValues.String),
+                    ConstructCell("SITE NAME", CellValues.String));
+
+                // Insert the header row to the Sheet Data
+                sheetData.AppendChild(row);
+
+                // Inserting each employee
+                foreach (var employee in employees)
+                {
+                    row = new Row();
+
+                    row.Append(
+                        ConstructCell(employee.BILLID.ToString(), CellValues.Number),
+                        ConstructCell(employee.BILL_NO, CellValues.String),
+                        ConstructCell(employee.CUST.ToString(), CellValues.String),
+                        ConstructCell(employee.DNAME.ToString(), CellValues.Number));
+
+                    sheetData.AppendChild(row);
+                }
+
+                worksheetPart.Worksheet.Save();
             }
             MS.WriteTo(Response.OutputStream);
             Response.Flush();
             Response.End();
             return Content("OK");
+        }
+        private Cell ConstructCell(string value, CellValues dataType)
+        {
+            return new Cell()
+            {
+                CellValue = new CellValue(value),
+                DataType = new EnumValue<CellValues>(dataType)
+            };
         }
         [Authorize]
         public ActionResult PRINTCHALLAN(string BNO, string BDATE, string CUST, string SNAME, string ADDR, string VNO)
@@ -554,7 +592,7 @@ namespace MVCINCV4._1.Controllers
                     Response.Clear();
                     Response.Buffer = true;
                     Response.Charset = "";
-                    string FL = "CHALLAN" + Rlst.Value + ".xlsx";
+                    string FL = "CHALLAN " + CUST + "- " + SNAME + "- " + Rlst.Value + ".xlsx";
                     Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                     Response.AddHeader("content-disposition", "attachment;filename=" + FL);
                     message = "Successfully Saved!";
@@ -587,12 +625,13 @@ namespace MVCINCV4._1.Controllers
                     ws.Range("a2").Style.Font.FontSize = 24;
                     ws.Range("a2").Style.Font.Bold = true;
                     ClosedXML.Excel.IXLRange range;
-                    range = ws.Range("a1", "k1");
+                    range = ws.Range("a1", "k5");
                     range.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
                     ws.Row(6).Height = 3;
                     ws.Cell(7, 1).Value = "CHALLAN NO:-";
                     ws.Cell(7, 10).Value = "DATE:-";
                     ws.Cell(7, 11).Value = BDATE;
+                    ws.Range("K7").Style.NumberFormat.SetFormat("dd-MMM-yyyy");
                     ws.Cell(8, 1).Value = "CUSTOMER:-";
                     ws.Cell(10, 1).Value = "VAT NO:-";
                     range = ws.Range("a1", "k5");
@@ -621,7 +660,8 @@ namespace MVCINCV4._1.Controllers
                     ws.Range("k12", "k52").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                     ws.Range("a13", "k52").Style.Font.FontSize = 9.5;
                     ws.Range("a56", "k56").Style.Font.Bold = true;
-                    ws.PageSetup.Margins.Left = 0.25;
+                    ws.Range("i13", "i52").Style.NumberFormat.SetFormat("#.00");
+                    ws.PageSetup.Margins.Left = 0.35;
                     ws.PageSetup.Margins.Right = 0.17;
                     ws.PageSetup.Margins.Top = 0.15;
                     ws.PageSetup.Margins.Bottom = 0.02;
@@ -658,6 +698,7 @@ namespace MVCINCV4._1.Controllers
                     range = ws.Range("a53", "k56");
                     range.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
                     ws.Range("a1", "k1").Merge();
+                    ws.Cell(56, 1).Value = "Signature of Customer";
                     ws.Range("a1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                     ws.Range("a1").Value = "CHALLAN";
                     ws.Range("a1").Style.Font.Underline = XLFontUnderlineValues.Single;
@@ -674,8 +715,9 @@ namespace MVCINCV4._1.Controllers
                     Response.Clear();
                     Response.Buffer = true;
                     Response.Charset = "";
+                    string FL = "CHALLAN " + CUST + "- " + SNAME + "- " + Rlst.Value + ".xlsx";
                     Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    Response.AddHeader("content-disposition", "attachment;filename=CHALLAN.xlsx");
+                    Response.AddHeader("content-disposition", "attachment;filename=" + FL);
                     message = "Successfully Saved!";
                     using (MemoryStream MyMemoryStream = new MemoryStream())
                     {
