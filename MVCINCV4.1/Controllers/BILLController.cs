@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ClosedXML.Excel;
-using System.Web.UI.WebControls;
 using System.IO;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -408,39 +407,55 @@ namespace MVCINCV4._1.Controllers
             {
                 WorkbookPart workbookPart = document.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet(new SheetData());
-                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Test Sheet" };
-                sheets.Append(sheet);
-                workbookPart.Workbook.Save();
-                List<BILL> employees = dc.BILL.ToList();
-                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
 
-                // Constructing header
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Test Sheet" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
                 Row row = new Row();
+                row.Append(ConstructCell("INVOICE", CellValues.String, 1));
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+                sheetData.AppendChild(row);
+                row = new Row();
+                row.Append(ConstructCell("B & R ELECTRICAL WORKS", CellValues.String, 2));
+                sheetData.AppendChild(row);
+                MergeCells mergeCells = new MergeCells();
+                mergeCells.Append(new MergeCell() { Reference = new StringValue("A1:K1") });
+                mergeCells.Append(new MergeCell() { Reference = new StringValue("A2:K2") });
+                worksheetPart.Worksheet.InsertAfter(mergeCells, worksheetPart.Worksheet.Elements<SheetData>().First());
+                List <BILL> employees = dc.BILL.Where(A => A.BILL_NO.Equals(BNO)).ToList();
+                 row = new Row();
 
                 row.Append(
-                    ConstructCell("Id", CellValues.String),
-                    ConstructCell("BILL NO", CellValues.String),
-                    ConstructCell("CUSTOMER", CellValues.String),
-                    ConstructCell("SITE NAME", CellValues.String));
+                    ConstructCell("SL NO", CellValues.String,2),
+                    ConstructCell("PART NO", CellValues.String,2),
+                    ConstructCell("PART NAME", CellValues.String,2),
+                    ConstructCell("QTY", CellValues.String,2));
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
-
-                // Inserting each employee
+                int i = 1;
                 foreach (var employee in employees)
                 {
                     row = new Row();
 
                     row.Append(
-                        ConstructCell(employee.BILLID.ToString(), CellValues.Number),
-                        ConstructCell(employee.BILL_NO, CellValues.String),
-                        ConstructCell(employee.CUST.ToString(), CellValues.String),
-                        ConstructCell(employee.DNAME.ToString(), CellValues.Number));
+                    ConstructCell(i.ToString(), CellValues.String,1),
+                    ConstructCell(employee.PART_NO, CellValues.String,1),
+                    ConstructCell(employee.PARTI, CellValues.String,1),
+                    ConstructCell(employee.QTY, CellValues.String,1));
 
                     sheetData.AppendChild(row);
+                    i = i + 1;
                 }
 
                 worksheetPart.Worksheet.Save();
@@ -450,21 +465,67 @@ namespace MVCINCV4._1.Controllers
             Response.End();
             return Content("OK");
         }
-        private Cell ConstructCell(string value, CellValues dataType)
+        private Cell ConstructCell(string value, CellValues dataType, uint styleIndex = 0)
         {
             return new Cell()
             {
                 CellValue = new CellValue(value),
-                DataType = new EnumValue<CellValues>(dataType)
+                DataType = new EnumValue<CellValues>(dataType),
+                StyleIndex = styleIndex
             };
         }
+
+        private Stylesheet GenerateStylesheet()
+        {
+            Stylesheet styleSheet = null;
+
+            Fonts fonts = new Fonts(
+                new Font( // Index 0 - default
+                    new FontSize() { Val = 10 }
+
+                ),
+                new Font( // Index 1 - header
+                    new FontSize() { Val = 10 },
+                    new Bold(),
+                    new Color() { Rgb = "FFFFFF" }
+
+                ));
+
+            Fills fills = new Fills(
+                    new Fill(new PatternFill() { PatternType = PatternValues.None }), // Index 0 - default
+                    new Fill(new PatternFill() { PatternType = PatternValues.Gray125 }), // Index 1 - default
+                    new Fill(new PatternFill(new ForegroundColor { Rgb = new HexBinaryValue() { Value = "66666666" } })
+                    { PatternType = PatternValues.Solid }) // Index 2 - header
+                );
+
+            Borders borders = new Borders(
+                    new Border(), // index 0 default
+                    new Border( // index 1 black border
+                        new LeftBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin },
+                        new RightBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin },
+                        new TopBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin },
+                        new BottomBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin },
+                        new DiagonalBorder())
+                );
+
+            CellFormats cellFormats = new CellFormats(
+                    new CellFormat(), // default
+                    new CellFormat { FontId = 0, FillId = 0, BorderId = 1, ApplyBorder = true }, // body
+                    new CellFormat { FontId = 1, FillId = 2, BorderId = 1, ApplyFill = true } // header
+                );
+
+            styleSheet = new Stylesheet(fonts, fills, borders, cellFormats);
+
+            return styleSheet;
+        }
+
         [Authorize]
         public ActionResult PRINTCHALLAN(string BNO, string BDATE, string CUST, string SNAME, string ADDR, string VNO)
         {
             string message = "";
             try
             {
-                GridView gv = new GridView();
+                System.Web.UI.WebControls.GridView gv = new System.Web.UI.WebControls.GridView();
                 var totcon = dc.BILL.Where(A => A.BILL_NO.Equals(BNO)).ToList();
                 gv.DataSource = totcon;
                 gv.DataBind();

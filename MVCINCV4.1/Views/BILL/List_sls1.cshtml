@@ -4,12 +4,14 @@
     ViewBag.Title = "SALES REPORT";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-
+<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/themes/ui-lightness/jquery-ui.css">
 <table id="grid" style="width:95%"></table>
 <div id="pager"></div>
 
 <script>
     $(document).ready(function () {
+        var wd = $(window).width() - 50;
+        var ht = $(window).height() - 190;
         $('#grid').jqGrid({
             url: '/BILL/List_sls/',
             datatype: 'json',
@@ -31,15 +33,22 @@
                 { key: false, name: 'STOT', index: 'STOT', editable: true },
                 { key: false, name: 'TVAL', index: 'TVAL', editable: true }
             ],
+            toppager: true,
             pager: jQuery('#pager'),
-            height: '100%',
+            rowNum: 100000000,
+            rowList: [10, 20, 30, 100000000],
+            loadComplete: function () {
+                $("option[value=100000000]").text('All');
+            },
+            height: ht,
             viewrecords: true,
             caption: 'SALES REPORT',
             sortname: 'BILLID',
             sortorder: "desc",
             emptyrecords: 'BLANK',
+            shrinkToFit: true,
+            width: wd,
             loadonce: true,
-            autowidth: true,
             jsonReader: {
                 root: 'rows',
                 page: 'page',
@@ -48,6 +57,6 @@
                 repeatitems: false,
                 id: '0'
             },
-        }).navGrid('#pager', { edit: false, add: false, del: false, refresh: true, search: true, view: true });
+        }).navGrid('#pager', { edit: false, add: false, del: false, refresh: true, search: true, view: true, cloneToTop:true  });
     });
 </script>
