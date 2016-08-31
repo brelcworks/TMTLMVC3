@@ -4,9 +4,12 @@
     ViewBag.Title = "PRICE LIST";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            var wd = $(window).width() - 50;
+            var ht = $(window).height() - 190;
             $('#grid').jqGrid({
                 url: '/Stock/List_Pr/',
                 datatype: 'json',
@@ -22,14 +25,20 @@
                     { key: false, name: 'TRATE', index: 'TRATE', editable: true },
                     { key: false, name: 'unit', index: 'unit', editable: true }
                 ],
+                toppager: true,
                 pager: jQuery('#pager'),
-                rowNum: 1000000,
-                height: '100%',
+                rowNum: 100000000,
+                rowList: [10, 20, 30, 100000000],
+                loadComplete: function () {
+                    $("option[value=100000000]").text('All');
+                },
+                height: ht,
                 viewrecords: true,
                 caption: 'PRICE LIST',
                 emptyrecords: 'BLANK',
                 loadonce: true,
-                autowidth: true,
+                shrinkToFit: true,
+                width: wd,
                 jsonReader: {
                     root: 'rows',
                     page: 'page',
@@ -38,7 +47,7 @@
                     repeatitems: false,
                     id: '0'
                 },
-            }).navGrid('#pager', { edit: true, add: true, del: true, refresh: true, search: true, view:true },
+            }).navGrid('#pager', { edit: true, add: true, del: true, refresh: true, search: true, view: true, cloneToTop: true },
    {
        zIndex: 100,
        url: '/Stock/edt',

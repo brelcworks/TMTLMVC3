@@ -4,14 +4,13 @@
     ViewBag.Title = "SALES REPORT";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.4/themes/ui-lightness/jquery-ui.css">
 <table id="grid" style="width:95%"></table>
 <div id="pager"></div>
 
 <script>
+    var wd = $(window).width() - 50;
+    var ht = $(window).height() - 190;
     $(document).ready(function () {
-        var wd = $(window).width() - 50;
-        var ht = $(window).height() - 190;
         $('#grid').jqGrid({
             url: '/BILL/List_sls/',
             datatype: 'json',

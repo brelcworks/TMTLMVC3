@@ -411,7 +411,7 @@ namespace MVCINCV4._1.Controllers
                 WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
                 worksheetPart.Worksheet = new Worksheet();
                 WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
-                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet = CreateStylesheet();
                 stylePart.Stylesheet.Save();
 
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
@@ -421,25 +421,80 @@ namespace MVCINCV4._1.Controllers
                 sheets.Append(sheet);
 
                 workbookPart.Workbook.Save();
-                Row row = new Row();
-                row.Append(ConstructCell("INVOICE", CellValues.String, 1));
                 SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+                Row row = new Row();
+                Row row1 = new Row();
+                Row row2 = new Row();
+                Row row3 = new Row();
+                Row row4 = new Row();
+                Row row5 = new Row();
+                Row row6 = new Row();
+                Row row7 = new Row();
+                Row row8 = new Row();
+                Row row9 = new Row();
                 sheetData.AppendChild(row);
-                row = new Row();
-                row.Append(ConstructCell("B & R ELECTRICAL WORKS", CellValues.String, 2));
-                sheetData.AppendChild(row);
+                sheetData.AppendChild(row1);
+                sheetData.AppendChild(row2);
+                sheetData.AppendChild(row3);
+                sheetData.AppendChild(row4);
+                sheetData.AppendChild(row5);
+                sheetData.AppendChild(row6);
+                sheetData.AppendChild(row7);
+                sheetData.AppendChild(row8);
+                sheetData.AppendChild(row9);
                 MergeCells mergeCells = new MergeCells();
                 mergeCells.Append(new MergeCell() { Reference = new StringValue("A1:K1") });
                 mergeCells.Append(new MergeCell() { Reference = new StringValue("A2:K2") });
+                mergeCells.Append(new MergeCell() { Reference = new StringValue("A3:K3") });
+                mergeCells.Append(new MergeCell() { Reference = new StringValue("A4:K4") });
+                mergeCells.Append(new MergeCell() { Reference = new StringValue("A5:K5") });
                 worksheetPart.Worksheet.InsertAfter(mergeCells, worksheetPart.Worksheet.Elements<SheetData>().First());
+                row.Append(ConstructCell("INVOICE", CellValues.String, 6), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 5), ConstructCell("", CellValues.String, 7));
+                row1.Append(ConstructCell("B & R ELECTRICAL WORKS", CellValues.String, 3), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 8));
+                row2.Append(ConstructCell("STALL NO. T/542, NEAR DOOARS BUS STAND, BIDHAN MARKET, SILIGURI - 734001", CellValues.String, 2), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 8));
+                row3.Append(ConstructCell("0353 - 2433269, 2526285", CellValues.String, 2), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 8));
+                row4.Append(ConstructCell("VAT NO: 19896290025, CST NO: 19896290219, PAN NO: AACFB7969H, S.TAX NO: AACFB7969HST001", CellValues.String, 2), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 0), ConstructCell("", CellValues.String, 8));
+                for (int i1 = 1; i1 < 12; i1++)
+                {
+                    row5.Append(
+                     ConstructCell("", CellValues.String, 5));
+                }
+                Cell cell = new Cell(){ CellReference = "A7", DataType = CellValues.String, CellValue = new CellValue("INVOICE NO:"), StyleIndex=9 };
+                Cell bcl1 = new Cell() { CellReference = "B7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell cell1 = new Cell() { CellReference = "C7", DataType = CellValues.String, CellValue = new CellValue(BNO), StyleIndex= 5 };
+                Cell bcl2 = new Cell() { CellReference = "D7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell bcl3 = new Cell() { CellReference = "E7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell bcl4 = new Cell() { CellReference = "F7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell bcl5 = new Cell() { CellReference = "G7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell bcl6 = new Cell() { CellReference = "H7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell bcl7 = new Cell() { CellReference = "I7", DataType = CellValues.String, CellValue = new CellValue(""), StyleIndex = 5 };
+                Cell cell2 = new Cell() { CellReference = "J7", DataType = CellValues.String, CellValue = new CellValue("DATE:"), StyleIndex = 5 };
+                Cell cell3 = new Cell() { CellReference = "K7", DataType = CellValues.String, CellValue = new CellValue(BDATE), StyleIndex = 7 };
+                
+                row6.Append(cell,bcl1,cell1,bcl2,bcl3,bcl4,bcl5,bcl6,bcl7,cell2,cell3);
+                Cell cell4 = new Cell() { CellReference = "A8", DataType = CellValues.String, CellValue = new CellValue("CUSTOMER:")};
+                Cell cell5 = new Cell() { CellReference = "C8", DataType = CellValues.String, CellValue = new CellValue(CUST) };
+                row7.AppendChild(cell4);
+                row7.AppendChild(cell5);
+                Cell cell6 = new Cell() { CellReference = "A9", DataType = CellValues.String, CellValue = new CellValue("ADDRESS:") };
+                Cell cell7 = new Cell() { CellReference = "C9", DataType = CellValues.String, CellValue = new CellValue(ADDR) };
+                row8.AppendChild(cell6);
+                row8.AppendChild(cell7);
+                Cell cell8 = new Cell() { CellReference = "A10", DataType = CellValues.String, CellValue = new CellValue("VAT NO:") };
+                Cell cell9 = new Cell() { CellReference = "C10", DataType = CellValues.String, CellValue = new CellValue(VNO) };
+                row9.AppendChild(cell8);
+                row9.AppendChild(cell9);
+                row = new Row();
+                sheetData.AppendChild(row);
+                
                 List <BILL> employees = dc.BILL.Where(A => A.BILL_NO.Equals(BNO)).ToList();
                  row = new Row();
 
                 row.Append(
-                    ConstructCell("SL NO", CellValues.String,2),
-                    ConstructCell("PART NO", CellValues.String,2),
-                    ConstructCell("PART NAME", CellValues.String,2),
-                    ConstructCell("QTY", CellValues.String,2));
+                    ConstructCell("SL NO", CellValues.String,1),
+                    ConstructCell("PART NO", CellValues.String,1),
+                    ConstructCell("PART NAME", CellValues.String,1),
+                    ConstructCell("QTY", CellValues.String,1));
 
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
@@ -449,16 +504,22 @@ namespace MVCINCV4._1.Controllers
                     row = new Row();
 
                     row.Append(
-                    ConstructCell(i.ToString(), CellValues.String,1),
-                    ConstructCell(employee.PART_NO, CellValues.String,1),
-                    ConstructCell(employee.PARTI, CellValues.String,1),
-                    ConstructCell(employee.QTY, CellValues.String,1));
+                    ConstructCell(i.ToString(), CellValues.String,4),
+                    ConstructCell(employee.PART_NO, CellValues.String,4),
+                    ConstructCell(employee.PARTI, CellValues.String,4),
+                    ConstructCell(employee.QTY, CellValues.String,4));
 
                     sheetData.AppendChild(row);
                     i = i + 1;
                 }
-
-                worksheetPart.Worksheet.Save();
+                for (int i1 = i; i1 < 41; i1++)
+                {
+                    row = new Row();
+                    row.Append(
+                     ConstructCell(i1.ToString(), CellValues.String, 4));
+                     sheetData.AppendChild(row);
+                }
+                    worksheetPart.Worksheet.Save();
             }
             MS.WriteTo(Response.OutputStream);
             Response.Flush();
@@ -475,6 +536,84 @@ namespace MVCINCV4._1.Controllers
             };
         }
 
+        private static Stylesheet CreateStylesheet()
+        {
+            Stylesheet ss = new Stylesheet();
+
+            Font font0 = new Font();
+            FontSize fnt1 = new FontSize() { Val = 10 };// Default font
+            font0.Append(fnt1);
+
+            Font font1 = new Font();         // Bold font
+            Bold bold = new Bold();
+            font1.Append(bold);
+
+            Font font2 = new Font();         // Bold font
+            Bold bold1 = new Bold();
+            FontSize fnt = new FontSize() { Val = 24 };
+            FontName fnme = new FontName() { Val = "Book Antiqua" };
+            font2.Append(bold1);
+            font2.Append(fnt);
+            font2.Append(fnme);
+            
+
+            Fonts fonts = new Fonts();      // <APENDING Fonts>
+            fonts.Append(font0);
+            fonts.Append(font1);
+            fonts.Append(font2);
+
+            // <Fills>
+            Fill fill0 = new Fill();        // Default fill
+
+            Fills fills = new Fills();      // <APENDING Fills>
+            fills.Append(fill0);
+
+            // <Borders>
+            Border border0 = new Border();     // Defualt border
+
+            Borders borders = new Borders(new Border(new LeftBorder(), new RightBorder(), new TopBorder(), new BottomBorder(), new DiagonalBorder()),
+            new Border(new LeftBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin }, new RightBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin }, new TopBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new BottomBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new DiagonalBorder()), //left right 1
+            new Border(new LeftBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new RightBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new TopBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin },new BottomBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new DiagonalBorder()), //top 2
+            new Border(new LeftBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin },new RightBorder( new Color() { Auto = true }){ Style = BorderStyleValues.None },new TopBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin },new BottomBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new DiagonalBorder()), //left top 3
+            new Border(new LeftBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new RightBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin },new TopBorder(new Color() { Auto = true }){ Style = BorderStyleValues.Thin },new BottomBorder(new Color() { Auto = true }){ Style = BorderStyleValues.None },new DiagonalBorder()), //right top 4
+            new Border(new LeftBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin }, new RightBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new TopBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new BottomBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new DiagonalBorder()), //left border 5
+            new Border(new LeftBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new RightBorder(new Color() { Auto = true }) { Style = BorderStyleValues.Thin }, new TopBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new BottomBorder(new Color() { Auto = true }) { Style = BorderStyleValues.None }, new DiagonalBorder()) //right border 6
+            );    // <APENDING Borders>
+            borders.Append(border0);
+
+            CellFormat cellformat0 = new CellFormat() { FontId = 0, FillId = 0, BorderId = 0 }; // Default style : Mandatory | Style ID =0
+
+            CellFormat cellformat1 = new CellFormat() { FontId = 1 };
+            CellFormat cellformat2 = new CellFormat(new Alignment() { Horizontal = HorizontalAlignmentValues.Center }) { FontId = 0, BorderId= 5 };
+            CellFormat cellformat3 = new CellFormat(new Alignment() { Horizontal = HorizontalAlignmentValues.Center }) { FontId = 2, BorderId= 5 };
+            CellFormat cellformat4 = new CellFormat(new Alignment()) { BorderId = 1 };
+            CellFormat cellformat5 = new CellFormat(new Alignment() { Horizontal = HorizontalAlignmentValues.Center }) { BorderId = 2 };
+            CellFormat cellformat6 = new CellFormat(new Alignment() { Horizontal = HorizontalAlignmentValues.Center }) { BorderId = 3 };
+            CellFormat cellformat7 = new CellFormat() { BorderId = 4 };
+            CellFormat cellformat8 = new CellFormat() { BorderId = 6 };
+            CellFormat lefttopbroder = new CellFormat() { BorderId = 3 };
+            CellFormats cellformats = new CellFormats();
+            cellformats.Append(cellformat0);
+            cellformats.Append(cellformat1);
+            cellformats.Append(cellformat2);
+            cellformats.Append(cellformat3);
+            cellformats.Append(cellformat4);
+            cellformats.Append(cellformat5);
+            cellformats.Append(cellformat6);
+            cellformats.Append(cellformat7);
+            cellformats.Append(cellformat8);
+            cellformats.Append(lefttopbroder);
+
+
+            ss.Append(fonts);
+            ss.Append(fills);
+            ss.Append(borders);
+            ss.Append(cellformats);
+
+
+            return ss;
+        }
+
         private Stylesheet GenerateStylesheet()
         {
             Stylesheet styleSheet = null;
@@ -488,7 +627,7 @@ namespace MVCINCV4._1.Controllers
                     new FontSize() { Val = 10 },
                     new Bold(),
                     new Color() { Rgb = "FFFFFF" }
-
+                    
                 ));
 
             Fills fills = new Fills(
@@ -518,6 +657,8 @@ namespace MVCINCV4._1.Controllers
 
             return styleSheet;
         }
+
+
 
         [Authorize]
         public ActionResult PRINTCHALLAN(string BNO, string BDATE, string CUST, string SNAME, string ADDR, string VNO)
