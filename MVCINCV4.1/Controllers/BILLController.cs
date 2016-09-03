@@ -10,7 +10,7 @@ using System.IO;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
-using A = DocumentFormat.OpenXml.Drawing;
+
 using Xdr = DocumentFormat.OpenXml.Drawing.Spreadsheet;
 
 
@@ -658,18 +658,18 @@ namespace MVCINCV4._1.Controllers
                     new Xdr.Picture(
                         new Xdr.NonVisualPictureProperties(
                             new Xdr.NonVisualDrawingProperties { Id = nvpId, Name = "Picture " + nvpId, Description = imageFileName },
-                            new Xdr.NonVisualPictureDrawingProperties(new A.PictureLocks { NoChangeAspect = true })
+                            new Xdr.NonVisualPictureDrawingProperties(new DocumentFormat.OpenXml.Drawing.PictureLocks { NoChangeAspect = true })
                         ),
                         new Xdr.BlipFill(
-                            new A.Blip { Embed = drawingsPart.GetIdOfPart(imagePart), CompressionState = A.BlipCompressionValues.Print },
-                            new A.Stretch(new A.FillRectangle())
+                            new DocumentFormat.OpenXml.Drawing.Blip { Embed = drawingsPart.GetIdOfPart(imagePart), CompressionState = DocumentFormat.OpenXml.Drawing.BlipCompressionValues.Print },
+                            new DocumentFormat.OpenXml.Drawing.Stretch(new DocumentFormat.OpenXml.Drawing.FillRectangle())
                         ),
                         new Xdr.ShapeProperties(
-                            new A.Transform2D(
-                                new A.Offset { X = 0, Y = 0 },
-                                new A.Extents { Cx = extentsCx, Cy = extentsCy }
+                            new DocumentFormat.OpenXml.Drawing.Transform2D(
+                                new DocumentFormat.OpenXml.Drawing.Offset { X = 0, Y = 0 },
+                                new DocumentFormat.OpenXml.Drawing.Extents { Cx = extentsCx, Cy = extentsCy }
                             ),
-                            new A.PresetGeometry { Preset = A.ShapeTypeValues.Rectangle }
+                            new DocumentFormat.OpenXml.Drawing.PresetGeometry { Preset = DocumentFormat.OpenXml.Drawing.ShapeTypeValues.Rectangle }
                         )
                     ),
                     new Xdr.ClientData()
