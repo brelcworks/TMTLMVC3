@@ -189,6 +189,9 @@
     <Content Include="App_Data\DB1.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\MVCINCDB.mdf" />
     <Content Include="App_Data\MVCINCDB_log.ldf">
       <DependentUpon>MVCINCDB.mdf</DependentUpon>

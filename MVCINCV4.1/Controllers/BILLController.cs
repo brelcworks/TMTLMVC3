@@ -624,7 +624,7 @@ namespace MVCINCV4._1.Controllers
                 var worksheetDrawing = drawingsPart.WorksheetDrawing;
 
                 var imagePart = drawingsPart.AddImagePart(ImagePartType.Jpeg);
-                string imageFileName = Server.MapPath("~/favicon.ico");
+                string imageFileName = Server.MapPath("~/App_Data/favicon.ico");
                 using (var stream = new FileStream(imageFileName, FileMode.Open))
                 {
                     imagePart.FeedData(stream);
